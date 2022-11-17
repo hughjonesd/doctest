@@ -7,8 +7,9 @@ Authors@R:
 Maintainer: Dummy <dummy@example.com>
 Author: Dummy <dummy@example.com>
 Description: What the package does (one paragraph).
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, 
          roclets = c("collate", "rd", "namespace", "doctest::doctest")) 
 RoxygenNote: 7.2.1
+Suggests: testthat

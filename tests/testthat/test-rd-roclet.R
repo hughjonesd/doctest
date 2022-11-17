@@ -14,7 +14,7 @@ test_that("rd_roclet output", {
   )
 
   expect_no_error(
-    suppressMessages(roxygen2::roxygenise("testPackage"))
+    suppressMessages(roxygen2::roxygenise("testPackage", clean = TRUE))
   )
 
   expect_snapshot_file(file.path("testPackage", "man", "safe_mean.Rd"),
