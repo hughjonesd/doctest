@@ -7,9 +7,18 @@
 
 <!-- badges: end -->
 
-Doctests are documentation combined with tests The doctest package helps
-you write doctests by adding tags to your
-[roxygen](https://roxygen2.r-lib.org/) documentation.
+Doctests are documentation combined with tests. The doctest package
+helps you write [testthat](https://testthat.r-lib.org/) doctests, by
+adding tags to your [roxygen](https://roxygen2.r-lib.org/)
+documentation.
+
+`R CMD CHECK` already checks examples, but it only confirms that they
+run. Using doctest, you can also make sure that examples do what they
+are supposed to do.
+
+The [roxytest](https://mikldk.github.io/roxytest/) package is another
+way you can write tests in roxygen. doctests aims to be slightly less
+verbose.
 
 ## Example
 
@@ -53,6 +62,14 @@ This will create tests like:
     #>   expect_warning(safe_mean(c(1, NA)), "NA elements")
     #> })
 
+The .Rd file will be created as normal, with an example section like:
+
+    \examples{
+    safe_mean(x)
+    safe_mean("a")
+    safe_mean(c(1, NA))
+    }
+
 ## Usage
 
 To use doctest, put a line in your package DESCRIPTION to add the
@@ -78,10 +95,9 @@ package DESCRIPTION file.
 
 The doctest package adds four tags to roxygen:
 
-  - `@expect` takes the next expression and writes an expectation for
-    it.
+### `@expect`
 
-<!-- end list -->
+`@expect` takes the next expression and writes an expectation for it.
 
 ``` r
 #'
@@ -92,9 +108,10 @@ The doctest package adds four tags to roxygen:
 You can use any `expect_*` function from `testthat`. Omit the `expect_`
 at the start.
 
-  - `@test *test-name*` creates a new test.
+### `@test`
 
-<!-- end list -->
+By default, all expectations are created in a single test, named after
+the example. `@test <test-name>` creates a new test.
 
 ``` r
 #' @test Should fail on NA
@@ -102,13 +119,13 @@ at the start.
 #' my_func(NA)
 ```
 
-By default, all expectations are created in a single test.
+### `@skiptest` and `@unskip`
 
-  - `@skiptest` omits lines of the example from the test, and
+By default, the test uses the whole example, since example code may
+depend on previous code.
 
-  - `@unskip` stops omitting lines
-
-<!-- end list -->
+`@skiptest` omits lines of the example from the test. `@unskip` stops
+omitting lines. You can use this to skip irrelevant material.
 
 ``` r
 #' @skiptest
@@ -116,6 +133,18 @@ By default, all expectations are created in a single test.
 #' plot(1:10, my_func(1:10))
 #' @unskip
 ```
+
+## How to use doctest
+
+doctest is best used for relatively simple tests. If things get too
+complex it may be better to write a test yourself. I like the following
+advice:
+
+> … write the best possible documentation, and \[R\] makes sure the code
+> samples in your documentation actually compile and run \[and do what
+> they are supposed to do\]
+
+*Programming Rust*, Blandy, Orendorff and Tindall, 2021
 
 ## Installation
 
