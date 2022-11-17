@@ -23,6 +23,7 @@ devtools::install("hughjonesd/testygen")
 Here’s some documentation for a function:
 
 ``` r
+
 #' Safe mean
 #' 
 #' @param x Numeric vector
@@ -47,3 +48,7 @@ safe_mean <- function (x) {
 ```
 
 This will create tests like:
+
+To use testygen, add the following line to your package DESCRIPTION:
+
+    Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest")) 

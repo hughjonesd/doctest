@@ -1,13 +1,13 @@
 
 
 #' @export
-test_builder_roclet <- function () {
-  roxygen2::roclet("test_builder")
+doctest_roclet <- function () {
+  roxygen2::roclet("doctest")
 }
 
 #' @importFrom roxygen2 roclet_process
 #' @export
-roclet_process.roclet_test_builder <- function (x, blocks, env, base_path) {
+roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
   results <- lapply(blocks, build_result_from_block)
 
   return(results)

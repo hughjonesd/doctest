@@ -36,27 +36,18 @@ devtools::install("hughjonesd/testygen")
 Here's some documentation for a function:
 
 ```r
-#' Safe mean
-#' 
-#' @param x Numeric vector
-#' @export
-#' 
-#' @examples
-#' 
-#' @expect equals(2)
-#' safe_mean(1:3)
-#' 
-#' @expect error("not numeric")
-#' safe_mean("a")
-#'
-#' @expect warning("NA elements")
-#' safe_mean(c(1, NA))
-safe_mean <- function (x) {
-  if (length(x) == 0L) stop("No elements in x")
-  if (! is.numeric(x)) stop("x is not numeric")
-  if (any(is.na(x))) warning("x contains NA elements")
-  mean(x)
-}
+```{r child = "tests/testthat/safe-mean.Rmd"}
+```
 ```
 
 This will create tests like:
+
+```{r, echo = FALSE}
+
+```
+
+To use testygen, add the following line to your package DESCRIPTION:
+
+```
+Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest")) 
+```

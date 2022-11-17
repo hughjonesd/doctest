@@ -30,5 +30,5 @@ foo <- function(x) as.numeric(x)
 
 parse_text(text)
 roc_proc_text(rd_roclet(), text)
-results <- roc_proc_text(test_builder_roclet(), text)
-roclet_output(test_builder_roclet(), results)
+results <- roc_proc_text(doctest_roclet(), text)
+roclet_output(doctest_roclet(), results)
