@@ -6,6 +6,7 @@ NULL
 #' @export
 roxy_tag_parse.roxy_tag_expect <- function (x) {
   x <- strip_first_line(x, first_line_name = "expect")
+  x$doctest_code <- clean_donts(x$raw)
   x <- roxygen2::tag_examples(x)
 
   x
@@ -62,6 +63,23 @@ strip_first_line <- function (x, first_line_name = NULL) {
   }
 
   x
+}
+
+
+clean_donts <- function (text) {
+  tf_in <- tempfile()
+  tf_out <- tempfile()
+  on.exit({
+    file.remove(tf_in)
+    file.remove(tf_out)
+  })
+
+  dummy_rd <- c("\\name{dummy}", "\\title{dummy}", "\\examples{", text, "}")
+  cat(dummy_rd, file = tf_in, sep = "\n")
+  # this comments out the actual \donttest but leaves the rest uncommented
+  tools::Rd2ex(tf_in, tf_out, commentDontrun = FALSE, commentDonttest = FALSE)
+
+  readLines(tf_out)
 }
 
 

@@ -38,6 +38,22 @@ NULL
   expect_snapshot_output(
     roxygen2::roclet_output(doctest::doctest(), results)
   )
+
+
+  donttest_expectation <- "
+#' @examples
+#' 1
+#' @expect equal(2)
+#' \\donttest{
+#' sum(1, 1)
+#' }
+NULL
+"
+
+  results <- roxygen2::roc_proc_text(doctest::doctest(), donttest_expectation)
+  expect_snapshot_output(
+    roxygen2::roclet_output(doctest::doctest(), results)
+  )
 })
 
 

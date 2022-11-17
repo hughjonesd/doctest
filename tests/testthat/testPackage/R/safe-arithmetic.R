@@ -14,6 +14,7 @@
 #' @test safe-mean-errors
 #'
 #' @expect warning("not numeric")
+#'
 #' safe_mean("a")
 #'
 #' @expect warning("NA elements")

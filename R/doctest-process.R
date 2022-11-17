@@ -78,8 +78,7 @@ add_tag_to_test <- function (x, test) UseMethod("add_tag_to_test", x)
 
 
 add_tag_to_test.roxy_tag_expect <- function (x, test, ...) {
-  lines <- strsplit(x$raw, "\n", fixed = TRUE)[[1]]
-  lines_expression <- parse(text = lines)
+  lines_expression <- parse(text = x$doctest_code)
 
   expectation <- x$doctest_expect
   expectation <- trimws(expectation)
