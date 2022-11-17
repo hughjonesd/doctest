@@ -8,7 +8,7 @@
       # Created from example for 'unknown', file <text> line 2
       
       1
-      expect_equals(sum(1, 1), 2)
+      expect_equal(sum(1, 1), 2)
     })
     
 
@@ -22,7 +22,7 @@
       # Created from example for 'unknown', file <text> line 2
       
       1
-      expect_equals(1 + 1, 2)
+      expect_equal(1 + 1, 2)
     })
     
 
@@ -36,7 +36,7 @@
       # Created from example for 'unknown', file <text> line 2
       
       1
-      expect_equals(base::sum(1, 1), 2)
+      expect_equal(base::sum(1, 1), 2)
     })
     
 
@@ -50,13 +50,13 @@
       # Created from example for 'unknown', file <text> line 2
       
       1
-      expect_equals(2, 2)
+      expect_equal(2, 2)
     })
     
     
     test_that("three", {
       # Created from example for 'unknown', file <text> line 6
-      expect_equals(3, 3)
+      expect_equal(3, 3)
     })
     
 

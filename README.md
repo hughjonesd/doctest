@@ -33,7 +33,7 @@ Here’s some documentation for a function:
 #' 
 #' @examples
 #' 
-#' @expect equals(2)
+#' @expect equal(2)
 #' safe_mean(1:3)
 #' 
 #' @expect error("not numeric")
@@ -57,7 +57,7 @@ This will create tests like:
     #> 
     #> test_that("Example: safe_mean", {
     #>   # Created from example for 'safe_mean', file <text> line 8
-    #>   expect_equals(safe_mean(1:3), 2)
+    #>   expect_equal(safe_mean(1:3), 2)
     #>   expect_error(safe_mean("a"), "not numeric")
     #>   expect_warning(safe_mean(c(1, NA)), "NA elements")
     #> })
@@ -104,7 +104,7 @@ The doctest package adds four tags to roxygen:
 
 ``` r
 #'
-#' @expect equals(2)
+#' @expect equal(2)
 1+1
 ```
 

@@ -5,7 +5,7 @@
 #' 
 #' @examples
 #' 
-#' @expect equals(2)
+#' @expect equal(2)
 #' safe_mean(1:3)
 #' 
 #' @expect error("not numeric")

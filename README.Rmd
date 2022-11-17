@@ -93,7 +93,7 @@ The doctest package adds four tags to roxygen:
 
 ```r
 #'
-#' @expect equals(2)
+#' @expect equal(2)
 1+1
 ```
 

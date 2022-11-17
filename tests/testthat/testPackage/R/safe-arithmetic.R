@@ -27,7 +27,7 @@ safe_mean <- function (x) {
 
 #' Safe variance
 #'
-#' @param x
+#' @param x A number
 #'
 #' @return Variance of `x`
 #' @export
@@ -40,7 +40,7 @@ safe_var <- function (x) {
   if (length(x) == 0L) stop("No elements in x")
   if (! is.numeric(x)) stop("x is not numeric")
   if (any(is.na(x))) warning("x contains NA elements")
-  var(x)
+  stats::var(x)
 }
 
 
@@ -55,7 +55,7 @@ safe_var <- function (x) {
 #'
 #' add(1, 2)
 #'
-#' @expect equals(add(1, 1))
+#' @expect equal(add(1, 1))
 #' 1 + 1
 add <- function (x, y) {
   x + y
@@ -71,7 +71,7 @@ add <- function (x, y) {
 #'
 #' @examples
 #' 1 %plus% 1
-#' @expect equals(4)
+#' @expect equal(4)
 #' 2 %plus% 2
 `%plus%` <- function (x, y) {
   x+y

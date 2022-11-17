@@ -4,7 +4,7 @@ test_that("@expectation", {
 "
 #' @examples
 #' 1
-#' @expect equals(2)
+#' @expect equal(2)
 #' sum(1, 1)
 NULL
 "
@@ -17,7 +17,7 @@ NULL
 "
 #' @examples
 #' 1
-#' @expect equals(2)
+#' @expect equal(2)
 #' 1 + 1
 NULL
 "
@@ -30,7 +30,7 @@ NULL
 "
 #' @examples
 #' 1
-#' @expect equals(2)
+#' @expect equal(2)
 #' base::sum(1, 1)
 NULL
 "
@@ -46,10 +46,10 @@ test_that("@test", {
 "
 #' @examples
 #' 1
-#' @expect equals(2)
+#' @expect equal(2)
 #' 2
 #' @test three
-#' @expect equals(3)
+#' @expect equal(3)
 #' 3
 NULL
 "
@@ -63,7 +63,7 @@ NULL
 #' @examples
 #' 1
 #' @test three\" {warning('this would be sad');\"
-#' @expect equals(3)
+#' @expect equal(3)
 #' 3
 NULL
 "
@@ -82,7 +82,7 @@ test_that("@skiptest", {
 #'
 #' a <- 2
 #' @unskip
-#' @expect equals(1)
+#' @expect equal(1)
 #' a
 NULL
 "
