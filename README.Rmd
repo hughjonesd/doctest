@@ -35,7 +35,30 @@ can write tests in roxygen. doctests aims to be slightly less verbose.
 Here's some documentation for a function:
 
 ```r
-```{r child = "safe-mean.Rmd"}
+```{r, echo = FALSE, results = "asis"}
+rox <- "
+#' Safe mean
+#' 
+#' @param x Numeric vector
+#' @export
+#' 
+#' @examples
+#' 
+#' @expect equal(2)
+#' safe_mean(1:3)
+#' 
+#' @expect warning(\"not numeric\")
+#' safe_mean(\"a\")
+#'
+#' @expect warning(\"NA elements\")
+#' safe_mean(c(1, NA))
+safe_mean <- function (x) {
+  if (! is.numeric(x)) warning(\"x is not numeric\")
+  if (any(is.na(x))) warning(\"x contains NA elements\")
+  mean(x)
+}
+"
+cat(rox)
 ```
 ```
 
@@ -44,8 +67,7 @@ This will create tests like:
 ```{r, echo = FALSE, warning = FALSE}
 library(doctest)
 library(roxygen2)
-text <- readLines("safe-mean.Rmd")
-results <- roc_proc_text(doctest(), text)
+results <- roc_proc_text(doctest(), rox)
 roclet_output(doctest(), results)
 ```
 
@@ -103,12 +125,12 @@ start.
 ### `@test`
 
 By default, all expectations are created in a single test, named after the
-example. `@test <test-name>` creates a new test.
+example. `@test <test-name>` changes to a new test.
 
 ```r
-#' @test Should fail on NA
-#' @expect error()
-#' my_func(NA)
+#' @test Negative numbers
+#' @expect gt(0)
+#' abs(-1)
 ```
 
 
@@ -141,9 +163,37 @@ it may be better to write a test yourself. I like the following advice:
 
 ## Bugs
 
+### Empty `@examples` section
+
 Roxygen may produce a warning like `@examples requires a value`. This is 
 harmless. To avoid it, put some R code in your `@examples` section before
 the first `@expectation` or other tag.
+
+
+
+### `donttest` and `dontrun`
+
+`donttest` and `dontrun` Rd tags are ignored by doctest. This lets you
+test code that would fail when run by R CMD CHECK. Howeer, these tags must
+not span more than one doctest tag. For example, this will work:
+
+```r
+#' @expect error("argh")
+#' \dontrun{
+#' stop("argh")
+#' }
+```
+
+But this won't:
+
+```r
+#' \dontrun{
+#' @expect error("argh")
+#' stop("argh")
+#' }
+```
+
+
 
 ## Installation
 

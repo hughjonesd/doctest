@@ -13,8 +13,10 @@ LazyData: true
 RoxygenNote: 7.2.1
 Imports: 
     cli,
+    pkgload,
     rlang,
     roxygen2,
-    stringr,
+    stringr
+Suggests:
     testthat
 Config/testthat/edition: 3
