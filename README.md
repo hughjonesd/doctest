@@ -78,12 +78,15 @@ To use doctest, put a line in your package DESCRIPTION to add the
 
     Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest")) 
 
-Then in the package directory, run:
+Then in the package directory run:
 
 ``` r
-library(doctest)
 roxygen2::roxygenize()
 ```
+
+as normal to create documentation. This will also create tests in
+`tests/testthat`, named `test-example-xxx.R`. One file is created for
+each example.
 
 At present, you can’t use doctest from the RStudio keyboard shortcut
 `Ctrl + Shift + D`, because this always uses the standard roxygen2
@@ -145,6 +148,12 @@ advice:
 > they are supposed to do\]
 
 *Programming Rust*, Blandy, Orendorff and Tindall, 2021
+
+## Bugs
+
+Roxygen may produce a warning like `@examples requires a value`. This is
+harmless. To avoid it, put some R code in your `@examples` section
+before the first `@expectation` or other tag.
 
 ## Installation
 

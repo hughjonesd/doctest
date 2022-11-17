@@ -60,3 +60,19 @@ safe_var <- function (x) {
 add <- function (x, y) {
   x + y
 }
+
+
+#' Add two numbers with an operator
+#'
+#' @param x,y Numbers
+#'
+#' @return The sum of x and y
+#' @export
+#'
+#' @examples
+#' 1 %plus% 1
+#' @expect equals(4)
+#' 2 %plus% 2
+`%plus%` <- function (x, y) {
+  x+y
+}
