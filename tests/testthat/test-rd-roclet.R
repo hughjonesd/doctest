@@ -10,6 +10,16 @@ test_that("rd_roclet", {
   )
 
   expect_silent(
-    roxygen2::roc_proc_text(roxygen2::rd_roclet(), r_file_text)
+    result <- roxygen2::roc_proc_text(roxygen2::rd_roclet(), r_file_text)
   )
+
+  expect_no_error(
+    roxygen2::roxygenise("testPackage")
+  )
+
+  expect_snapshot_file(file.path("testPackage", "man", "safe_mean.Rd"),
+                       compare = compare_file_text)
+
+  expect_snapshot_file(file.path("testPackage", "man", "safe_mean.Rd"),
+                       compare = compare_file_text)
 })

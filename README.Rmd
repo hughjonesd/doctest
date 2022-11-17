@@ -13,22 +13,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-# testygen
+# doctest
 
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-Testygen helps you to add "doctests" - tests combined with documentation - 
-to your R package. You do this by adding tags to your roxygen examples.
+Doctests are documentation combined with tests  The doctest package 
+helps you write doctests by adding tags to your [roxygen](https://roxygen2.r-lib.org/) documentation.
 
 
 ## Installation
 
-You can install the development version of testygen like so:
+You can install the development version of doctest like so:
 
 ``` r
-devtools::install("hughjonesd/testygen")
+devtools::install("hughjonesd/doctest")
 ```
 
 ## Example
@@ -36,17 +36,22 @@ devtools::install("hughjonesd/testygen")
 Here's some documentation for a function:
 
 ```r
-```{r child = "tests/testthat/safe-mean.Rmd"}
+```{r child = "safe-mean.Rmd"}
 ```
 ```
 
 This will create tests like:
 
-```{r, echo = FALSE}
-
+```{r, echo = FALSE, warning = FALSE}
+library(doctest)
+library(roxygen2)
+text <- readLines("safe-mean.Rmd")
+results <- roc_proc_text(doctest(), text)
+roclet_output(doctest(), results)
 ```
 
-To use testygen, add the following line to your package DESCRIPTION:
+To use testygen, change your package DESCRIPTION to add the `doctest`
+roclet to roxygen, like this:
 
 ```
 Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest")) 

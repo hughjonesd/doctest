@@ -14,7 +14,7 @@ roxy_tag_parse.roxy_tag_expect <- function (x) {
 #' @export
 roxy_tag_parse.roxy_tag_test <- function (x) {
   x <- strip_first_line(x, first_line_name = "test_name")
-  if (is.null(x$testygen_test_name)) {
+  if (is.null(x$doctest_test_name)) {
     roxygen2::warn_roxy_tag(x, "requires a test name")
   }
   if (stringr::str_trim(x$raw) != "") {
@@ -57,7 +57,7 @@ strip_first_line <- function (x, first_line_name = NULL) {
   }
 
   if (! is.null(first_line_name) && length(lines)) {
-    first_line_name <- paste0("testygen_", first_line_name)
+    first_line_name <- paste0("doctest_", first_line_name)
     x[[first_line_name]] <- lines[[1]]
   }
 
@@ -67,7 +67,7 @@ strip_first_line <- function (x, first_line_name = NULL) {
 
 #' @export
 roxy_tag_rd.roxy_tag_expect <- function(x, base_path, env) {
-  rd_section("examples", x$val)
+  roxygen2::rd_section("examples", x$val)
 }
 
 

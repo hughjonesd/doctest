@@ -1,9 +1,10 @@
 
 
 #' @export
-doctest_roclet <- function () {
+doctest <- function () {
   roxygen2::roclet("doctest")
 }
+
 
 #' @importFrom roxygen2 roclet_process
 #' @export
@@ -19,7 +20,7 @@ build_result_from_block <- function (block) {
 
   tags <- roxygen2::block_get_tags(block, c("expect", "examples", "test"))
 
-  result <- structure(list(tests = list()), class = "testygen_result")
+  result <- structure(list(tests = list()), class = "doctest_result")
 
   result$file <- basename(block$file)
   result$object <- block$object$alias
@@ -34,7 +35,7 @@ build_result_from_block <- function (block) {
     if (inherits(tag, "roxy_tag_test")) {
       result$tests <- c(result$tests, list(test))
       test <- new_test(
-                       name = tag$testygen_test_name,
+                       name = tag$doctest_test_name,
                        source_object = block$object$alias,
                        source_file = tag$file,
                        source_line = tag$line
@@ -59,7 +60,7 @@ new_test <- function (name, source_object, source_file, source_line) {
                    source_line   = source_line,
                    has_expectation = FALSE
                   ),
-              class = "testygen_test")
+              class = "doctest_test")
 }
 
 
@@ -70,7 +71,7 @@ add_tag_to_test.roxy_tag_expect <- function (x, test, ...) {
   lines <- strsplit(x$raw, "\n", fixed = TRUE)[[1]]
   lines_expression <- parse(text = lines)
 
-  expectation <- x$testygen_expect
+  expectation <- x$doctest_expect
   expectation <- trimws(expectation)
   expectation <- paste0("expect_", expectation)
   expectation <- parse(text = expectation, n = 1)[[1]]
