@@ -1,6 +1,6 @@
 
 
-test_that("rd_roclet", {
+test_that("rd_roclet output", {
   r_file <- file.path("testPackage", "R", "safe-arithmetic.R")
   r_file_text <- readLines(r_file)
 
@@ -14,7 +14,7 @@ test_that("rd_roclet", {
   )
 
   expect_no_error(
-    roxygen2::roxygenise("testPackage")
+    suppressMessages(roxygen2::roxygenise("testPackage"))
   )
 
   expect_snapshot_file(file.path("testPackage", "man", "safe_mean.Rd"),

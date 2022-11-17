@@ -1,6 +1,5 @@
 
 
-#' @importFrom roxygen2 roclet_output
 #' @export
 roclet_output.roclet_doctest <- function (x, results, base_path, ...) {
   for (result in results) {
@@ -24,7 +23,7 @@ write_test_file <- function (filename, contents, base_path) {
 
 
 test_file_name <- function (result) {
-  sprintf("test-examples-%s.R", result$object)
+  sprintf("test-examples-%s.R", nice_name(result))
 }
 
 
@@ -48,7 +47,7 @@ build_lines <- function (test) {
              "",
              sprintf("test_that(\"%s\", {", test$name),
              sprintf("  # Created from example for '%s', file %s line %s",
-                     test$source_object,
+                     test$source_object %||% "unknown",
                      test$source_file,
                      test$source_line
                      ),

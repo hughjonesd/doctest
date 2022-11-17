@@ -42,3 +42,21 @@ safe_var <- function (x) {
   if (any(is.na(x))) warning("x contains NA elements")
   var(x)
 }
+
+
+#' Add two numbers
+#'
+#' @param x,y Numbers
+#'
+#' @return The sum of x and y
+#' @export
+#'
+#' @examples
+#'
+#' add(1, 2)
+#'
+#' @expect equals(add(1, 1))
+#' 1 + 1
+add <- function (x, y) {
+  x + y
+}

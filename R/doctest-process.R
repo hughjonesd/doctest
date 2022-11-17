@@ -6,7 +6,6 @@ doctest <- function () {
 }
 
 
-#' @importFrom roxygen2 roclet_process
 #' @export
 roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
   results <- lapply(blocks, build_result_from_block)
@@ -26,7 +25,7 @@ build_result_from_block <- function (block) {
   result$object <- block$object$alias
 
   test <- new_test(
-                   name = sprintf("Example: %s", block$object$alias),
+                   name = sprintf("Example: %s", nice_name(result)),
                    source_object = block$object$alias,
                    source_file = tags[[1]]$file,
                    source_line = tags[[1]]$line
@@ -51,16 +50,27 @@ build_result_from_block <- function (block) {
   result
 }
 
+nice_name <- function(result) {
+  result$object %||% "unknown"
+}
+
 
 new_test <- function (name, source_object, source_file, source_line) {
-    structure(list(
-                   name   = name,
-                   source_object = source_object,
-                   source_file   = source_file,
-                   source_line   = source_line,
-                   has_expectation = FALSE
-                  ),
-              class = "doctest_test")
+  if (grepl("\"|\\\\", name)) {
+    cli::cli_abort(c(
+      "@test name must not include double quotes or backslashes",
+      x = "Name was {.code {name}}"
+    ))
+  }
+
+  structure(list(
+                 name   = name,
+                 source_object = source_object,
+                 source_file   = source_file,
+                 source_line   = source_line,
+                 has_expectation = FALSE
+                ),
+            class = "doctest_test")
 }
 
 

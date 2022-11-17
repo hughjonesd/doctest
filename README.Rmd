@@ -23,14 +23,6 @@ Doctests are documentation combined with tests  The doctest package
 helps you write doctests by adding tags to your [roxygen](https://roxygen2.r-lib.org/) documentation.
 
 
-## Installation
-
-You can install the development version of doctest like so:
-
-``` r
-devtools::install("hughjonesd/doctest")
-```
-
 ## Example
 
 Here's some documentation for a function:
@@ -50,9 +42,68 @@ results <- roc_proc_text(doctest(), text)
 roclet_output(doctest(), results)
 ```
 
-To use testygen, change your package DESCRIPTION to add the `doctest`
+
+## Usage
+
+To use doctest, put a line in your package DESCRIPTION to add the `doctest`
 roclet to roxygen, like this:
 
 ```
-Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest")) 
+Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest")) 
+```
+
+Then in the package directory, run:
+
+```r
+library(doctest)
+roxygen2::roxygenize()
+```
+
+At present, you can't use doctest from the RStudio keyboard shortcut
+`Ctrl + Shift + D`, because this always uses the standard roxygen2 roclets. 
+However, you can bind the RStudio addin "Devtools: document a package" to a
+keyboard shortcut. This will use the roclets from your package DESCRIPTION file.
+
+## doctest tags
+
+The doctest package adds four tags to roxygen:
+
+* `@expect` takes the next expression and writes an expectation for it.
+
+```r
+#'
+#' @expect equals(2)
+1+1
+```
+
+You can use any `expect_*` function from `testthat`. Omit the `expect_` at the
+start.
+
+* `@test *test-name*` creates a new test.
+
+```r
+#' @test Should fail on NA
+#' @expect error()
+#' my_func(NA)
+```
+
+By default, all expectations are created in a single test.
+
+* `@skiptest` omits lines of the example from the test, and
+
+* `@unskip` stops omitting lines
+
+```r
+#' @skiptest
+#' # No need to test plotting
+#' plot(1:10, my_func(1:10))
+#' @unskip
+```
+
+## Installation
+
+You can install the development version of doctest like so:
+
+``` r
+devtools::install("hughjonesd/doctest")
 ```

@@ -38,7 +38,7 @@ roxy_tag_parse.roxy_tag_skiptest <- function (x) {
 roxy_tag_parse.roxy_tag_unskip <- function (x) {
   x <- strip_first_line(x)
   # we test so as not to warn if unskip is empty
-  if (stringr::str_trim(x$raw) != "") {
+  if (length(x$raw) > 0 && stringr::str_trim(x$raw) != "") {
     x <- roxygen2::tag_examples(x)
   }
 
