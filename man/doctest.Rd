@@ -12,12 +12,8 @@ The doctest roclet
 \description{
 Create doctests from roxygen tags
 }
-\details{
-To use this, add
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
-}\if{html}{\out{</div>}}
-
-to your package DESCRIPTION file. Then run \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} from the
-command line. Or, run \code{roxygen2::roxygenize(roclets = "doctest::doctest")}.
+\examples{
+\dontrun{
+roxygen2::roxygenize(roclets = "doctest::doctest")
+}
 }

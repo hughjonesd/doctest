@@ -3,18 +3,12 @@
 
 #' Create doctests from roxygen tags
 #'
-#' @details
-#' To use this, add
-#'
-#' ```r
-#' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
-#' ```
-#'
-#' to your package DESCRIPTION file. Then run [roxygen2::roxygenize()] from the
-#' command line. Or, run `roxygen2::roxygenize(roclets = "doctest::doctest")`.
-#'
 #' @return The doctest roclet
 #' @export
+#' @examples
+#' \dontrun{
+#' roxygen2::roxygenize(roclets = "doctest::doctest")
+#' }
 doctest <- function () {
   roxygen2::roclet("doctest")
 }

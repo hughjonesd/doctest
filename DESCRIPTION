@@ -13,6 +13,7 @@ LazyData: true
 RoxygenNote: 7.2.2
 Imports: 
     cli,
+    lifecycle,
     pkgload,
     rlang,
     roxygen2,
