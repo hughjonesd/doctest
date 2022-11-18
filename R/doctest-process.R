@@ -3,9 +3,10 @@
 
 #' Create doctests from roxygen tags
 #'
+#' @details
 #' To use this, add
 #'
-#' ```
+#' ```r
 #' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
 #' ```
 #'
@@ -22,13 +23,14 @@ doctest <- function () {
 #' @export
 roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
   results <- lapply(blocks, build_result_from_block)
+  results <- Filter(Negate(is.null), results)
 
   return(results)
 }
 
 
 build_result_from_block <- function (block) {
-  if (! roxygen2::block_has_tags(block, c("expect", "test"))) return(list())
+  if (! roxygen2::block_has_tags(block, c("expect", "test"))) return(NULL)
 
   tags <- roxygen2::block_get_tags(block, c("expect", "examples", "test"))
 
@@ -92,19 +94,33 @@ add_tag_to_test <- function (x, test) UseMethod("add_tag_to_test", x)
 
 add_tag_to_test.roxy_tag_expect <- function (x, test, ...) {
   lines_expression <- parse(text = x$doctest_code)
+  target <- lines_expression[[1]] # a call
 
   expectation <- x$doctest_expect
   expectation <- trimws(expectation)
   expectation <- paste0("expect_", expectation)
   expectation <- parse(text = expectation, n = 1)[[1]]
 
-  target <- lines_expression[[1]]
-  expectation <- as.call(c(expectation[[1]],
-                           target, as.list(expectation[-1])))
+  ast_has_a_dot <- function (x) {
+    if (length(x) == 1) return(typeof(x) == "symbol" && as.character(x) == ".")
+    if (length(x) > 1) any(unlist(lapply(x, ast_has_a_dot)))
+  }
+  has_a_dot <- ast_has_a_dot(expectation)
+
+  expectation <- if (has_a_dot) {
+                   do.call("substitute", list(expectation, list(. = target)))
+                 } else {
+                   as.call(c(
+                            expectation[[1]],
+                            target,
+                            as.list(expectation[-1])
+                           ))
+                 }
+
   expectation <- deparse(expectation)
 
   rest <- if (length(lines_expression) > 1) {
-            deparse(lines_expression[-1])
+            sapply(lines_expression[-1], deparse)
           } else {
             character(0)
           }

@@ -10,13 +10,14 @@ doctest()
 The doctest roclet
 }
 \description{
-To use this, add
+Create doctests from roxygen tags
 }
 \details{
-```
-Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
-```
+To use this, add
 
-to your package DESCRIPTION file. Then run [roxygen2::roxygenize()] from the
-command line. Or, run `roxygen2::roxygenize(roclets = "doctest::doctest")`.
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
+}\if{html}{\out{</div>}}
+
+to your package DESCRIPTION file. Then run \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} from the
+command line. Or, run \code{roxygen2::roxygenize(roclets = "doctest::doctest")}.
 }

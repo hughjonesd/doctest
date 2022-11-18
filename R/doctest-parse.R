@@ -6,6 +6,9 @@ NULL
 #' @export
 roxy_tag_parse.roxy_tag_expect <- function (x) {
   x <- strip_first_line(x, first_line_name = "expect")
+  if (is.null(x$doctest_expect) || x$doctest_expect == "") {
+    roxygen2::warn_roxy_tag(x, "has no expectation defined")
+  }
   x$doctest_code <- clean_donts(x$raw)
   x <- roxygen2::tag_examples(x)
 

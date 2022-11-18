@@ -4,7 +4,6 @@
 # doctest
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 Doctests are documentation combined with tests. The doctest package
@@ -72,8 +71,7 @@ The .Rd file will be created as normal, with an example section like:
 ## Usage
 
 To use doctest, put a line in your package DESCRIPTION to add the
-`doctest` roclet to roxygen, like
-    this:
+`doctest` roclet to roxygen, like this:
 
     Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest")) 
 
@@ -99,7 +97,7 @@ The doctest package adds four tags to roxygen:
 
 ### `@expect`
 
-`@expect` takes the next expression and writes an expectation for it.
+`@expect` takes the expression below and writes an expectation for it.
 
 ``` r
 #'
@@ -109,6 +107,19 @@ The doctest package adds four tags to roxygen:
 
 You can use any `expect_*` function from `testthat`. Omit the `expect_`
 at the start.
+
+Use a dot `.` to substitute for the expression below:
+
+``` r
+#' @expect equal(head(.), 1:6)
+#' seq_len(100)
+#'
+#' @expect equal(., rev(.))
+#' c("T", "E", "N", "E", "T")
+```
+
+If there are no dots, then the expression is simply put as the first
+argument.
 
 ### `@test`
 
