@@ -4,6 +4,8 @@
 # doctest
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/hughjonesd/doctest/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hughjonesd/doctest/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Doctests are documentation combined with tests. The doctest package
@@ -16,7 +18,7 @@ run. Using doctest, you can also make sure that examples do what they
 are supposed to do.
 
 The [roxytest](https://mikldk.github.io/roxytest/) package is another
-way you can write tests in roxygen. doctest aims to be slightly less
+way you can write tests in roxygen. doctests aims to be slightly less
 verbose.
 
 ## Example
