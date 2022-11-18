@@ -37,11 +37,11 @@ build_result_from_block <- function (block) {
   result <- structure(list(tests = list()), class = "doctest_result")
 
   result$file <- basename(block$file)
-  result$object <- block$object$alias
+  result$object <- block_name(block)
 
   test <- new_test(
-                   name = sprintf("Example: %s", nice_name(result)),
-                   source_object = block$object$alias,
+                   name = sprintf("Example: %s", result$object),
+                   source_object = result$object,
                    source_file = tags[[1]]$file,
                    source_line = tags[[1]]$line
                    )
@@ -50,7 +50,7 @@ build_result_from_block <- function (block) {
       result$tests <- c(result$tests, list(test))
       test <- new_test(
                        name = tag$doctest_test_name,
-                       source_object = block$object$alias,
+                       source_object = result$object,
                        source_file = tag$file,
                        source_line = tag$line
                        )
@@ -64,6 +64,13 @@ build_result_from_block <- function (block) {
 
   result
 }
+
+
+block_name <- function (block) {
+  name_tag <- roxygen2::block_get_tag(block, "name")
+  block$object$alias %||% name_tag$val %||% "unknown"
+}
+
 
 nice_name <- function(result) {
   result$object %||% "unknown"
