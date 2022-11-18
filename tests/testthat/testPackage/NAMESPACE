@@ -2,5 +2,6 @@
 
 export("%plus%")
 export(add)
+export(palindrome)
 export(safe_mean)
 export(safe_var)

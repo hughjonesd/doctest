@@ -70,8 +70,9 @@ strip_first_line <- function (x, first_line_name = NULL) {
 
 
 clean_donts <- function (text) {
-  tf_in <- tempfile()
-  tf_out <- tempfile()
+  if (text == "") return(text)
+  tf_in <- tempfile("Rex")
+  tf_out <- tempfile("Rex")
   on.exit({
     file.remove(tf_in)
     file.remove(tf_out)
