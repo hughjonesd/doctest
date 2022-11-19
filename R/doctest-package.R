@@ -7,7 +7,10 @@
 #' to your package DESCRIPTION file. Then run [roxygen2::roxygenize()] or
 #' [devtools::document()] from the command line.
 #'
+#' doctest is `r lifecycle::badge("experimental")`
+#'
 #' @keywords internal
+#' @aliases NULL
 "_PACKAGE"
 
 ## usethis namespace: start

@@ -2,8 +2,6 @@
 % Please edit documentation in R/doctest-package.R
 \docType{package}
 \name{doctest-package}
-\alias{doctest}
-\alias{doctest-package}
 \title{Write testthat files using roxygen tags}
 \description{
 To use this, add
@@ -13,6 +11,9 @@ To use this, add
 
 to your package DESCRIPTION file. Then run \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} or
 \code{\link[devtools:document]{devtools::document()}} from the command line.
+}
+\details{
+doctest is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \author{
 \strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}
