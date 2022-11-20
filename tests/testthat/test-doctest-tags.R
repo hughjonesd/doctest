@@ -100,11 +100,11 @@ test_that("@test", {
 })
 
 
-test_that("@testcomments", {
+test_that("@testComments", {
   test_comment <- "
                    #' @examples
                    #' 1
-                   #' @testcomments
+                   #' @testComments
                    #' a <- 1
                    #' # expect equal(a, 1)
                    #' # expect equal(., 4)
@@ -120,7 +120,7 @@ test_that("@testcomments", {
   bad_test_comment <- "
                        #' @examples
                        #' 1
-                       #' @testcomments
+                       #' @testComments
                        #'
                        #' a <- 1 # expect equal(a, 1)
                        NULL
@@ -132,19 +132,19 @@ test_that("@testcomments", {
 })
 
 
-test_that("@skiptest", {
-  skiptest <- "
+test_that("@skipTest", {
+  skip_test <- "
                #' @examples
                #' a <- 1
-               #' @skiptest
+               #' @skipTest
                #'
                #' a <- 2
-               #' @unskip
+               #' @resumeTest
                #' @expect equal(., 1)
                #' a
                NULL
               " |> dedent()
-  results <- roc_proc_text(doctest(), skiptest)
+  results <- roc_proc_text(doctest(), skip_test)
   expect_output(
     roclet_output(doctest(), results),
     regexp = "a <- 1\\s+expect"

@@ -88,7 +88,7 @@
       expect_true(TRUE)
     })
 
-# @testcomments
+# @testComments
 
     
     # File test-examples-unknown.R

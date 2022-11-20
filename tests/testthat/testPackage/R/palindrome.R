@@ -11,9 +11,9 @@
 #'
 #' @expect match(., "Panama")
 #' palindrome()
-#' @skiptest
+#' @skipTest
 #' print(p)
-#' @unskip
+#' @resumeTest
 #' pal_letters <- p |>
 #'   tolower() |>
 #'   gsub("[^A-z]", "", x = _) |>

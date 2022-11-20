@@ -152,22 +152,22 @@ the example. `@test <test-name>` changes to a new test.
 #' abs(-1)
 ```
 
-### `@skiptest` and `@unskip`
+### `@skipTest` and `@resumeTest`
 
 By default, the test uses the whole example, since example code may
 depend on previous code.
 
-`@skiptest` omits lines of the example from the test. `@unskip` stops
-omitting lines. You can use this to skip irrelevant material.
+`@skipTest` omits lines of the example from the test. `@resumeTest`
+stops omitting lines. You can use this to skip irrelevant material.
 
 ``` r
-#' @skiptest
+#' @skipTest
 #' # No need to test plotting
 #' plot(1:10, my_func(1:10))
-#' @unskip
+#' @resumeTest
 ```
 
-### `@testcomments`
+### `@testComments`
 
 Because of how roxygen works, you can’t add expectations in the middle
 of complex expressions like `if` statements or `for` loops. For example,
@@ -181,11 +181,11 @@ this won’t work:
 #' }
 ```
 
-As an alternative, you can use the `@testcomments` tag to test
+As an alternative, you can use the `@testComments` tag to test
 expectations in comments:
 
 ``` r
-#' @testcomments
+#' @testComments
 #' if (x > 0) {
 #'   # expect gt(x, 0)
 #' } else {
@@ -238,7 +238,7 @@ But this won’t, because it contains a doctest tag:
 #' }
 ```
 
-You can work around this by using the `@testcomments` tag and writing
+You can work around this by using the `@testComments` tag and writing
 expectations as comments.
 
 ## Related packages

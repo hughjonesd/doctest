@@ -29,7 +29,7 @@ roxy_tag_parse.roxy_tag_test <- function (x) {
 
 
 #' @export
-roxy_tag_parse.roxy_tag_skiptest <- function (x) {
+roxy_tag_parse.roxy_tag_skipTest <- function (x) {
   x <- strip_first_line(x)
   x <- tag_nonempty_examples(x)
 
@@ -38,7 +38,7 @@ roxy_tag_parse.roxy_tag_skiptest <- function (x) {
 
 
 #' @export
-roxy_tag_parse.roxy_tag_unskip <- function (x) {
+roxy_tag_parse.roxy_tag_resumeTest <- function (x) {
   x <- strip_first_line(x)
   x <- tag_nonempty_examples(x)
 
@@ -47,7 +47,7 @@ roxy_tag_parse.roxy_tag_unskip <- function (x) {
 
 
 #' @export
-roxy_tag_parse.roxy_tag_testcomments <- function (x) {
+roxy_tag_parse.roxy_tag_testComments <- function (x) {
   x <- strip_first_line(x)
   x <- tag_nonempty_examples(x)
 
@@ -93,12 +93,12 @@ roxy_tag_rd.roxy_tag_test <- roxy_tag_rd.roxy_tag_expect
 
 
 #' @export
-roxy_tag_rd.roxy_tag_skiptest <- roxy_tag_rd.roxy_tag_expect
+roxy_tag_rd.roxy_tag_skipTest <- roxy_tag_rd.roxy_tag_expect
 
 
 #' @export
-roxy_tag_rd.roxy_tag_unskip <- roxy_tag_rd.roxy_tag_expect
+roxy_tag_rd.roxy_tag_resumeTest <- roxy_tag_rd.roxy_tag_expect
 
 
 #' @export
-roxy_tag_rd.roxy_tag_testcomments <- roxy_tag_rd.roxy_tag_expect
+roxy_tag_rd.roxy_tag_testComments <- roxy_tag_rd.roxy_tag_expect

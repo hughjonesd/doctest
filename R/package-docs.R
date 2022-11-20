@@ -74,7 +74,7 @@ NULL
 
 #' Exclude example code from a test
 #'
-#' `@skiptest` excludes the following code from a test. `@unskip` stops excluding
+#' `@skipTest` excludes the following code from a test. `@resumeTest` stops excluding
 #' code.
 #'
 #' @details
@@ -85,9 +85,9 @@ NULL
 #'     #' @expect equal(., 0)
 #'     #' sin(0)
 #'     #'
-#'     #' @skiptest
+#'     #' @skipTest
 #'     #' curve(sin(x), 0, 2 * pi)
-#'     #' @unskip
+#'     #' @resumeTest
 #'     #'
 #'     #' @expect equal(., 1)
 #'     #' cos(0)
@@ -96,8 +96,8 @@ NULL
 #' your users. If your code is getting too different from your example, consider
 #' splitting it off into a proper test file.
 #'
-#' @name skiptest
-#' @aliases @skiptest @unskip
+#' @name skipTest
+#' @aliases @skipTest @resumeTest
 NULL
 
 
@@ -105,7 +105,7 @@ NULL
 
 #' Write expectations in comments
 #'
-#' `@testcomments` lets you write expectations in comments.
+#' `@testComments` lets you write expectations in comments.
 #' This may be useful if you have complex examples with `if` statements or
 #' `for` loops
 #'
@@ -123,11 +123,11 @@ NULL
 #'     #'   print("x is negative")
 #'     #' }
 #'
-#' As an alternative, put `@testcomments` in your examples section and write
+#' As an alternative, put `@testComments` in your examples section and write
 #' expectations in comments:
 #'
 #'     #' @examples
-#'     #' @testcomments
+#'     #' @testComments
 #'     #' if (x > 0) {
 #'     #'   # expect gt(x, 0)
 #'     #'   print("x is positive")
@@ -152,6 +152,6 @@ NULL
 #'     #' # expect equal(., 4)
 #'     #' 2 + 2
 #'
-#' @name testcomments
-#' @aliases @testcomments
+#' @name testComments
+#' @aliases @testComments
 NULL

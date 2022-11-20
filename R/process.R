@@ -28,18 +28,18 @@ roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
 
 
 build_result_from_block <- function (block) {
-  if (! roxygen2::block_has_tags(block, c("expect", "test", "testcomments"))) {
+  if (! roxygen2::block_has_tags(block, c("expect", "test", "testComments"))) {
     return(NULL)
   }
 
   tags <- roxygen2::block_get_tags(block, c("expect", "examples", "test",
-                                            "testcomments"))
+                                            "testComments"))
 
   result <- structure(list(tests = list()), class = "doctest_result")
 
   result$file <- basename(block$file)
   result$object <- block_name(block)
-  result$test_comments <- roxygen2::block_has_tags(block, "testcomments")
+  result$test_comments <- roxygen2::block_has_tags(block, "testComments")
 
   test <- new_test(
                    name = sprintf("Example: %s", result$object),
@@ -120,13 +120,13 @@ add_tag_to_test.roxy_tag_examples <- function (tag, test, ...) {
 }
 
 
-add_tag_to_test.roxy_tag_testcomments <- add_tag_to_test.roxy_tag_examples
+add_tag_to_test.roxy_tag_testComments <- add_tag_to_test.roxy_tag_examples
 
 
-add_tag_to_test.roxy_tag_unskip <- add_tag_to_test.roxy_tag_examples
+add_tag_to_test.roxy_tag_resumeTest <- add_tag_to_test.roxy_tag_examples
 
 
-add_tag_to_test.roxy_tag_skiptest <- function (tag, test, ...) {
+add_tag_to_test.roxy_tag_skipTest <- function (tag, test, ...) {
   test
 }
 
