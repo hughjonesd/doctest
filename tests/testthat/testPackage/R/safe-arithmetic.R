@@ -8,16 +8,16 @@
 #'
 #' @examples
 #' x <- 1:3
-#' @expect equal(2)
+#' @expect equal(., 2)
 #' safe_mean(x)
 #'
 #' @test safe-mean-errors
 #'
-#' @expect warning("not numeric")
+#' @expect warning(., "not numeric")
 #'
 #' safe_mean("a")
 #'
-#' @expect warning("NA elements")
+#' @expect warning(., "NA elements")
 #' safe_mean(c(1, NA))
 safe_mean <- function (x) {
   if (length(x) == 0L) stop("No elements in x")
@@ -73,7 +73,7 @@ add <- function (x, y) {
 #'
 #' @examples
 #' 1 %plus% 1
-#' @expect equal(4)
+#' @expect equal(., 4)
 #' 2 %plus% 2
 `%plus%` <- function (x, y) {
   x+y

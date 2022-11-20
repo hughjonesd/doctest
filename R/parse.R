@@ -10,7 +10,7 @@ roxy_tag_parse.roxy_tag_expect <- function (x) {
     roxygen2::warn_roxy_tag(x, "has no expectation defined")
   }
 
-  x <- roxygen2::tag_examples(x)
+  x <- tag_nonempty_examples(x)
 
   x
 }
@@ -21,9 +21,8 @@ roxy_tag_parse.roxy_tag_test <- function (x) {
   if (is.null(x$doctest_test_name)) {
     roxygen2::warn_roxy_tag(x, "requires a test name")
   }
-  if (stringr::str_trim(x$raw) != "") {
-    x <- roxygen2::tag_examples(x)
-  }
+
+  x <- tag_nonempty_examples(x)
 
   x
 }
@@ -32,7 +31,7 @@ roxy_tag_parse.roxy_tag_test <- function (x) {
 #' @export
 roxy_tag_parse.roxy_tag_skiptest <- function (x) {
   x <- strip_first_line(x)
-  x <- roxygen2::tag_examples(x)
+  x <- tag_nonempty_examples(x)
 
   x
 }
@@ -42,9 +41,7 @@ roxy_tag_parse.roxy_tag_skiptest <- function (x) {
 roxy_tag_parse.roxy_tag_unskip <- function (x) {
   x <- strip_first_line(x)
   # we test so as not to warn if unskip is empty
-  if (length(x$raw) > 0 && stringr::str_trim(x$raw) != "") {
-    x <- roxygen2::tag_examples(x)
-  }
+  x <- tag_nonempty_examples(x)
 
   x
 }
@@ -63,6 +60,14 @@ strip_first_line <- function (x, first_line_name = NULL) {
   if (! is.null(first_line_name) && length(lines)) {
     first_line_name <- paste0("doctest_", first_line_name)
     x[[first_line_name]] <- lines[[1]]
+  }
+
+  x
+}
+
+tag_nonempty_examples <- function (x) {
+  if (length(x$raw) > 0 && stringr::str_trim(x$raw) != "") {
+    x <- roxygen2::tag_examples(x)
   }
 
   x
