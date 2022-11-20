@@ -101,13 +101,4 @@ roxy_tag_rd.roxy_tag_resumeTest <- roxy_tag_rd.roxy_tag_expect
 
 
 #' @export
-roxy_tag_rd.roxy_tag_testComments <- function(x, base_path, env) {
-  rd_section("testComments", x$val)
-}
-
-#' @export
-merge.rd_section_testComments <- function (x, y, ...) {
-  browser()
-  rd_section(x$type, c(x$value, y$value))
-}
-
+roxy_tag_rd.roxy_tag_testComments <- roxy_tag_rd.roxy_tag_expect
