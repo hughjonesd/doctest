@@ -194,7 +194,8 @@ expectations in comments:
 ```
 
 Doctest comments follow the same format as the expectation tag, but with
-`@expect` replaced by `# expect`. Comments must be on their own line.
+`@expect` replaced by `# expect`. Comments must be on their own line,
+and will remain in the example code.
 
 ## How to use doctest
 

@@ -42,6 +42,8 @@ NULL
 #'
 #'     @expect equals(., 4)
 #'     2 + 2
+#'     @expect length(10)
+#'     rnorm(10)
 #'
 #' @name expect
 #' @aliases @expect
@@ -151,6 +153,8 @@ NULL
 #'     #' # Right:
 #'     #' # expect equal(., 4)
 #'     #' 2 + 2
+#'
+#' Comments will be visible in the example.
 #'
 #' @name testComments
 #' @aliases @testComments

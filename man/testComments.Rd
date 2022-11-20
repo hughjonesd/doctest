@@ -54,4 +54,6 @@ Comments should be on their own line, with no other code:
 #' # expect equal(., 4)
 #' 2 + 2
 }\if{html}{\out{</div>}}
+
+Comments will be visible in the example.
 }

@@ -25,5 +25,7 @@ Use a dot \code{.} to refer to the following expression:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{@expect equals(., 4)
 2 + 2
+@expect length(10)
+rnorm(10)
 }\if{html}{\out{</div>}}
 }
