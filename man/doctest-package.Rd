@@ -13,7 +13,7 @@ to your package DESCRIPTION file. Then run \code{\link[roxygen2:roxygenize]{roxy
 \code{\link[devtools:document]{devtools::document()}} from the command line.
 }
 \details{
-doctest is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+doctest is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}.
 }
 \author{
 \strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}
