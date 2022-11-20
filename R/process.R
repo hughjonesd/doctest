@@ -1,6 +1,11 @@
 
 
-#' Create doctests from roxygen tags
+#' Create the doctest roclet
+#'
+#' You can use this in your package DESCRIPTION like this:
+#' ```r
+#' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
+#' ```
 #'
 #' @return The doctest roclet
 #' @export

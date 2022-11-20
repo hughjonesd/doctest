@@ -4,16 +4,26 @@
 \name{doctest-package}
 \title{Write testthat files using roxygen tags}
 \description{
-To use this, add
+To use doctest in your package, add
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
 }\if{html}{\out{</div>}}
 
-to your package DESCRIPTION file. Then run \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} or
-\code{\link[devtools:document]{devtools::document()}} from the command line.
+to the DESCRIPTION file. You may also optionally
+add doctest to your 'Suggests:' dependencies.
 }
 \details{
-doctest is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}.
+Then run \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} or \code{\link[devtools:document]{devtools::document()}} from the
+command line.
+
+Doctest is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://hughjonesd.github.io/doctest/}
+}
+
 }
 \author{
 \strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}

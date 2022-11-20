@@ -1,13 +1,16 @@
 #' Write testthat files using roxygen tags
 #'
-#' To use this, add
+#' To use doctest in your package, add
 #' ```r
 #' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
 #' ```
-#' to your package DESCRIPTION file. Then run [roxygen2::roxygenize()] or
-#' [devtools::document()] from the command line.
+#' to the DESCRIPTION file. You may also optionally
+#' add doctest to your 'Suggests:' dependencies.
 #'
-#' doctest is `r lifecycle::badge("experimental")`.
+#' Then run [roxygen2::roxygenize()] or [devtools::document()] from the
+#' command line.
+#'
+#' Doctest is `r lifecycle::badge("experimental")`.
 #'
 #' @keywords internal
 #' @aliases NULL
@@ -110,8 +113,8 @@ NULL
 #' Doctests like this won't work, because the test tags split up the example
 #' code so that roxygen can't parse it.
 #'
-#'     @examples
-#'
+#'     #' @examples
+#'     #'
 #'     #' if (x > 0) {
 #'     #'   @expect gt(x, 0)
 #'     #'   print("x is positive")

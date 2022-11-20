@@ -13,8 +13,8 @@ This may be useful if you have complex examples with \code{if} statements or
 Doctests like this won't work, because the test tags split up the example
 code so that roxygen can't parse it.
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{@examples
-
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
+#'
 #' if (x > 0) \{
 #'   @expect gt(x, 0)
 #'   print("x is positive")

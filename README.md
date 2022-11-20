@@ -238,6 +238,9 @@ But this won’t, because it contains a doctest tag:
 #' }
 ```
 
+You can work around this by using the `@testcomments` tag and writing
+expectations as coments.
+
 ## Related packages
 
 The [roxytest](https://mikldk.github.io/roxytest/) package is another

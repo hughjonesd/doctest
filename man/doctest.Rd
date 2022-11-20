@@ -2,7 +2,7 @@
 % Please edit documentation in R/process.R
 \name{doctest}
 \alias{doctest}
-\title{Create doctests from roxygen tags}
+\title{Create the doctest roclet}
 \usage{
 doctest()
 }
@@ -10,7 +10,10 @@ doctest()
 The doctest roclet
 }
 \description{
-Create doctests from roxygen tags
+You can use this in your package DESCRIPTION like this:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
+}\if{html}{\out{</div>}}
 }
 \examples{
 \dontrun{
