@@ -14,13 +14,13 @@ RoxygenNote: 7.2.2
 Imports: 
     cli,
     fs,
-    lifecycle,
     pkgload,
     purrr,
     rlang,
     roxygen2,
     stringr
 Suggests:
-    testthat
+    testthat,
+    lifecycle
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)

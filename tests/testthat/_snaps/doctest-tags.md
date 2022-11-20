@@ -6,7 +6,7 @@
     
     test_that("Example: unknown", {
     # Created from @examples for `unknown`
-    # Source file: 'tests/testthat/<text>'
+    # Source file: '<text>'
     # Source line: 2
       1
       expect_equal(sum(1, 1), 2)
@@ -20,7 +20,7 @@
     
     test_that("Example: unknown", {
     # Created from @examples for `unknown`
-    # Source file: 'tests/testthat/<text>'
+    # Source file: '<text>'
     # Source line: 2
       1
       expect_equal(1 + 1, 2)
@@ -34,7 +34,7 @@
     
     test_that("Example: unknown", {
     # Created from @examples for `unknown`
-    # Source file: 'tests/testthat/<text>'
+    # Source file: '<text>'
     # Source line: 2
       1
       expect_equal(base::sum(1, 1), 2)
@@ -48,7 +48,7 @@
     
     test_that("Example: unknown", {
     # Created from @examples for `unknown`
-    # Source file: 'tests/testthat/<text>'
+    # Source file: '<text>'
     # Source line: 2
       1
       expect_equal(sum(1, 1), 2)
@@ -62,7 +62,7 @@
     
     test_that("Example: unknown", {
     # Created from @examples for `unknown`
-    # Source file: 'tests/testthat/<text>'
+    # Source file: '<text>'
     # Source line: 2
       1 %plus% 1
       expect_equal(2 %plus% 2, 4)
@@ -76,14 +76,14 @@
     
     test_that("Example: unknown", {
     # Created from @examples for `unknown`
-    # Source file: 'tests/testthat/<text>'
+    # Source file: '<text>'
     # Source line: 2
       1
       expect_equal(1, 1)
     })
     test_that("is TRUE true?", {
     # Created from @examples for `unknown`
-    # Source file: 'tests/testthat/<text>'
+    # Source file: '<text>'
     # Source line: 6
       expect_true(TRUE)
     })

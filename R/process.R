@@ -4,7 +4,6 @@
 #'
 #' @return The doctest roclet
 #' @export
-#' @seealso Package documentation at [doctest-package]
 #' @examples
 #' \dontrun{
 #' roxygen2::roxygenize(roclets = "doctest::doctest")
@@ -78,7 +77,9 @@ new_test <- function (name, source_object, source_file, source_line) {
     ))
   }
 
-  source_file <- fs::path_rel(source_file, pkgload::pkg_path())
+  if (source_file != "<text>") {
+    source_file <- fs::path_rel(source_file, pkgload::pkg_path())
+  }
   structure(list(
                  name          = name,
                  source_object = source_object,

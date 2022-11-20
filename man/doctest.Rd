@@ -17,6 +17,3 @@ Create doctests from roxygen tags
 roxygen2::roxygenize(roclets = "doctest::doctest")
 }
 }
-\seealso{
-Package documentation at \link{doctest-package}
-}
