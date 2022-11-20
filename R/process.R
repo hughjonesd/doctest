@@ -34,6 +34,7 @@ build_result_from_block <- function (block) {
 
   result$file <- basename(block$file)
   result$object <- block_name(block)
+  result$test_comments <- roxygen2::block_has_tags(block, "testcomments")
 
   test <- new_test(
                    name = sprintf("Example: %s", result$object),
@@ -44,7 +45,7 @@ build_result_from_block <- function (block) {
   for (tag in tags) {
     if (inherits(tag, "roxy_tag_test")) {
       # create expectations
-      result <- add_test_to_result(test, result)
+      result <- process_test(test, result)
       test <- new_test(
                        name = tag$doctest_test_name,
                        source_object = result$object,
@@ -55,7 +56,7 @@ build_result_from_block <- function (block) {
       test <- add_tag_to_test(tag, test)
     }
   }
-  result <- add_test_to_result(test, result)
+  result <- process_test(test, result)
 
   result
 }
@@ -88,9 +89,8 @@ new_test <- function (name, source_object, source_file, source_line) {
                  source_object = source_object,
                  source_file   = source_file,
                  source_line   = source_line,
-                 lines         = character(0),
-                 test_comments = FALSE
-                ),
+                 lines         = character(0)
+                 ),
             class = "doctest_test")
 }
 
@@ -115,14 +115,11 @@ add_tag_to_test.roxy_tag_examples <- function (tag, test, ...) {
 }
 
 
+add_tag_to_test.roxy_tag_testcomments <- add_tag_to_test.roxy_tag_examples
+
+
 add_tag_to_test.roxy_tag_unskip <- add_tag_to_test.roxy_tag_examples
 
-add_tag_to_test.roxy_tag_testcomments <- function (tag, test, ...) {
-  test <- add_lines_to_test(tag, test)
-  test$test_comments <- TRUE
-
-  test
-}
 
 add_tag_to_test.roxy_tag_skiptest <- function (tag, test, ...) {
   test
@@ -137,8 +134,8 @@ add_lines_to_test <- function (tag, test) {
 }
 
 
-add_test_to_result <- function (test, result) {
-  test <- process_expectations(test)
+process_test <- function (test, result) {
+  test <- create_expectations(test, test_comments = result$test_comments)
   result$tests <- c(result$tests, list(test))
 
   result

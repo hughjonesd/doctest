@@ -10,18 +10,21 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-Doctests are documentation combined with tests. The doctest package
-helps you write [testthat](https://testthat.r-lib.org/) doctests, by
-adding tags to your [roxygen](https://roxygen2.r-lib.org/)
-documentation.
+Documentation examples and tests share certain features. They are both
+usually self-contained pieces of code. They should cover the software’s
+most important functions and typical uses. They should both be simple
+and clear: complex examples are hard for users to understand, and
+complex test code can introduce testing bugs. This similarity makes it
+attractive to use “doctests”, which provide both documentation and
+testing. Indeed, several languages, including Python and Rust, have
+doctests built in.[^1] R also checks for errors in examples when running
+`R CMD check`.
 
-`R CMD CHECK` already checks examples, but it only confirms that they
-run. Using doctest, you can also make sure that examples do what they
+The doctest package extends this idea. It lets you write
+[testthat](https://testthat.r-lib.org/) tests, by adding tags to your
+[roxygen](https://roxygen2.r-lib.org/) documentation. So, as well as
+checking that your examples run, you can also check they do what they
 are supposed to do.
-
-The [roxytest](https://mikldk.github.io/roxytest/) package is another
-way you can write tests in roxygen. doctests aims to be slightly less
-verbose.
 
 ## Example
 
@@ -69,11 +72,12 @@ This will create tests like:
 
 The .Rd file will be created as normal, with an example section like:
 
-    \examples{
-    safe_mean(x)
-    safe_mean("a")
-    safe_mean(c(1, NA))
-    }
+    #> \examples{
+    #> 
+    #> x <- safe_mean(1:3)
+    #> safe_mean("a")
+    #> safe_mean(c(1, NA))
+    #> }
 
 ## Usage
 
@@ -83,10 +87,17 @@ You can install the development version of doctest like this:
 devtools::install("hughjonesd/doctest")
 ```
 
-To use doctest, put a line in your package DESCRIPTION to add the
-`doctest` roclet to roxygen, like this:
+To use doctest, alter your package DESCRIPTION to add the `doctest`
+roclet to roxygen, like this:
 
     Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest")) 
+
+You can also add `doctest` as a dependency:
+
+``` r
+usethis::use_dev_package("doctest", type = "Suggests", 
+                         remote = "hughjonesd/doctest")
+```
 
 Then in the package directory run:
 
@@ -106,7 +117,7 @@ package DESCRIPTION file.
 
 ## doctest tags
 
-The doctest package adds four tags to roxygen:
+The doctest package adds five tags to roxygen:
 
 ### `@expect`
 
@@ -156,6 +167,35 @@ omitting lines. You can use this to skip irrelevant material.
 #' @unskip
 ```
 
+### `@testcomments`
+
+Because of how roxygen works, you can’t add expectations in the middle
+of complex expressions like `if` statements or `for` loops. For example,
+this won’t work:
+
+``` r
+#' if (x > 0) {
+#'   @expect gt(x, 0)
+#' } else {
+#'   @expect lt(x, 0)
+#' }
+```
+
+As an alternative, you can use the `@testcomments` tag to test
+expectations in comments:
+
+``` r
+#' @testcomments
+#' if (x > 0) {
+#'   # expect gt(x, 0)
+#' } else {
+#'   # expect lt(x, 0)
+#' }
+```
+
+Doctest comments follow the same format as the expectation tag, but with
+`@expect` replaced by `# expect`. Comments must be on their own line.
+
 ## How to use doctest
 
 doctest is best used for relatively simple tests. If things get too
@@ -168,7 +208,7 @@ advice:
 
 *Programming Rust*, Blandy, Orendorff and Tindall, 2021
 
-## Bugs
+## Bugs and limitations
 
 ### Empty `@examples` section
 
@@ -197,3 +237,12 @@ But this won’t, because it contains a doctest tag:
 #' stop("argh")
 #' }
 ```
+
+## Related packages
+
+The [roxytest](https://mikldk.github.io/roxytest/) package is another
+way you can write tests in roxygen. doctest aims to be slightly less
+verbose.
+
+[^1]: <https://docs.python.org/3/library/doctest.html>,
+    <https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html>

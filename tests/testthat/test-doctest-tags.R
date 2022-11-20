@@ -1,4 +1,5 @@
 
+library(roxygen2)
 dedent <- function (x) gsub("\n\\s+", "\n", x)
 
 test_that("@expectation", {
@@ -9,9 +10,9 @@ test_that("@expectation", {
                       #' sum(1, 1)
                       NULL
                      " |> dedent()
-  results <- roxygen2::roc_proc_text(doctest::doctest(), dot_expectation)
+  results <- roc_proc_text(doctest(), dot_expectation)
   expect_snapshot_output(
-    roxygen2::roclet_output(doctest::doctest(), results)
+    roclet_output(doctest(), results)
   )
 
   operator_expectation <- "
@@ -21,9 +22,9 @@ test_that("@expectation", {
                            #' 1 + 1
                            NULL
                           " |> dedent()
-  results <- roxygen2::roc_proc_text(doctest::doctest(), operator_expectation)
+  results <- roc_proc_text(doctest(), operator_expectation)
   expect_snapshot_output(
-    roxygen2::roclet_output(doctest::doctest(), results)
+    roclet_output(doctest(), results)
   )
 
   namespace_expectation <- "
@@ -33,9 +34,9 @@ test_that("@expectation", {
                             #' base::sum(1, 1)
                             NULL
                            " |> dedent()
-  results <- roxygen2::roc_proc_text(doctest::doctest(), namespace_expectation)
+  results <- roc_proc_text(doctest(), namespace_expectation)
   expect_snapshot_output(
-    roxygen2::roclet_output(doctest::doctest(), results)
+    roclet_output(doctest(), results)
   )
 
   donttest_expectation <- "
@@ -48,9 +49,9 @@ test_that("@expectation", {
                            NULL
                           " |> dedent()
 
-  results <- roxygen2::roc_proc_text(doctest::doctest(), donttest_expectation)
+  results <- roc_proc_text(doctest(), donttest_expectation)
   expect_snapshot_output(
-    roxygen2::roclet_output(doctest::doctest(), results)
+    roclet_output(doctest(), results)
   )
 
   custom_operator_expectation <- "
@@ -61,10 +62,10 @@ test_that("@expectation", {
                                   NULL
                                  " |> dedent()
 
-  results <- roxygen2::roc_proc_text(doctest::doctest(),
+  results <- roc_proc_text(doctest(),
                                      custom_operator_expectation)
   expect_snapshot_output(
-    roxygen2::roclet_output(doctest::doctest(), results)
+    roclet_output(doctest(), results)
   )
 
 })
@@ -80,9 +81,9 @@ test_that("@test", {
                 #' @expect true(TRUE)
                 NULL
                " |> dedent()
-  results <- roxygen2::roc_proc_text(doctest::doctest(), test_ex)
+  results <- roc_proc_text(doctest(), test_ex)
   expect_snapshot_output(
-    roxygen2::roclet_output(doctest::doctest(), results)
+    roclet_output(doctest(), results)
   )
 
   test_bad_name <- "
@@ -94,7 +95,7 @@ test_that("@test", {
                     NULL
                    " |> dedent()
   expect_error(
-    roxygen2::roc_proc_text(doctest::doctest(), test_bad_name)
+    roc_proc_text(doctest(), test_bad_name)
   )
 })
 
@@ -111,9 +112,22 @@ test_that("@testcomments", {
                    NULL
                   " |> dedent()
 
-  results <- roxygen2::roc_proc_text(doctest::doctest(), test_comment)
+  results <- roc_proc_text(doctest(), test_comment)
   expect_snapshot_output(
-    roxygen2::roclet_output(doctest::doctest(), results)
+    roclet_output(doctest(), results)
+  )
+
+  bad_test_comment <- "
+                       #' @examples
+                       #' 1
+                       #' @testcomments
+                       #'
+                       #' a <- 1 # expect equal(a, 1)
+                       NULL
+                      " |> dedent()
+
+  expect_error(
+    roc_proc_text(doctest(), bad_test_comment)
   )
 })
 
@@ -130,9 +144,9 @@ test_that("@skiptest", {
                #' a
                NULL
               " |> dedent()
-  results <- roxygen2::roc_proc_text(doctest::doctest(), skiptest)
+  results <- roc_proc_text(doctest(), skiptest)
   expect_output(
-    roxygen2::roclet_output(doctest::doctest(), results),
+    roclet_output(doctest(), results),
     regexp = "a <- 1\\s+expect"
   )
 })

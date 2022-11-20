@@ -1,8 +1,9 @@
-process_expectations <- function (test) {
+create_expectations <- function (test, test_comments) {
   example_lines <- clean_donts(test$lines)
-  if (test$test_comments) {
+  if (test_comments) {
     example_lines <- convert_comments_to_expectations(example_lines)
   }
+
   example_text <- paste(example_lines, collapse = "\n")
   example_exprs <- rlang::parse_exprs(example_text)
 

@@ -69,7 +69,6 @@ NULL
 NULL
 
 
-
 #' Exclude example code from a test
 #'
 #' `@skiptest` excludes the following code from a test. `@unskip` stops excluding
@@ -96,4 +95,60 @@ NULL
 #'
 #' @name skiptest
 #' @aliases @skiptest @unskip
+NULL
+
+
+
+
+#' Write expectations in comments
+#'
+#' `@testcomments` lets you write expectations in comments.
+#' This may be useful if you have complex examples with `if` statements or
+#' `for` loops
+#'
+#' @details
+#' Doctests like this won't work, because the test tags split up the example
+#' code so that roxygen can't parse it.
+#'
+#'     @examples
+#'
+#'     #' if (x > 0) {
+#'     #'   @expect gt(x, 0)
+#'     #'   print("x is positive")
+#'     #' } else {
+#'     #'   @expect lt(x, 0)
+#'     #'   print("x is negative")
+#'     #' }
+#'
+#' As an alternative, put `@testcomments` in your examples section and write
+#' expectations in comments:
+#'
+#'     #' @examples
+#'     #' @testcomments
+#'     #' if (x > 0) {
+#'     #'   # expect gt(x, 0)
+#'     #'   print("x is positive")
+#'     #' } else {
+#'     #'   # expect lt(x, 0)
+#'     #'   print("x is negative")
+#'     #' }
+#'
+#' Expectations in comments match the format of [expect] tags, but with a
+#' comment character `#` in place of the `@`.
+#'
+#' Comments should be on their own line, with no other code:
+#'
+#'     #' # Wrong:
+#'     #' x <- 2 + 2 # expect equal(x, 4)
+#'     #'
+#'     #' # Right:
+#'     #' x <- 2 + 2
+#'     #' # expect equal(x, 4)
+#'     #'
+#'     #' # Right:
+#'     #' # expect equal(., 4)
+#'     #' 2 + 2
+#'
+#' @name testcomments
+#' @aliases @testcomments
 NULL
