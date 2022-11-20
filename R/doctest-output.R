@@ -23,7 +23,7 @@ write_test_file <- function (filename, contents, base_path) {
 
 
 test_file_name <- function (result) {
-  sprintf("test-examples-%s.R", nice_name(result))
+  sprintf("test-examples-%s.R", result_name(result))
 }
 
 
@@ -34,7 +34,7 @@ test_file_contents <- function (result) {
   lines <- c(lines, doctest_stamp())
 
   for (test in result$tests) {
-    newlines <- build_lines(test)
+    newlines <- test$lines
     lines <- c(lines, newlines)
   }
 

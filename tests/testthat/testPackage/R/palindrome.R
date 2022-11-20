@@ -9,6 +9,7 @@
 #' @examples
 #' p <- palindrome()
 #' @expect match("Panama")
+#' p
 #' @skiptest
 #' print(p)
 #' @unskip
