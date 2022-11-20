@@ -69,6 +69,7 @@ test_that("@expectation", {
 
 })
 
+
 test_that("@test", {
     test_ex <- "
                 #' @examples
@@ -94,6 +95,25 @@ test_that("@test", {
                    " |> dedent()
   expect_error(
     roxygen2::roc_proc_text(doctest::doctest(), test_bad_name)
+  )
+})
+
+
+test_that("@testcomments", {
+  test_comment <- "
+                   #' @examples
+                   #' 1
+                   #' @testcomments
+                   #' a <- 1
+                   #' # expect equal(a, 1)
+                   #' # expect equal(., 4)
+                   #' 2 + 2
+                   NULL
+                  " |> dedent()
+
+  results <- roxygen2::roc_proc_text(doctest::doctest(), test_comment)
+  expect_snapshot_output(
+    roxygen2::roclet_output(doctest::doctest(), results)
   )
 })
 

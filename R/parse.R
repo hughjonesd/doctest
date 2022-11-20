@@ -40,7 +40,15 @@ roxy_tag_parse.roxy_tag_skiptest <- function (x) {
 #' @export
 roxy_tag_parse.roxy_tag_unskip <- function (x) {
   x <- strip_first_line(x)
-  # we test so as not to warn if unskip is empty
+  x <- tag_nonempty_examples(x)
+
+  x
+}
+
+
+#' @export
+roxy_tag_parse.roxy_tag_testcomments <- function (x) {
+  x <- strip_first_line(x)
   x <- tag_nonempty_examples(x)
 
   x
@@ -91,3 +99,6 @@ roxy_tag_rd.roxy_tag_skiptest <- roxy_tag_rd.roxy_tag_expect
 #' @export
 roxy_tag_rd.roxy_tag_unskip <- roxy_tag_rd.roxy_tag_expect
 
+
+#' @export
+roxy_tag_rd.roxy_tag_testcomments <- roxy_tag_rd.roxy_tag_expect

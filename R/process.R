@@ -23,9 +23,12 @@ roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
 
 
 build_result_from_block <- function (block) {
-  if (! roxygen2::block_has_tags(block, c("expect", "test"))) return(NULL)
+  if (! roxygen2::block_has_tags(block, c("expect", "test", "testcomments"))) {
+    return(NULL)
+  }
 
-  tags <- roxygen2::block_get_tags(block, c("expect", "examples", "test"))
+  tags <- roxygen2::block_get_tags(block, c("expect", "examples", "test",
+                                            "testcomments"))
 
   result <- structure(list(tests = list()), class = "doctest_result")
 
@@ -85,7 +88,8 @@ new_test <- function (name, source_object, source_file, source_line) {
                  source_object = source_object,
                  source_file   = source_file,
                  source_line   = source_line,
-                 lines         = character(0)
+                 lines         = character(0),
+                 test_comments = FALSE
                 ),
             class = "doctest_test")
 }
@@ -113,6 +117,12 @@ add_tag_to_test.roxy_tag_examples <- function (tag, test, ...) {
 
 add_tag_to_test.roxy_tag_unskip <- add_tag_to_test.roxy_tag_examples
 
+add_tag_to_test.roxy_tag_testcomments <- function (tag, test, ...) {
+  test <- add_lines_to_test(tag, test)
+  test$test_comments <- TRUE
+
+  test
+}
 
 add_tag_to_test.roxy_tag_skiptest <- function (tag, test, ...) {
   test

@@ -13,13 +13,15 @@ test_that("rd_roclet output", {
     result <- roxygen2::roc_proc_text(roxygen2::rd_roclet(), r_file_text)
   )
 
+  setwd("testPackage")
+  on.exit(setwd(".."))
   expect_no_error(
-    suppressMessages(roxygen2::roxygenise("testPackage", clean = TRUE))
-  )
+    suppressMessages(roxygen2::roxygenise(clean = TRUE))
+   )
 
-  expect_snapshot_file(file.path("testPackage", "man", "safe_mean.Rd"),
+  expect_snapshot_file(file.path("man", "safe_mean.Rd"),
                        compare = compare_file_text)
 
-  expect_snapshot_file(file.path("testPackage", "man", "safe_mean.Rd"),
+  expect_snapshot_file(file.path("man", "safe_mean.Rd"),
                        compare = compare_file_text)
 })

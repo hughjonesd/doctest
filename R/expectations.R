@@ -1,5 +1,8 @@
 process_expectations <- function (test) {
   example_lines <- clean_donts(test$lines)
+  if (test$test_comments) {
+    example_lines <- convert_comments_to_expectations(example_lines)
+  }
   example_text <- paste(example_lines, collapse = "\n")
   example_exprs <- rlang::parse_exprs(example_text)
 
@@ -68,6 +71,32 @@ make_expectation <- function (raw_expect_expr, target_expr) {
 }
 
 
+convert_comments_to_expectations <- function (lines) {
+  parsed <- parse(text = lines, keep.source = TRUE)
+  parse_data <- utils::getParseData(parsed)
+
+  comments <- parse_data[parse_data$token == "COMMENT", ]
+  comments <- comments[grepl("#\\s*expect\\s+", comments$text), ]
+
+  comment_lines <- comments$line1
+  expectations <- gsub("#\\s*expect\\s+(.+)", ".doctest_expect_\\1",
+                       comments$text)
+
+  other_stuff <- parse_data$line1 %in% comment_lines &
+                 parse_data$token != "COMMENT"
+  if (any(other_stuff)) {
+    cli::cli_abort(c("Found code on same line as expectation comment",
+                     i = "doctest comments must be on their own line"))
+  }
+
+  if (length(comment_lines) > 0L) {
+    lines[comment_lines] <- expectations
+  }
+
+  lines
+}
+
+
 ast_has_dot <- function (x) {
   if (length(x) == 1) return(typeof(x) == "symbol" && as.character(x) == ".")
   if (length(x) > 1) any(unlist(lapply(x, ast_has_dot)))
@@ -75,7 +104,8 @@ ast_has_dot <- function (x) {
 
 
 clean_donts <- function (lines) {
-  if (length(lines) == 1 && lines == "") return(lines)
+  # also deals with character(0):
+  if (paste(lines, collapse = "") == "") return(lines)
   tf_in <- tempfile("Rex")
   tf_out <- tempfile("Rex")
   on.exit({
