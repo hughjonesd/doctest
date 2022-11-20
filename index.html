@@ -155,21 +155,21 @@
 <span><span class="co">#' abs(-1)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="skiptest-and-unskip">
-<code>@skiptest</code> and <code>@unskip</code>
-<a class="anchor" aria-label="anchor" href="#skiptest-and-unskip"></a>
+<h3 id="skiptest-and-resumetest">
+<code>@skipTest</code> and <code>@resumeTest</code>
+<a class="anchor" aria-label="anchor" href="#skiptest-and-resumetest"></a>
 </h3>
 <p>By default, the test uses the whole example, since example code may depend on previous code.</p>
-<p><code>@skiptest</code> omits lines of the example from the test. <code>@unskip</code> stops omitting lines. You can use this to skip irrelevant material.</p>
+<p><code>@skipTest</code> omits lines of the example from the test. <code>@resumeTest</code> stops omitting lines. You can use this to skip irrelevant material.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @skiptest</span></span>
+<code class="sourceCode R"><span><span class="co">#' @skipTest</span></span>
 <span><span class="co">#' # No need to test plotting</span></span>
 <span><span class="co">#' plot(1:10, my_func(1:10))</span></span>
-<span><span class="co">#' @unskip</span></span></code></pre></div>
+<span><span class="co">#' @resumeTest</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="testcomments">
-<code>@testcomments</code><a class="anchor" aria-label="anchor" href="#testcomments"></a>
+<code>@testComments</code><a class="anchor" aria-label="anchor" href="#testcomments"></a>
 </h3>
 <p>Because of how roxygen works, you can’t add expectations in the middle of complex expressions like <code>if</code> statements or <code>for</code> loops. For example, this won’t work:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -178,9 +178,9 @@
 <span><span class="co">#' } else {</span></span>
 <span><span class="co">#'   @expect lt(x, 0)</span></span>
 <span><span class="co">#' }</span></span></code></pre></div>
-<p>As an alternative, you can use the <code>@testcomments</code> tag to test expectations in comments:</p>
+<p>As an alternative, you can use the <code>@testComments</code> tag to test expectations in comments:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @testcomments</span></span>
+<code class="sourceCode R"><span><span class="co">#' @testComments</span></span>
 <span><span class="co">#' if (x &gt; 0) {</span></span>
 <span><span class="co">#'   # expect gt(x, 0)</span></span>
 <span><span class="co">#' } else {</span></span>
@@ -223,7 +223,7 @@
 <span><span class="co">#' @expect error("argh")</span></span>
 <span><span class="co">#' stop("argh")</span></span>
 <span><span class="co">#' }</span></span></code></pre></div>
-<p>You can work around this by using the <code>@testcomments</code> tag and writing expectations as comments.</p>
+<p>You can work around this by using the <code>@testComments</code> tag and writing expectations as comments.</p>
 </div>
 </div>
 <div class="section level2">
