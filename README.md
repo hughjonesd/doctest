@@ -239,12 +239,12 @@ But this won’t, because it contains a doctest tag:
 ```
 
 You can work around this by using the `@testcomments` tag and writing
-expectations as coments.
+expectations as comments.
 
 ## Related packages
 
 The [roxytest](https://mikldk.github.io/roxytest/) package is another
-way you can write tests in roxygen. doctest aims to be slightly less
+way you can write tests in roxygen. Doctest aims to be slightly less
 verbose.
 
 [^1]: <https://docs.python.org/3/library/doctest.html>,
