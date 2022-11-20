@@ -110,12 +110,11 @@ The doctest package adds four tags to roxygen:
 
 ### `@expect`
 
-`@expect` takes the expression below and writes an expectation for it.
+`@expect` writes a testthat expectation.
 
 ``` r
 #'
-#' @expect equal(2)
-1+1
+#' @expect equal(1 + 1, 2)
 ```
 
 You can use any `expect_*` function from `testthat`. Omit the `expect_`
@@ -124,15 +123,12 @@ at the start.
 Use a dot `.` to substitute for the expression below:
 
 ``` r
-#' @expect equal(head(.), 1:6)
-#' seq_len(100)
+#' @expect equal(., 4)
+#' 2+2
 #'
 #' @expect equal(., rev(.))
 #' c("T", "E", "N", "E", "T")
 ```
-
-If there are no dots, then the expression is simply put as the first
-argument.
 
 ### `@test`
 
@@ -193,7 +189,7 @@ must not span more than one doctest tag. For example, this will work:
 #' }
 ```
 
-But this won’t:
+But this won’t, because it contains a doctest tag:
 
 ``` r
 #' \dontrun{
