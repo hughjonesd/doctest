@@ -148,7 +148,7 @@ the example. `@test <test-name>` changes to a new test.
 
 ``` r
 #' @test Negative numbers
-#' @expect gt(0)
+#' @expect gt(., 0)
 #' abs(-1)
 ```
 
@@ -224,7 +224,7 @@ test code that would fail when run by R CMD CHECK. Howeer, these tags
 must not span more than one doctest tag. For example, this will work:
 
 ``` r
-#' @expect error("argh")
+#' @expect error(., "argh")
 #' \dontrun{
 #' stop("argh")
 #' }
@@ -234,7 +234,7 @@ But this won’t, because it contains a doctest tag:
 
 ``` r
 #' \dontrun{
-#' @expect error("argh")
+#' @expect error(., "argh")
 #' stop("argh")
 #' }
 ```
