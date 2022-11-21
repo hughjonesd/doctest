@@ -95,8 +95,9 @@
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   x &lt;- safe_mean(1:3)</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_equal(x, 2)</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_warning(safe_mean("a"), "not numeric")</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_warning(safe_mean(c(1, NA)), "NA elements")</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; })</span></span></code></pre></div>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_warning(., "NA elements")</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   safe_mean(c(1, NA))</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; })</span></span></code></pre></div>
 <p>The .Rd file will be created as normal, with an example section like:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \examples{</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -112,7 +113,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
 <p>To use doctest, alter your package DESCRIPTION to add the <code>doctest</code> roclet to roxygen, like this:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Roxygen<span class="sc">:</span> <span class="fu">list</span>(<span class="at">roclets =</span> <span class="fu">c</span>(<span class="st">"collate"</span>, <span class="st">"rd"</span>, <span class="st">"namespace"</span>, <span class="st">"doctest::doctest"</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Roxygen<span class="sc">:</span> <span class="fu">list</span>(<span class="at">roclets =</span> <span class="fu">c</span>(<span class="st">"collate"</span>, <span class="st">"rd"</span>, <span class="st">"namespace"</span>, <span class="st">"doctest::dt_roclet"</span>)) </span></code></pre></div>
 <p>You can also add <code>doctest</code> as a dependency:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_dev_package</span><span class="op">(</span><span class="st">"doctest"</span>, type <span class="op">=</span> <span class="st">"Suggests"</span>, </span>
@@ -145,12 +146,12 @@
 <span><span class="co">#' c("T", "E", "N", "E", "T")</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="test">
-<code>@test</code><a class="anchor" aria-label="anchor" href="#test"></a>
+<h3 id="doctest-1">
+<code>@doctest</code><a class="anchor" aria-label="anchor" href="#doctest-1"></a>
 </h3>
-<p>By default, all expectations are created in a single test, named after the example. <code>@test &lt;test-name&gt;</code> changes to a new test.</p>
+<p>By default, all expectations are created in a single test, named after the example. <code>@doctest &lt;test-name&gt;</code> changes to a new test.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @test Negative numbers</span></span>
+<code class="sourceCode R"><span><span class="co">#' @doctest Negative numbers</span></span>
 <span><span class="co">#' @expect gt(., 0)</span></span>
 <span><span class="co">#' abs(-1)</span></span></code></pre></div>
 </div>
