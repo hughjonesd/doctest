@@ -7,28 +7,8 @@ create_expectations <- function (test, test_comments) {
   example_text <- paste(example_lines, collapse = "\n")
   example_exprs <- rlang::parse_exprs(example_text)
 
-  is_expect <- function (expr) {
-                 matches <- grepl("^\\.doctest_expect", as.character(expr))
-                 matches[1]
-  }
-  expect_lgl <- purrr::map_lgl(example_exprs, is_expect)
-  expect_idx <- which(expect_lgl)
-  target_idx <- expect_idx + 1
+  example_exprs <- recursively_rewrite(example_exprs)
 
-  expect_with_dot_lgl <- expect_lgl & purrr::map_lgl(example_exprs, ast_has_dot)
-  expect_with_dot_idx <- which(expect_with_dot_lgl)
-  target_with_dot_idx <- expect_with_dot_idx + 1
-
-  expect_exprs <- example_exprs[expect_idx]
-  target_exprs <- example_exprs[target_idx]
-
-  expect_exprs <- purrr::map2(expect_exprs, target_exprs, make_expectation)
-  example_exprs[expect_idx] <- expect_exprs
-  # if target was used in expectation, we remove it from the test code
-  # the `if` is needed because x[-numeric(0)] == x[numeric(0)] == numeric(0)
-  if (length(target_with_dot_idx)) {
-    example_exprs <- example_exprs[-target_with_dot_idx]
-  }
   example_lines_list <- purrr::map(example_exprs, rlang::expr_deparse)
   test$lines <- purrr::flatten_chr(example_lines_list)
 
@@ -47,28 +27,70 @@ create_expectations <- function (test, test_comments) {
 }
 
 
-make_expectation <- function (raw_expect_expr, target_expr) {
-  if (! rlang::is_call_simple(raw_expect_expr)) {
-    cli::cli_abort(c("@expect tag did not contain a call",
-                     i = "An @expect tag must contain a call",
-                     i = "Example: `@expect equals(0)`"))
+recursively_rewrite <- function(x) {
+  switch(expr_type(x),
+    symbol = {
+      xs <- rlang::as_string(x)
+      if (grepl("^\\.doctest_expect", xs)) {
+        xs <- gsub("^\\.doctest_", "", xs)
+        x <- rlang::sym(xs)
+      }
+      x
+    },
+    constant = x,
+    pairlist = x, # pairlist can't be toplevel, can't be a ._doctest_expr call
+    call = {
+      purrr::modify(x, recursively_rewrite)
+    },
+    list = , # only at top level
+    "{" = {
+      x <- replace_dot(x)
+      purrr::modify(x, recursively_rewrite)
+    }
+  )
+}
+
+
+
+expr_type <- function(x) {
+  if (rlang::is_syntactic_literal(x)) {
+    "constant"
+  } else if (is.symbol(x)) {
+    "symbol"
+  } else if (is.call(x)) {
+     if (inherits(x, "{")) "{" else "call"
+  } else if (is.pairlist(x)) {
+    "pairlist"
+  } else {
+    typeof(x)
   }
-  expect_text <- rlang::call_name(raw_expect_expr)
-  stopifnot(grepl("^\\.doctest_expect", expect_text))
+}
 
-  expect_text <- sub("^\\.doctest_", "", expect_text)
-  expect_call <- rlang::sym(expect_text)
-  expect_expr <- raw_expect_expr
-  expect_expr[[1]] <- expect_call
 
-  has_dot <- ast_has_dot(expect_expr)
-
-  if (has_dot) {
-    expect_expr <- do.call("substitute",
-                           list(expect_expr, list(. = target_expr)))
+replace_dot <- function(exprs) {
+  for (ix in seq_along(exprs)) {
+    expr <- exprs[[ix]]
+    if (rlang::is_call_simple(expr) && grepl("^\\.doctest_expect",
+                                             rlang::call_name(expr))) {
+      has_dot <- purrr::map_lgl(expr, ast_has_dot)
+      if (any(has_dot)) {
+        if (ix < length(exprs)) {
+          # replace dot with sibling
+          exprs[[ix]] <- do.call("substitute",
+                                 list(exprs[[ix]], list(. = exprs[[ix + 1]])))
+          exprs <- exprs[-(ix+1)]
+          return(exprs)
+        } else {
+          cli::cli_abort(
+            "No expression to substitute for . in @expect",
+            i = "A dot in an @expect tag is replaced by the next expression",
+          )
+        }
+      }
+    }
   }
 
-  expect_expr
+  exprs
 }
 
 

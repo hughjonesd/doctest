@@ -42,7 +42,7 @@ NULL
 #'
 #'     @expect equals(., 4)
 #'     2 + 2
-#'     @expect length(10)
+#'     @expect length(., 10)
 #'     rnorm(10)
 #'
 #' @name expect

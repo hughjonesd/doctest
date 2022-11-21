@@ -117,6 +117,27 @@ test_that("@testComments", {
     roclet_output(doctest(), results)
   )
 
+  complex_test_comment <- "
+                           #' @examples
+                           #' 1
+                           #' @testComments
+                           #' if (TRUE) {
+                           #'   # expect equal(a, 1)
+                           #'   # expect equal(., 4)
+                           #'   2 + 2
+                           #' } else {
+                           #'   # expect gt(a, 0)
+                           #'   # expect length(., 10)
+                           #'   rnorm(10)
+                           #' }
+                           NULL
+                          " |> dedent()
+
+  results <- roc_proc_text(doctest(), complex_test_comment)
+  expect_snapshot_output(
+    roclet_output(doctest(), results)
+  )
+
   bad_test_comment <- "
                        #' @examples
                        #' 1
