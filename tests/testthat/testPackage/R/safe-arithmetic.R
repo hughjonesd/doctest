@@ -7,6 +7,8 @@
 #' @export
 #'
 #' @examples
+#' 1
+#' @doctest
 #' x <- 1:3
 #' @expect equal(2)
 #' safe_mean(x)
@@ -34,6 +36,8 @@ safe_mean <- function (x) {
 #' @export
 #'
 #' @examples
+#' 1
+#' @doctest
 #' x <- 1:5
 #' @expect length(1)
 #' safe_var(x)
@@ -55,6 +59,7 @@ safe_var <- function (x) {
 #' @examples
 #'
 #' add(1, 2)
+#' @doctest
 #'
 #' @expect equal(add(1, 1))
 #' 1 + 1
@@ -72,6 +77,7 @@ add <- function (x, y) {
 #'
 #' @examples
 #' 1 %plus% 1
+#' @doctest
 #' @expect equal(4)
 #' 2 %plus% 2
 `%plus%` <- function (x, y) {

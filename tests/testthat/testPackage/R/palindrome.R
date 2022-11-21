@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' 1 # to avoid warning
-#'
+#' @doctest
 #' @expect match(., "Panama")
 #' palindrome()
 #' @skipTest

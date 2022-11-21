@@ -33,10 +33,10 @@ build_result_from_block <- function (block) {
     return(NULL)
   }
 
+
   tags <- roxygen2::block_get_tags(block, c("expect", "expectRaw",
-                                            "examples", "doctest",
-                                            "testComments", "skipTest",
-                                            "resumeTest"))
+                                            "doctest", "testComments",
+                                            "skipTest", "resumeTest"))
 
   result <- structure(list(tests = list()), class = "doctest_result")
 
@@ -44,24 +44,25 @@ build_result_from_block <- function (block) {
   result$object <- block_name(block)
   result$test_comments <- roxygen2::block_has_tags(block, "testComments")
 
-  test <- new_test(
-                   name = sprintf("Example: %s", result$object),
-                   source_object = result$object,
-                   source_file = tags[[1]]$file,
-                   source_line = tags[[1]]$line
-                   )
+  test <- NULL
   for (tag in tags) {
     if (inherits(tag, "roxy_tag_doctest")) {
-      # create expectations
-      result <- process_test(test, result)
+      if (! is.null(test)) result <- process_test(test, result)
       test <- new_test(
-                       name = tag$doctest_test_name,
+                       name = test_name(tag, result),
                        source_object = result$object,
                        source_file = tag$file,
                        source_line = tag$line
                        )
-    } else {
+    }
+
+    if (! is.null(test)) {
+      # we may add the @doctest tag to the test here
       test <- add_tag_to_test(tag, test)
+    } else {
+      roxygen2::warn_roxy_tag(tag,
+                      c("cannot be used before a @doctest block",
+                        i = "Place a @doctest tag in your @examples section"))
     }
   }
   result <- process_test(test, result)
@@ -78,6 +79,17 @@ block_name <- function (block) {
 
 result_name <- function(result) {
   result$object %||% "unknown"
+}
+
+
+test_name <- function (tag, result) {
+  # works with NULL and character(0):
+  test_name <- paste(tag$doctest_test_name, collapse = "")
+  if (test_name == "") {
+    sprintf("Example: %s", result$object)
+  } else {
+    test_name
+  }
 }
 
 
@@ -130,15 +142,19 @@ add_tag_to_test.roxy_tag_expectRaw <- function (tag, test, ...) {
 
 
 
-add_tag_to_test.roxy_tag_examples <- function (tag, test, ...) {
+add_tag_to_test.roxy_tag_testComments <- function (tag, test, ...) {
   add_lines_to_test(tag, test)
 }
 
 
-add_tag_to_test.roxy_tag_testComments <- add_tag_to_test.roxy_tag_examples
+add_tag_to_test.roxy_tag_resumeTest <- function (tag, test, ...) {
+  add_lines_to_test(tag, test)
+}
 
 
-add_tag_to_test.roxy_tag_resumeTest <- add_tag_to_test.roxy_tag_examples
+add_tag_to_test.roxy_tag_doctest <- function (tag, test, ...) {
+  add_lines_to_test(tag, test)
+}
 
 
 add_tag_to_test.roxy_tag_skipTest <- function (tag, test, ...) {
@@ -161,5 +177,3 @@ process_test <- function (test, result) {
 
   result
 }
-
-

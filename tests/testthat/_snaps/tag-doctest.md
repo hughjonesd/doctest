@@ -7,15 +7,14 @@
     test_that("Example: unknown", {
     # Created from @examples for `unknown`
     # Source file: '<text>'
-    # Source line: 2
-      1
+    # Source line: 4
       expect_equal(1, 1)
     })
     
     test_that("is TRUE true?", {
     # Created from @examples for `unknown`
     # Source file: '<text>'
-    # Source line: 6
+    # Source line: 7
       expect_true(TRUE)
     })
     

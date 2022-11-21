@@ -8,6 +8,7 @@ test_that("@doctest", {
     test_ex <- "
                 #' @examples
                 #' 1
+                #' @doctest is 1 1?
                 #' @expectRaw equal(1, 1)
                 #'
                 #' @doctest is TRUE true?
