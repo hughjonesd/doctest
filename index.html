@@ -70,13 +70,13 @@
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @examples</span></span>
 <span><span class="co">#' </span></span>
-<span><span class="co">#' x &lt;- safe_mean(1:3)</span></span>
-<span><span class="co">#' @expect equal(x, 2)</span></span>
+<span><span class="co">#' @expect equal(2)</span></span>
+<span><span class="co">#' safe_mean(1:3)</span></span>
 <span><span class="co">#' </span></span>
-<span><span class="co">#' @expect warning(., "not numeric")</span></span>
+<span><span class="co">#' @expect warning("not numeric")</span></span>
 <span><span class="co">#' safe_mean("a")</span></span>
 <span><span class="co">#'</span></span>
-<span><span class="co">#' @expect warning(., "NA elements")</span></span>
+<span><span class="co">#' @expect warning("NA elements")</span></span>
 <span><span class="co">#' safe_mean(c(1, NA))</span></span>
 <span><span class="va">safe_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"x is not numeric"</span><span class="op">)</span></span>
@@ -91,20 +91,20 @@
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; test_that("Example: safe_mean", {</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Created from @examples for `safe_mean`</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source file: '&lt;text&gt;'</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source line: 7</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   x &lt;- safe_mean(1:3)</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_equal(x, 2)</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_warning(safe_mean("a"), "not numeric")</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_warning(., "NA elements")</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   safe_mean(c(1, NA))</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; })</span></span></code></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source line: 9</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_equal(2)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   safe_mean(1:3)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_warning("not numeric")</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   safe_mean("a")</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   expect_warning("NA elements")</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   safe_mean(c(1, NA))</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; })</span></span></code></pre></div>
 <p>The .Rd file will be created as normal, with an example section like:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \examples{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; x &lt;- safe_mean(1:3)</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; safe_mean("a")</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; safe_mean(c(1, NA))</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; safe_mean(1:3)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; safe_mean("a")</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; safe_mean(c(1, NA))</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -127,7 +127,7 @@
 <div class="section level2">
 <h2 id="doctest-tags">doctest tags<a class="anchor" aria-label="anchor" href="#doctest-tags"></a>
 </h2>
-<p>The doctest package adds five tags to roxygen:</p>
+<p>The doctest package adds six tags to roxygen:</p>
 <div class="section level3">
 <h3 id="expect">
 <code>@expect</code><a class="anchor" aria-label="anchor" href="#expect"></a>
@@ -135,25 +135,38 @@
 <p><code>@expect</code> writes a testthat expectation.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#'</span></span>
-<span><span class="co">#' @expect equal(1 + 1, 2)</span></span></code></pre></div>
+<span><span class="co">#' @expect equal(4)</span></span>
+<span><span class="co">#' 2 + 2</span></span></code></pre></div>
 <p>You can use any <code>expect_*</code> function from <code>testthat</code>. Omit the <code>expect_</code> at the start.</p>
-<p>Use a dot <code>.</code> to substitute for the expression below:</p>
+<p>The next expression will be substituted as the first argument into the <code>expect</code> call.</p>
+<p>Use a dot <code>.</code> to substitute in different places:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @expect equal(., 4)</span></span>
-<span><span class="co">#' 2+2</span></span>
-<span><span class="co">#'</span></span>
-<span><span class="co">#' @expect equal(., rev(.))</span></span>
+<code class="sourceCode R"><span><span class="co">#' @expect equal(., rev(.))</span></span>
 <span><span class="co">#' c("T", "E", "N", "E", "T")</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="expectraw">
+<code>@expectRaw</code><a class="anchor" aria-label="anchor" href="#expectraw"></a>
+</h3>
+<p><code>@expectRaw</code> writes an expectation, without substituting the next expression:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#' x &lt;- 2 + 2</span></span>
+<span><span class="co">#' @expectRaw equal(x, 4)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="doctest-1">
 <code>@doctest</code><a class="anchor" aria-label="anchor" href="#doctest-1"></a>
 </h3>
 <p>By default, all expectations are created in a single test, named after the example. <code>@doctest &lt;test-name&gt;</code> changes to a new test.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @doctest Negative numbers</span></span>
-<span><span class="co">#' @expect gt(., 0)</span></span>
-<span><span class="co">#' abs(-1)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#' x &lt;- 1</span></span>
+<span><span class="co">#' @expect equal(x)</span></span>
+<span><span class="co">#' abs(x)</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @doctest Negative numbers</span></span>
+<span><span class="co">#' x &lt;- -1</span></span>
+<span><span class="co">#' @expect equal(-x)</span></span>
+<span><span class="co">#' abs(x)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="skiptest-and-resumetest">
@@ -162,7 +175,7 @@
 </h3>
 <p>By default, the test uses the whole example, since example code may depend on previous code.</p>
 <p><code>@skipTest</code> omits lines of the example from the test. <code>@resumeTest</code> stops omitting lines. You can use this to skip irrelevant material.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @skipTest</span></span>
 <span><span class="co">#' # No need to test plotting</span></span>
 <span><span class="co">#' plot(1:10, my_func(1:10))</span></span>
@@ -173,31 +186,37 @@
 <code>@testComments</code><a class="anchor" aria-label="anchor" href="#testcomments"></a>
 </h3>
 <p>Because of how roxygen works, you can’t add expectations in the middle of complex expressions like <code>if</code> statements or <code>for</code> loops. For example, this won’t work:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' if (x &gt; 0) {</span></span>
 <span><span class="co">#'   @expect gt(x, 0)</span></span>
 <span><span class="co">#' } else {</span></span>
 <span><span class="co">#'   @expect lt(x, 0)</span></span>
 <span><span class="co">#' }</span></span></code></pre></div>
 <p>As an alternative, you can use the <code>@testComments</code> tag to test expectations in comments:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @testComments</span></span>
 <span><span class="co">#' if (x &gt; 0) {</span></span>
-<span><span class="co">#'   # expect gt(x, 0)</span></span>
+<span><span class="co">#'   # expect gt(0)</span></span>
+<span><span class="co">#'   x</span></span>
 <span><span class="co">#' } else {</span></span>
-<span><span class="co">#'   # expect lt(x, 0)</span></span>
+<span><span class="co">#'   # expect lt(0)</span></span>
+<span><span class="co">#'   x</span></span>
 <span><span class="co">#' }</span></span></code></pre></div>
-<p>Doctest comments follow the same format as the expectation tag, but with <code>@expect</code> replaced by <code># expect</code>. Comments must be on their own line, and will remain in the example code.</p>
+<p>Doctest comments follow the same format as the expectation tag, but with <code>@expect</code> replaced by <code># expect</code> (or <code>@expectRaw</code> replaced by <code># expectRaw</code>). Comments must be on their own line, and will remain in the example code.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="how-to-use-doctest">How to use doctest<a class="anchor" aria-label="anchor" href="#how-to-use-doctest"></a>
 </h2>
-<p>doctest is best used for relatively simple tests. If things get too complex it may be better to write a test yourself. I like the following advice:</p>
+<p>I like the following advice:</p>
 <blockquote>
 <p>… write the best possible documentation, and [R] makes sure the code samples in your documentation actually compile and run [and do what they are supposed to do]</p>
 </blockquote>
 <p><em>Programming Rust</em>, Blandy, Orendorff and Tindall, 2021</p>
+<p>In particular, use doctest as an <em>addition</em> to manually created tests, not a <em>substitute</em> for them. For example, testing difficult corner cases would not usually be appropriate in documentation. Use doctest for relatively simple tests of basic functionality, or to catch when user-visible output changes using <code>expect_snapshot()</code>:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#' @expect snapshot()</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="bugs-and-limitations">Bugs and limitations<a class="anchor" aria-label="anchor" href="#bugs-and-limitations"></a>
@@ -213,13 +232,13 @@
 <a class="anchor" aria-label="anchor" href="#donttest-and-dontrun"></a>
 </h3>
 <p><code>donttest</code> and <code>dontrun</code> Rd tags are ignored by doctest. This lets you test code that would fail when run by R CMD CHECK. Howeer, these tags must not span more than one doctest tag. For example, this will work:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @expect error(., "argh")</span></span>
 <span><span class="co">#' \dontrun{</span></span>
 <span><span class="co">#' stop("argh")</span></span>
 <span><span class="co">#' }</span></span></code></pre></div>
 <p>But this won’t, because it contains a doctest tag:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' \dontrun{</span></span>
 <span><span class="co">#' @expect error(., "argh")</span></span>
 <span><span class="co">#' stop("argh")</span></span>
