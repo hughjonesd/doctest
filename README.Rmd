@@ -260,7 +260,11 @@ expectations as comments.
 
 ## Related packages
 
-The [roxytest](https://mikldk.github.io/roxytest/) package is another way you 
-can write tests in roxygen. Doctest aims to be slightly less verbose.
+The [roxytest](https://mikldk.github.io/roxytest/) and
+[roxut](https://github.com/bryanhanson/roxut) packages both allow you to write
+tests in roxygen blocks. Doctest is slightly different because it combines tests
+with examples. The [exampletestr](https://github.com/rorynolan/exampletestr/)
+package uses roxygen examples to generate a test skeleton which you can fill in
+yourself.
 
 
