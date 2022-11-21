@@ -9,17 +9,6 @@ create_expectations <- function (test) {
   example_lines_list <- purrr::map(example_exprs, rlang::expr_deparse)
   test$lines <- purrr::flatten_chr(example_lines_list)
 
-  test$lines <- paste0("  ", test$lines)
-  test_opener <- c(
-                   sprintf('test_that("%s", {', test$name),
-                   sprintf("# Created from @examples for `%s`",
-                           test$source_object),
-                   sprintf("# Source file: '%s'", test$source_file),
-                   sprintf("# Source line: %s", test$source_line)
-                  )
-
-  test$lines <- c(test_opener, test$lines, "})", "")
-
   test
 }
 

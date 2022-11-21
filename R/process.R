@@ -164,7 +164,25 @@ add_lines_to_test <- function (tag, test) {
 
 process_test <- function (test, result) {
   test <- create_expectations(test)
+  test <- top_and_tail(test)
+
   result$tests <- c(result$tests, list(test))
 
   result
+}
+
+
+top_and_tail <- function (test) {
+  test$lines <- paste0("  ", test$lines)
+  test_opener <- c(
+                   sprintf('test_that("%s", {', test$name),
+                   sprintf("  # Created from @examples for `%s`",
+                           test$source_object),
+                   sprintf("  # Source file: '%s'", test$source_file),
+                   sprintf("  # Source line: %s", test$source_line)
+                  )
+
+  test$lines <- c(test_opener, test$lines, "})", "")
+
+  test
 }

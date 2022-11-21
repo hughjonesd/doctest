@@ -78,7 +78,7 @@ Instead of an `@examples` section, we have a `@doctest` section.
 
 This will create tests like:
 
-```{r, echo = FALSE, warning = FALSE}
+```{r, echo = FALSE, warning = FALSE, comment=""}
 library(doctest)
 library(roxygen2)
 results <- roc_proc_text(dt_roclet(), rox)
@@ -87,7 +87,7 @@ roclet_output(dt_roclet(), results)
 
 The .Rd file will be created as normal, with an example section like:
 
-```{r, echo = FALSE, warning = FALSE}
+```{r, echo = FALSE, warning = FALSE, comment=""}
 results <- roc_proc_text(rd_roclet(), rox)
 text <- format(results[[1]])
 cat(gsub(".*\\\\examples", "\\\\examples", text))
