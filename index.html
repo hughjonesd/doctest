@@ -151,7 +151,7 @@
 <p>By default, all expectations are created in a single test, named after the example. <code>@test &lt;test-name&gt;</code> changes to a new test.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @test Negative numbers</span></span>
-<span><span class="co">#' @expect gt(0)</span></span>
+<span><span class="co">#' @expect gt(., 0)</span></span>
 <span><span class="co">#' abs(-1)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -213,14 +213,14 @@
 </h3>
 <p><code>donttest</code> and <code>dontrun</code> Rd tags are ignored by doctest. This lets you test code that would fail when run by R CMD CHECK. Howeer, these tags must not span more than one doctest tag. For example, this will work:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @expect error("argh")</span></span>
+<code class="sourceCode R"><span><span class="co">#' @expect error(., "argh")</span></span>
 <span><span class="co">#' \dontrun{</span></span>
 <span><span class="co">#' stop("argh")</span></span>
 <span><span class="co">#' }</span></span></code></pre></div>
 <p>But this won’t, because it contains a doctest tag:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' \dontrun{</span></span>
-<span><span class="co">#' @expect error("argh")</span></span>
+<span><span class="co">#' @expect error(., "argh")</span></span>
 <span><span class="co">#' stop("argh")</span></span>
 <span><span class="co">#' }</span></span></code></pre></div>
 <p>You can work around this by using the <code>@testComments</code> tag and writing expectations as comments.</p>
