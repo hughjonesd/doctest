@@ -14,7 +14,7 @@
 #' @resumeTest
 #' pal_letters <- p |>
 #'   tolower() |>
-#'   gsub("[^A-z]", "", x = _) |>
+#'   \(x) gsub("[^A-z]", "", x) |>
 #'   strsplit() |>
 #'   unlist()
 #' @expectRaw equal(pal_letters, rev(pal_letters))
