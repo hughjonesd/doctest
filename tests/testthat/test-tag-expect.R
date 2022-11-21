@@ -10,9 +10,9 @@ test_that("@expectation", {
                       #' sum(1, 1)
                       NULL
                      " |> dedent()
-  results <- roc_proc_text(doctest(), dot_expectation)
+  results <- roc_proc_text(dt_roclet(), dot_expectation)
   expect_snapshot_output(
-    roclet_output(doctest(), results)
+    roclet_output(dt_roclet(), results)
   )
 
   operator_expectation <- "
@@ -22,9 +22,9 @@ test_that("@expectation", {
                            #' 1 + 1
                            NULL
                           " |> dedent()
-  results <- roc_proc_text(doctest(), operator_expectation)
+  results <- roc_proc_text(dt_roclet(), operator_expectation)
   expect_snapshot_output(
-    roclet_output(doctest(), results)
+    roclet_output(dt_roclet(), results)
   )
 
   namespace_expectation <- "
@@ -34,9 +34,9 @@ test_that("@expectation", {
                             #' base::sum(1, 1)
                             NULL
                            " |> dedent()
-  results <- roc_proc_text(doctest(), namespace_expectation)
+  results <- roc_proc_text(dt_roclet(), namespace_expectation)
   expect_snapshot_output(
-    roclet_output(doctest(), results)
+    roclet_output(dt_roclet(), results)
   )
 
   donttest_expectation <- "
@@ -49,9 +49,9 @@ test_that("@expectation", {
                            NULL
                           " |> dedent()
 
-  results <- roc_proc_text(doctest(), donttest_expectation)
+  results <- roc_proc_text(dt_roclet(), donttest_expectation)
   expect_snapshot_output(
-    roclet_output(doctest(), results)
+    roclet_output(dt_roclet(), results)
   )
 
   custom_operator_expectation <- "
@@ -62,10 +62,10 @@ test_that("@expectation", {
                                   NULL
                                  " |> dedent()
 
-  results <- roc_proc_text(doctest(),
+  results <- roc_proc_text(dt_roclet(),
                                      custom_operator_expectation)
   expect_snapshot_output(
-    roclet_output(doctest(), results)
+    roclet_output(dt_roclet(), results)
   )
 
 
@@ -76,6 +76,6 @@ test_that("@expectation", {
                                 NULL
                                " |> dedent()
   expect_error(
-    roc_proc_text(doctest(), misplaced_dot_expectation)
+    roc_proc_text(dt_roclet(), misplaced_dot_expectation)
   )
 })

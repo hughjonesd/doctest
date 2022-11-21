@@ -11,7 +11,7 @@
 #' @expect equal(., 2)
 #' safe_mean(x)
 #'
-#' @test safe-mean-errors
+#' @doctest safe-mean-errors
 #'
 #' @expect warning(., "not numeric")
 #'

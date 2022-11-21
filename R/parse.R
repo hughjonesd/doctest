@@ -16,7 +16,7 @@ roxy_tag_parse.roxy_tag_expect <- function (x) {
 }
 
 #' @export
-roxy_tag_parse.roxy_tag_test <- function (x) {
+roxy_tag_parse.roxy_tag_doctest <- function (x) {
   x <- strip_first_line(x, first_line_name = "test_name")
   if (is.null(x$doctest_test_name)) {
     roxygen2::warn_roxy_tag(x, "requires a test name")
@@ -89,7 +89,7 @@ roxy_tag_rd.roxy_tag_expect <- function(x, base_path, env) {
 
 
 #' @export
-roxy_tag_rd.roxy_tag_test <- roxy_tag_rd.roxy_tag_expect
+roxy_tag_rd.roxy_tag_doctest <- roxy_tag_rd.roxy_tag_expect
 
 
 #' @export

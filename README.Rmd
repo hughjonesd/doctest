@@ -77,8 +77,8 @@ This will create tests like:
 ```{r, echo = FALSE, warning = FALSE}
 library(doctest)
 library(roxygen2)
-results <- roc_proc_text(doctest(), rox)
-roclet_output(doctest(), results)
+results <- roc_proc_text(dt_roclet(), rox)
+roclet_output(dt_roclet(), results)
 ```
 
 The .Rd file will be created as normal, with an example section like:
@@ -102,7 +102,7 @@ To use doctest, alter your package DESCRIPTION to add the `doctest`
 roclet to roxygen, like this:
 
 ```
-Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest")) 
+Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet")) 
 ```
 
 You can also add `doctest` as a dependency:
@@ -155,13 +155,13 @@ Use a dot `.` to substitute for the expression below:
 ```
 
 
-### `@test`
+### `@doctest`
 
 By default, all expectations are created in a single test, named after the
-example. `@test <test-name>` changes to a new test.
+example. `@doctest <test-name>` changes to a new test.
 
 ```r
-#' @test Negative numbers
+#' @doctest Negative numbers
 #' @expect gt(., 0)
 #' abs(-1)
 ```

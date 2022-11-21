@@ -67,7 +67,8 @@ This will create tests like:
     #>   x <- safe_mean(1:3)
     #>   expect_equal(x, 2)
     #>   expect_warning(safe_mean("a"), "not numeric")
-    #>   expect_warning(safe_mean(c(1, NA)), "NA elements")
+    #>   expect_warning(., "NA elements")
+    #>   safe_mean(c(1, NA))
     #> })
 
 The .Rd file will be created as normal, with an example section like:
@@ -90,7 +91,7 @@ devtools::install("hughjonesd/doctest")
 To use doctest, alter your package DESCRIPTION to add the `doctest`
 roclet to roxygen, like this:
 
-    Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest")) 
+    Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet")) 
 
 You can also add `doctest` as a dependency:
 
@@ -141,13 +142,13 @@ Use a dot `.` to substitute for the expression below:
 #' c("T", "E", "N", "E", "T")
 ```
 
-### `@test`
+### `@doctest`
 
 By default, all expectations are created in a single test, named after
-the example. `@test <test-name>` changes to a new test.
+the example. `@doctest <test-name>` changes to a new test.
 
 ``` r
-#' @test Negative numbers
+#' @doctest Negative numbers
 #' @expect gt(., 0)
 #' abs(-1)
 ```

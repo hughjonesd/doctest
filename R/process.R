@@ -4,16 +4,16 @@
 #'
 #' You can use this in your package DESCRIPTION like this:
 #' ```r
-#' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
+#' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet"))
 #' ```
 #'
 #' @return The doctest roclet
 #' @export
 #' @examples
 #' \dontrun{
-#' roxygen2::roxygenize(roclets = "doctest::doctest")
+#' roxygen2::roxygenize(roclets = "doctest::dt_roclet")
 #' }
-doctest <- function () {
+dt_roclet <- function () {
   roxygen2::roclet("doctest")
 }
 
@@ -28,12 +28,14 @@ roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
 
 
 build_result_from_block <- function (block) {
-  if (! roxygen2::block_has_tags(block, c("expect", "test", "testComments"))) {
+  if (! roxygen2::block_has_tags(block, c("expect", "doctest",
+                                          "testComments"))) {
     return(NULL)
   }
 
-  tags <- roxygen2::block_get_tags(block, c("expect", "examples", "test",
-                                            "testComments"))
+  tags <- roxygen2::block_get_tags(block, c("expect", "examples", "doctest",
+                                            "testComments", "skipTest",
+                                            "resumeTest"))
 
   result <- structure(list(tests = list()), class = "doctest_result")
 
@@ -48,7 +50,7 @@ build_result_from_block <- function (block) {
                    source_line = tags[[1]]$line
                    )
   for (tag in tags) {
-    if (inherits(tag, "roxy_tag_test")) {
+    if (inherits(tag, "roxy_tag_doctest")) {
       # create expectations
       result <- process_test(test, result)
       test <- new_test(
@@ -81,7 +83,7 @@ result_name <- function(result) {
 new_test <- function (name, source_object, source_file, source_line) {
   if (grepl("\"|\\\\", name)) {
     cli::cli_abort(c(
-      "@test name must not include double quotes or backslashes",
+      "@doctest name must not include double quotes or backslashes",
       x = "Name was {.code {name}}"
     ))
   }
@@ -132,6 +134,7 @@ add_tag_to_test.roxy_tag_skipTest <- function (tag, test, ...) {
 
 
 add_lines_to_test <- function (tag, test) {
+  if (length(tag$raw) == 0L) return(test)
   example_lines <- strsplit(tag$raw, "\n", fixed = TRUE)[[1]]
   test$lines <- c(test$lines, example_lines)
 

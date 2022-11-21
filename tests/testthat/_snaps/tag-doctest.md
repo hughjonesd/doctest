@@ -1,4 +1,4 @@
-# @test
+# @doctest
 
     
     # File test-examples-unknown.R

@@ -2,11 +2,13 @@
 % Please edit documentation in R/package-docs.R
 \docType{package}
 \name{doctest-package}
+\alias{doctest}
+\alias{doctest-package}
 \title{Write testthat files using roxygen tags}
 \description{
 To use doctest in your package, add
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet"))
 }\if{html}{\out{</div>}}
 
 to the DESCRIPTION file. You may also optionally

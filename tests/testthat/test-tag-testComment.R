@@ -15,9 +15,9 @@ test_that("@testComments", {
                    NULL
                   " |> dedent()
 
-  results <- roc_proc_text(doctest(), test_comment)
+  results <- roc_proc_text(dt_roclet(), test_comment)
   expect_snapshot_output(
-    roclet_output(doctest(), results)
+    roclet_output(dt_roclet(), results)
   )
 
   complex_test_comment <- "
@@ -36,9 +36,9 @@ test_that("@testComments", {
                            NULL
                           " |> dedent()
 
-  results <- roc_proc_text(doctest(), complex_test_comment)
+  results <- roc_proc_text(dt_roclet(), complex_test_comment)
   expect_snapshot_output(
-    roclet_output(doctest(), results)
+    roclet_output(dt_roclet(), results)
   )
 
   bad_test_comment <- "
@@ -51,7 +51,7 @@ test_that("@testComments", {
                       " |> dedent()
 
   expect_error(
-    roc_proc_text(doctest(), bad_test_comment)
+    roc_proc_text(dt_roclet(), bad_test_comment)
   )
 
   misplaced_dot_comment <- "
@@ -64,7 +64,7 @@ test_that("@testComments", {
                            NULL
                           " |> dedent()
   expect_error(
-    roc_proc_text(doctest(), misplaced_dot_comment)
+    roc_proc_text(dt_roclet(), misplaced_dot_comment)
   )
 
 })

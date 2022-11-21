@@ -2,7 +2,7 @@
 #'
 #' To use doctest in your package, add
 #' ```r
-#' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::doctest"))
+#' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet"))
 #' ```
 #' to the DESCRIPTION file. You may also optionally
 #' add doctest to your 'Suggests:' dependencies.
@@ -13,7 +13,6 @@
 #' Doctest is `r lifecycle::badge("experimental")`.
 #'
 #' @keywords internal
-#' @aliases NULL
 "_PACKAGE"
 
 ## usethis namespace: start
@@ -52,11 +51,11 @@ NULL
 
 #' Start a new test
 #'
-#' `@test` starts a new test.
+#' `@doctest` starts a new test.
 #'
 #' @details
 #' By default, a test labelled "Example: &lt;object name&gt;" is created. Use
-#' `@test` to create separate tests within a single example:
+#' `@doctest` to create separate tests within a single example:
 #'
 #'     #' @examples
 #'     #'
@@ -64,13 +63,13 @@ NULL
 #'     #' @expect equal(., x)
 #'     #' abs(x)
 #'     #'
-#'     #' @test Negative numbers
+#'     #' @doctest Negative numbers
 #'     #' x <- -1
 #'     #' @expect equal(., -x)
 #'     #' abs(x)
 #
-#' @name test
-#' @aliases @test
+#' @name doctest-tag
+#' @aliases @doctest
 NULL
 
 
@@ -98,11 +97,9 @@ NULL
 #' your users. If your code is getting too different from your example, consider
 #' splitting it off into a proper test file.
 #'
-#' @name skipTest
+#' @name skipTest-tag
 #' @aliases @skipTest @resumeTest
 NULL
-
-
 
 
 #' Write expectations in comments
@@ -156,6 +153,6 @@ NULL
 #'
 #' Comments will be visible in the example.
 #'
-#' @name testComments
+#' @name testComments-tag
 #' @aliases @testComments
 NULL

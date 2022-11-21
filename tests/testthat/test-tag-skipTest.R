@@ -15,9 +15,9 @@ test_that("@skipTest", {
                #' a
                NULL
               " |> dedent()
-  results <- roc_proc_text(doctest(), skip_test)
+  results <- roc_proc_text(dt_roclet(), skip_test)
   expect_output(
-    roclet_output(doctest(), results),
+    roclet_output(dt_roclet(), results),
     regexp = "a <- 1\\s+expect"
   )
 })
