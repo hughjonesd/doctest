@@ -9,7 +9,6 @@ Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Creates 'testthat' tests from 'roxygen' examples using simple tags.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.2.2
 Imports: 
     cli,

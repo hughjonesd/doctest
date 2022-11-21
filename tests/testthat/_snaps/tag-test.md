@@ -11,10 +11,12 @@
       1
       expect_equal(1, 1)
     })
+    
     test_that("is TRUE true?", {
     # Created from @examples for `unknown`
     # Source file: '<text>'
     # Source line: 6
       expect_true(TRUE)
     })
+    
 
