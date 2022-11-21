@@ -21,7 +21,7 @@ create_expectations <- function (test, test_comments) {
                    sprintf("# Source line: %s", test$source_line)
                   )
 
-  test$lines <- c(test_opener, test$lines, "})")
+  test$lines <- c(test_opener, test$lines, "})", "")
 
   test
 }
