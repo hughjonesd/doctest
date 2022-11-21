@@ -14,14 +14,14 @@ Use these tags to avoid redundant or noisy code:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
 #'
-#' @expect equal(., 0)
+#' @expect equal(0)
 #' sin(0)
 #'
 #' @skipTest
 #' curve(sin(x), 0, 2 * pi)
 #' @resumeTest
 #'
-#' @expect equal(., 1)
+#' @expect equal(1)
 #' cos(0)
 }\if{html}{\out{</div>}}
 

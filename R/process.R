@@ -28,12 +28,13 @@ roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
 
 
 build_result_from_block <- function (block) {
-  if (! roxygen2::block_has_tags(block, c("expect", "doctest",
+  if (! roxygen2::block_has_tags(block, c("expect", "expectRaw", "doctest",
                                           "testComments"))) {
     return(NULL)
   }
 
-  tags <- roxygen2::block_get_tags(block, c("expect", "examples", "doctest",
+  tags <- roxygen2::block_get_tags(block, c("expect", "expectRaw",
+                                            "examples", "doctest",
                                             "testComments", "skipTest",
                                             "resumeTest"))
 
@@ -115,6 +116,18 @@ add_tag_to_test.roxy_tag_expect <- function (tag, test, ...) {
 
   test
 }
+
+add_tag_to_test.roxy_tag_expectRaw <- function (tag, test, ...) {
+  # we put the expectation back, because we have to get rid of
+  # \donttest etc.
+  # we use .doctest_expect_ as a string to search for
+  expect_line <- sprintf(".doctest_raw_expect_%s", tag$doctest_expect)
+  test$lines <- c(test$lines, expect_line)
+  test <- add_lines_to_test(tag, test)
+
+  test
+}
+
 
 
 add_tag_to_test.roxy_tag_examples <- function (tag, test, ...) {

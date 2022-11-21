@@ -1,4 +1,5 @@
 
+
 library(roxygen2)
 dedent <- function (x) gsub("\n\\s+", "\n", x)
 
@@ -7,10 +8,11 @@ test_that("@doctest", {
     test_ex <- "
                 #' @examples
                 #' 1
-                #' @expect equal(1, 1)
+                #' @expectRaw equal(1, 1)
                 #'
                 #' @doctest is TRUE true?
-                #' @expect true(TRUE)
+                #' @expect true()
+                #' TRUE
                 NULL
                " |> dedent()
   results <- roc_proc_text(dt_roclet(), test_ex)
@@ -22,7 +24,7 @@ test_that("@doctest", {
                     #' @examples
                     #' 1
                     #' @doctest three\" {warning('this would be sad');\"
-                    #' @expect equal(., 3)
+                    #' @expect equal(3)
                     #' 3
                     NULL
                    " |> dedent()

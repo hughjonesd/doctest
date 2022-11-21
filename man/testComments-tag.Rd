@@ -16,11 +16,13 @@ code so that roxygen can't parse it.
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
 #'
 #' if (x > 0) \{
-#'   @expect gt(x, 0)
-#'   print("x is positive")
+#'   @expect gt(0)
+#'   x
+#'   print("x is positive')
 #' \} else \{
-#'   @expect lt(x, 0)
-#'   print("x is negative")
+#'   @expect lt(0)
+#'   x
+#'   print("x is negative')
 #' \}
 }\if{html}{\out{</div>}}
 
@@ -30,30 +32,33 @@ expectations in comments:
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
 #' @testComments
 #' if (x > 0) \{
-#'   # expect gt(x, 0)
+#'   # expect gt(0)
+#'   x
 #'   print("x is positive")
 #' \} else \{
-#'   # expect lt(x, 0)
+#'   # expect lt(0)
+#'   x
 #'   print("x is negative")
 #' \}
 }\if{html}{\out{</div>}}
 
-Expectations in comments match the format of \link{expect} tags, but with a
+Expectations in comments match the format of \link{@expect} tags, but with a
 comment character \verb{#} in place of the \code{@}.
 
 Comments should be on their own line, with no other code:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' # Wrong:
-#' x <- 2 + 2 # expect equal(x, 4)
+#' x <- 2 + 2 # expectRaw equal(x, 4)
+#'
+#' # Right:
+#' # expect equal(4)
+#' 2 + 2
 #'
 #' # Right:
 #' x <- 2 + 2
-#' # expect equal(x, 4)
-#'
-#' # Right:
-#' # expect equal(., 4)
-#' 2 + 2
+#' # expectRaw equal(x, 4)
 }\if{html}{\out{</div>}}
 
-Comments will be visible in the example.
+You can only use \code{expect} and \code{expectRaw}, not any other tags.
+Comments will remain visible in the example.
 }

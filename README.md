@@ -39,13 +39,13 @@ Here’s some documentation for a function:
 #' 
 #' @examples
 #' 
-#' x <- safe_mean(1:3)
-#' @expect equal(x, 2)
+#' @expect equal(2)
+#' safe_mean(1:3)
 #' 
-#' @expect warning(., "not numeric")
+#' @expect warning("not numeric")
 #' safe_mean("a")
 #'
-#' @expect warning(., "NA elements")
+#' @expect warning("NA elements")
 #' safe_mean(c(1, NA))
 safe_mean <- function (x) {
   if (! is.numeric(x)) warning("x is not numeric")
@@ -63,19 +63,19 @@ This will create tests like:
     #> test_that("Example: safe_mean", {
     #> # Created from @examples for `safe_mean`
     #> # Source file: '<text>'
-    #> # Source line: 7
-    #>   x <- safe_mean(1:3)
-    #>   expect_equal(x, 2)
-    #>   expect_warning(safe_mean("a"), "not numeric")
-    #>   expect_warning(., "NA elements")
+    #> # Source line: 9
+    #>   expect_equal(2)
+    #>   safe_mean(1:3)
+    #>   expect_warning("not numeric")
+    #>   safe_mean("a")
+    #>   expect_warning("NA elements")
     #>   safe_mean(c(1, NA))
     #> })
 
 The .Rd file will be created as normal, with an example section like:
 
     #> \examples{
-    #> 
-    #> x <- safe_mean(1:3)
+    #> safe_mean(1:3)
     #> safe_mean("a")
     #> safe_mean(c(1, NA))
     #> }
@@ -118,7 +118,7 @@ package DESCRIPTION file.
 
 ## doctest tags
 
-The doctest package adds five tags to roxygen:
+The doctest package adds six tags to roxygen:
 
 ### `@expect`
 
@@ -126,20 +126,31 @@ The doctest package adds five tags to roxygen:
 
 ``` r
 #'
-#' @expect equal(1 + 1, 2)
+#' @expect equal(4)
+#' 2 + 2
 ```
 
 You can use any `expect_*` function from `testthat`. Omit the `expect_`
 at the start.
 
-Use a dot `.` to substitute for the expression below:
+The next expression will be substituted as the first argument into the
+`expect` call.
+
+Use a dot `.` to substitute in different places:
 
 ``` r
-#' @expect equal(., 4)
-#' 2+2
-#'
 #' @expect equal(., rev(.))
 #' c("T", "E", "N", "E", "T")
+```
+
+### `@expectRaw`
+
+`@expectRaw` writes an expectation, without substituting the next
+expression:
+
+``` r
+#' x <- 2 + 2
+#' @expectRaw equal(x, 4)
 ```
 
 ### `@doctest`
@@ -148,9 +159,14 @@ By default, all expectations are created in a single test, named after
 the example. `@doctest <test-name>` changes to a new test.
 
 ``` r
+#' x <- 1
+#' @expect equal(x)
+#' abs(x)
+#'
 #' @doctest Negative numbers
-#' @expect gt(., 0)
-#' abs(-1)
+#' x <- -1
+#' @expect equal(-x)
+#' abs(x)
 ```
 
 ### `@skipTest` and `@resumeTest`
@@ -188,27 +204,39 @@ expectations in comments:
 ``` r
 #' @testComments
 #' if (x > 0) {
-#'   # expect gt(x, 0)
+#'   # expect gt(0)
+#'   x
 #' } else {
-#'   # expect lt(x, 0)
+#'   # expect lt(0)
+#'   x
 #' }
 ```
 
 Doctest comments follow the same format as the expectation tag, but with
-`@expect` replaced by `# expect`. Comments must be on their own line,
-and will remain in the example code.
+`@expect` replaced by `# expect` (or `@expectRaw` replaced by
+`# expectRaw`). Comments must be on their own line, and will remain in
+the example code.
 
 ## How to use doctest
 
-doctest is best used for relatively simple tests. If things get too
-complex it may be better to write a test yourself. I like the following
-advice:
+I like the following advice:
 
 > … write the best possible documentation, and \[R\] makes sure the code
 > samples in your documentation actually compile and run \[and do what
 > they are supposed to do\]
 
 *Programming Rust*, Blandy, Orendorff and Tindall, 2021
+
+In particular, use doctest as an *addition* to manually created tests,
+not a *substitute* for them. For example, testing difficult corner cases
+would not usually be appropriate in documentation. Use doctest for
+relatively simple tests of basic functionality, or to catch when
+user-visible output changes using `expect_snapshot()`:
+
+``` r
+#' @expect snapshot()
+summary(model)
+```
 
 ## Bugs and limitations
 

@@ -29,23 +29,49 @@ NULL
 #'
 #'     #' @examples
 #'     #'
-#'     #'x <- 2 + 2
-#'     #' @expect equals(x, 4)
+#'     #' @expect equals(4)
+#'     #' 2 + 2
 #'     #'
 #'     #' f <- function () warning("Watch out")
-#'     #' @expect warning(f())
+#'     #' @expect warning()
+#'     #' f()
+#'
+#' The next expression will be inserted as the first
+#' argument to the `expect_*` call.
 #'
 #' Don't include the `expect_` prefix.
 #'
-#' Use a dot `.` to refer to the following expression:
+#' If you want to include the expression in a different
+#' place or places, use a dot `.`:
 #'
-#'     @expect equals(., 4)
-#'     2 + 2
-#'     @expect length(., 10)
-#'     rnorm(10)
+#'     @expect equals(., rev(.))
+#'     c("T", "E", "N", "E", "T")
 #'
-#' @name expect
+#' @name expect-tag
 #' @aliases @expect
+NULL
+
+
+#' Create an expectation as-is
+#'
+#' `@expect` creates an expectation for your example code.
+#'
+#' @details
+#' `@expectRaw` creates a testthat expectation. Unlike [@expect], it doesn't
+#' insert the next expression:
+#'
+#'     #' @examples
+#'     #'
+#'     #'x <- 2 + 2
+#'     #' @expectRaw equals(x, 4)
+#'     #'
+#'     #' f <- function () warning("Watch out")
+#'     #' @expectRaw warning(f())
+#'
+#' Don't include the `expect_` prefix.
+#'
+#' @name expectRaw-tag
+#' @aliases @expectRaw
 NULL
 
 
@@ -60,12 +86,12 @@ NULL
 #'     #' @examples
 #'     #'
 #'     #' x <- 1
-#'     #' @expect equal(., x)
+#'     #' @expect equal(x)
 #'     #' abs(x)
 #'     #'
 #'     #' @doctest Negative numbers
 #'     #' x <- -1
-#'     #' @expect equal(., -x)
+#'     #' @expect equal(-x)
 #'     #' abs(x)
 #
 #' @name doctest-tag
@@ -83,14 +109,14 @@ NULL
 #'
 #'     #' @examples
 #'     #'
-#'     #' @expect equal(., 0)
+#'     #' @expect equal(0)
 #'     #' sin(0)
 #'     #'
 #'     #' @skipTest
 #'     #' curve(sin(x), 0, 2 * pi)
 #'     #' @resumeTest
 #'     #'
-#'     #' @expect equal(., 1)
+#'     #' @expect equal(1)
 #'     #' cos(0)
 #'
 #' Remember that the main purpose of examples is to document your package for
@@ -115,11 +141,13 @@ NULL
 #'     #' @examples
 #'     #'
 #'     #' if (x > 0) {
-#'     #'   @expect gt(x, 0)
-#'     #'   print("x is positive")
+#'     #'   @expect gt(0)
+#'     #'   x
+#'     #'   print("x is positive')
 #'     #' } else {
-#'     #'   @expect lt(x, 0)
-#'     #'   print("x is negative")
+#'     #'   @expect lt(0)
+#'     #'   x
+#'     #'   print("x is negative')
 #'     #' }
 #'
 #' As an alternative, put `@testComments` in your examples section and write
@@ -128,30 +156,33 @@ NULL
 #'     #' @examples
 #'     #' @testComments
 #'     #' if (x > 0) {
-#'     #'   # expect gt(x, 0)
+#'     #'   # expect gt(0)
+#'     #'   x
 #'     #'   print("x is positive")
 #'     #' } else {
-#'     #'   # expect lt(x, 0)
+#'     #'   # expect lt(0)
+#'     #'   x
 #'     #'   print("x is negative")
 #'     #' }
 #'
-#' Expectations in comments match the format of [expect] tags, but with a
+#' Expectations in comments match the format of [@expect] tags, but with a
 #' comment character `#` in place of the `@`.
 #'
 #' Comments should be on their own line, with no other code:
 #'
 #'     #' # Wrong:
-#'     #' x <- 2 + 2 # expect equal(x, 4)
+#'     #' x <- 2 + 2 # expectRaw equal(x, 4)
+#'     #'
+#'     #' # Right:
+#'     #' # expect equal(4)
+#'     #' 2 + 2
 #'     #'
 #'     #' # Right:
 #'     #' x <- 2 + 2
-#'     #' # expect equal(x, 4)
-#'     #'
-#'     #' # Right:
-#'     #' # expect equal(., 4)
-#'     #' 2 + 2
+#'     #' # expectRaw equal(x, 4)
 #'
-#' Comments will be visible in the example.
+#' You can only use `expect` and `expectRaw`, not any other tags.
+#' Comments will remain visible in the example.
 #'
 #' @name testComments-tag
 #' @aliases @testComments

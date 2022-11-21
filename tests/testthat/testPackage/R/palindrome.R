@@ -19,7 +19,7 @@
 #'   gsub("[^A-z]", "", x = _) |>
 #'   strsplit() |>
 #'   unlist()
-#' @expect equal(pal_letters, rev(pal_letters))
+#' @expectRaw equal(pal_letters, rev(pal_letters))
 palindrome <- function () {
    "A man, a plan, a canal - Panama"
 }

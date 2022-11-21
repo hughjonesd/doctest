@@ -9,8 +9,7 @@ test_that("@testComments", {
                    #' 1
                    #' @testComments
                    #' a <- 1
-                   #' # expect equal(a, 1)
-                   #' # expect equal(., 4)
+                   #' # expect equal(4)
                    #' 2 + 2
                    NULL
                   " |> dedent()
@@ -25,18 +24,31 @@ test_that("@testComments", {
                            #' 1
                            #' @testComments
                            #' if (TRUE) {
-                           #'   # expect equal(a, 1)
-                           #'   # expect equal(., 4)
+                           #'   # expect equal(4)
                            #'   2 + 2
                            #' } else {
-                           #'   # expect gt(a, 0)
-                           #'   # expect length(., 10)
+                           #'   # expect length(10)
                            #'   rnorm(10)
                            #' }
                            NULL
                           " |> dedent()
 
   results <- roc_proc_text(dt_roclet(), complex_test_comment)
+  expect_snapshot_output(
+    roclet_output(dt_roclet(), results)
+  )
+
+  raw_test_comment <- "
+                           #' @examples
+                           #' 1
+                           #' @testComments
+                           #' if (TRUE) {
+                           #'   # expectRaw equal(2 + 2, 4)
+                           #' }
+                           NULL
+                          " |> dedent()
+
+  results <- roc_proc_text(dt_roclet(), raw_test_comment)
   expect_snapshot_output(
     roclet_output(dt_roclet(), results)
   )

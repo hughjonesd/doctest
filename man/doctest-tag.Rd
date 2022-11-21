@@ -14,12 +14,12 @@ By default, a test labelled "Example: <object name>" is created. Use
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
 #'
 #' x <- 1
-#' @expect equal(., x)
+#' @expect equal(x)
 #' abs(x)
 #'
 #' @doctest Negative numbers
 #' x <- -1
-#' @expect equal(., -x)
+#' @expect equal(-x)
 #' abs(x)
 }\if{html}{\out{</div>}}
 }

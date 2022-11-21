@@ -15,6 +15,20 @@ roxy_tag_parse.roxy_tag_expect <- function (x) {
   x
 }
 
+
+#' @export
+roxy_tag_parse.roxy_tag_expectRaw <- function (x) {
+  x <- strip_first_line(x, first_line_name = "expect_raw")
+  if (is.null(x$doctest_expect_raw) || x$doctest_expect_raw == "") {
+    roxygen2::warn_roxy_tag(x, "has no expectation defined")
+  }
+
+  x <- tag_nonempty_examples(x)
+
+  x
+}
+
+
 #' @export
 roxy_tag_parse.roxy_tag_doctest <- function (x) {
   x <- strip_first_line(x, first_line_name = "test_name")
@@ -86,6 +100,10 @@ tag_nonempty_examples <- function (x) {
 roxy_tag_rd.roxy_tag_expect <- function(x, base_path, env) {
   roxygen2::rd_section("examples", x$val)
 }
+
+
+#' @export
+roxy_tag_rd.roxy_tag_expectRaw <- roxy_tag_rd.roxy_tag_expect
 
 
 #' @export
