@@ -10,8 +10,6 @@ roxy_tag_parse.roxy_tag_expect <- function (x) {
     roxygen2::warn_roxy_tag(x, "has no expectation defined")
   }
 
-  # x <- tag_nonempty_examples(x)
-
   x
 }
 
@@ -23,8 +21,6 @@ roxy_tag_parse.roxy_tag_expectRaw <- function (x) {
     roxygen2::warn_roxy_tag(x, "has no expectation defined")
   }
 
-  x <- tag_nonempty_examples(x)
-
   x
 }
 
@@ -33,8 +29,6 @@ roxy_tag_parse.roxy_tag_expectRaw <- function (x) {
 roxy_tag_parse.roxy_tag_doctest <- function (x) {
   x <- strip_first_line(x, first_line_name = "test_name")
 
-  # x <- tag_nonempty_examples(x)
-
   x
 }
 
@@ -42,7 +36,6 @@ roxy_tag_parse.roxy_tag_doctest <- function (x) {
 #' @export
 roxy_tag_parse.roxy_tag_skipTest <- function (x) {
   x <- strip_first_line(x)
-  # x <- tag_nonempty_examples(x)
 
   x
 }
@@ -51,29 +44,19 @@ roxy_tag_parse.roxy_tag_skipTest <- function (x) {
 #' @export
 roxy_tag_parse.roxy_tag_resumeTest <- function (x) {
   x <- strip_first_line(x)
-  # x <- tag_nonempty_examples(x)
-
-  x
-}
-
-
-#' @export
-roxy_tag_parse.roxy_tag_testComments <- function (x) {
-  x <- strip_first_line(x)
-  # x <- tag_nonempty_examples(x)
 
   x
 }
 
 
 strip_first_line <- function (x, first_line_name = NULL) {
-  if (is.null(x$raw)) return(x)
+  if (is.null(x$raw)) x$raw <- ""
   lines <- strsplit(x$raw, "\n", fixed = TRUE)[[1]]
 
   if (length(lines)) {
-    x$raw <- paste(lines[-1], collapse = "\n")
+    x$val <- paste(lines[-1], collapse = "\n")
   } else {
-    x$raw <- character(0)
+    x$val <- character(0)
   }
 
   if (! is.null(first_line_name) && length(lines)) {
@@ -87,82 +70,60 @@ strip_first_line <- function (x, first_line_name = NULL) {
 
 #' @export
 roxy_tag_rd.roxy_tag_doctest <- function(x, base_path, env) {
-  x <- roxygen2::rd_section("doctest", x$raw)
-  x$is_doctest_tag <- TRUE
-
-  x
+  sect <- roxygen2::rd_section("doctest", x$val)
+  # we keep the tag around for error messages during Rd parsing
+  #
+  sect$tag <- x
+  sect
 }
 
 
 #' @export
-roxy_tag_rd.roxy_tag_expect <- function(x, base_path, env) {
-  x <- roxygen2::rd_section("doctest", x$raw)
-  x$is_doctest_tag <- FALSE
-
-  x
-}
+roxy_tag_rd.roxy_tag_expect <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
-roxy_tag_rd.roxy_tag_expectRaw <- roxy_tag_rd.roxy_tag_expect
+roxy_tag_rd.roxy_tag_expectRaw <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
-roxy_tag_rd.roxy_tag_skipTest <- function(x, base_path, env) {
-  x <- roxygen2::rd_section("doctest", x$raw)
-  x$is_doctest_tag <- FALSE
-
-  x
-}
-
+roxy_tag_rd.roxy_tag_skipTest <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
-roxy_tag_rd.roxy_tag_resumeTest <- function(x, base_path, env) {
-  x <- roxygen2::rd_section("doctest", x$raw)
-  x$is_doctest_tag <- FALSE
-
-  x
-}
-
-
-#' @export
-roxy_tag_rd.roxy_tag_testComments <- function(x, base_path, env) {
-  x <- roxygen2::rd_section("doctest", x$raw)
-  x$is_doctest_tag <- FALSE
-
-  x
-}
+roxy_tag_rd.roxy_tag_resumeTest <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
 merge.rd_section_doctest <- function (x, y, ...) {
-  x_is_doctest_tag <- x$is_doctest_tag
+  x_tag <- x$tag
   x <- NextMethod()
-  x$is_doctest_tag <- x_is_doctest_tag
-
-  if (! is.null(x$is_doctest_tag) && x$is_doctest_tag) {
-    # try to recreate ourselves, but with parsed Rd
-    raw <- paste(x$value, collapse = "\n")
-    if (raw != "") {
-      tmp_tag <- roxy_tag("roxy_tag_doctest", raw = raw)
-      tmp_tag <- roxygen2::tag_examples(tmp_tag)
-      if (! is.null(tmp_tag)) {
-        x$value <- tmp_tag$val
-      }
-    }
-  } else if (is.null(x$is_doctest_tag)) {
-    recover()
-  }
-
+  x$tag <- x_tag
   x
 }
 
+
 #' @export
 format.rd_section_doctest <- function (x, ...) {
-  value <- paste0(x$value, collapse = "\n")
-  roxygen2:::rd_macro("examples", value, space = TRUE)
+  # x$value is a vector of lines which have not yet been parsed
+  # we need to call tag_examples
+
+  tag <- x$tag
+  tag$raw <- paste(x$value, collapse = "\n")
+  tag <- roxygen2::tag_examples(tag)
+  # now tag$val contains parsed Rd. Maybe!
+  if (is.null(tag)) {
+    return("")
+  } else {
+    # OK, we can now be an examples section.
+    # directly copied from rd_macro:
+    values <- paste0("\n", paste0(tag$val, collapse = "\n"), "\n")
+    rd <- paste0("\\examples", paste0("{", values, "}", collapse = ""))
+    return(rd)
+  }
 }
+
+
 
 # THE PROBLEM
 # ===========

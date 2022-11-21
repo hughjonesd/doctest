@@ -35,9 +35,11 @@ Here’s some documentation for a function:
 #' Safe mean
 #' 
 #' @param x Numeric vector
-#' @export
+#' @value The mean of `x`
 #' 
-#' @examples
+#' @export
+#'
+#' @doctest
 #' 
 #' @expect equal(2)
 #' safe_mean(1:3)
@@ -54,6 +56,8 @@ safe_mean <- function (x) {
 }
 ```
 
+Instead of an `@examples` section, we have a `@doctest` section.
+
 This will create tests like:
 
     #> 
@@ -64,12 +68,9 @@ This will create tests like:
     #> # Created from @examples for `safe_mean`
     #> # Source file: '<text>'
     #> # Source line: 9
-    #>   expect_equal(2)
-    #>   safe_mean(1:3)
-    #>   expect_warning("not numeric")
-    #>   safe_mean("a")
-    #>   expect_warning("NA elements")
-    #>   safe_mean(c(1, NA))
+    #>   expect_equal(safe_mean(1:3), 2)
+    #>   expect_warning(safe_mean("a"), "not numeric")
+    #>   expect_warning(safe_mean(c(1, NA)), "NA elements")
     #> })
 
 The .Rd file will be created as normal, with an example section like:
@@ -118,29 +119,68 @@ package DESCRIPTION file.
 
 ## doctest tags
 
-The doctest package adds six tags to roxygen:
+The doctest package adds five tags to roxygen:
+
+### `@doctest`
+
+Use `@doctest` instead of `@examples`:
+
+``` r
+#' @doctest
+#' 
+#' # ... examples for your function
+```
+
+The content of `@doctest` will be used in the .Rd “examples” section,
+and in a testthat test.
+
+You can have more than one `@doctest` section. Each section creates one
+test like `test_that("Test name", {...})`. You can name the doctest, or
+leave it blank for a default name. All the sections will be merged into
+a single .Rd example.
+
+``` r
+#' @doctest Positive numbers
+#' x <- 1
+#' @expect equal(x)
+#' abs(x)
+#'
+#' @doctest Negative numbers
+#' x <- -1
+#' @expect equal(-x)
+#' abs(x)
+```
 
 ### `@expect`
 
 `@expect` writes a testthat expectation.
 
 ``` r
-#'
 #' @expect equal(4)
 #' 2 + 2
 ```
 
 You can use any `expect_*` function from `testthat`. Omit the `expect_`
-at the start.
+at the start of the call.
 
-The next expression will be substituted as the first argument into the
-`expect` call.
+The expression on the next line will be substituted as the first
+argument into the `expect` call:
+
+``` r
+expect_equal(2 + 2, 4)
+```
 
 Use a dot `.` to substitute in different places:
 
 ``` r
 #' @expect equal(., rev(.))
 #' c("T", "E", "N", "E", "T")
+```
+
+becomes:
+
+``` r
+expect_equal(c("T", "E", "N", "E", "T"), rev(c("T", "E", "N", "E", "T")))
 ```
 
 ### `@expectRaw`
@@ -153,69 +193,22 @@ expression:
 #' @expectRaw equal(x, 4)
 ```
 
-### `@doctest`
-
-By default, all expectations are created in a single test, named after
-the example. `@doctest <test-name>` changes to a new test.
-
-``` r
-#' x <- 1
-#' @expect equal(x)
-#' abs(x)
-#'
-#' @doctest Negative numbers
-#' x <- -1
-#' @expect equal(-x)
-#' abs(x)
-```
-
 ### `@skipTest` and `@resumeTest`
 
 By default, the test uses the whole example, since example code may
 depend on previous code.
 
 `@skipTest` omits lines of the example from the test. `@resumeTest`
-stops omitting lines. You can use this to skip irrelevant material.
+stops omitting lines. You can use this to skip irrelevant code or code
+that produces output.
 
 ``` r
+#' myfunc(1)
 #' @skipTest
 #' # No need to test plotting
 #' plot(1:10, my_func(1:10))
 #' @resumeTest
 ```
-
-### `@testComments`
-
-Because of how roxygen works, you can’t add expectations in the middle
-of complex expressions like `if` statements or `for` loops. For example,
-this won’t work:
-
-``` r
-#' if (x > 0) {
-#'   @expect gt(x, 0)
-#' } else {
-#'   @expect lt(x, 0)
-#' }
-```
-
-As an alternative, you can use the `@testComments` tag to test
-expectations in comments:
-
-``` r
-#' @testComments
-#' if (x > 0) {
-#'   # expect gt(0)
-#'   x
-#' } else {
-#'   # expect lt(0)
-#'   x
-#' }
-```
-
-Doctest comments follow the same format as the expectation tag, but with
-`@expect` replaced by `# expect` (or `@expectRaw` replaced by
-`# expectRaw`). Comments must be on their own line, and will remain in
-the example code.
 
 ## How to use doctest
 
@@ -237,39 +230,6 @@ user-visible output changes using `expect_snapshot()`:
 #' @expect snapshot()
 summary(model)
 ```
-
-## Bugs and limitations
-
-### Empty `@examples` section
-
-Roxygen may produce a warning like `@examples requires a value`. This is
-harmless. To avoid it, put some R code in your `@examples` section
-before the first `@expectation` or other tag.
-
-### `donttest` and `dontrun`
-
-`donttest` and `dontrun` Rd tags are ignored by doctest. This lets you
-test code that would fail when run by R CMD CHECK. Howeer, these tags
-must not span more than one doctest tag. For example, this will work:
-
-``` r
-#' @expect error(., "argh")
-#' \dontrun{
-#' stop("argh")
-#' }
-```
-
-But this won’t, because it contains a doctest tag:
-
-``` r
-#' \dontrun{
-#' @expect error(., "argh")
-#' stop("argh")
-#' }
-```
-
-You can work around this by using the `@testComments` tag and writing
-expectations as comments.
 
 ## Related packages
 

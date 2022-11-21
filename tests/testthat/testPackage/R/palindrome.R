@@ -6,11 +6,9 @@
 #' @return A string
 #' @export
 #'
-#' @examples
-#' 1 # to avoid warning
 #' @doctest
-#' @expect match(., "Panama")
-#' palindrome()
+#' p <- palindrome()
+#' @expectRaw match(p, "Panama")
 #' @skipTest
 #' print(p)
 #' @resumeTest

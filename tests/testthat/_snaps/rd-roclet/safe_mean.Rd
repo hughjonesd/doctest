@@ -16,9 +16,9 @@ Mean of \code{x}
 Safe mean
 }
 \examples{
-1
 x <- 1:3
 safe_mean(x)
+
 safe_mean("a")
 safe_mean(c(1, NA))
 }

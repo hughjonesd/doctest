@@ -1,8 +1,5 @@
-create_expectations <- function (test, test_comments) {
+create_expectations <- function (test) {
   example_lines <- clean_donts(test$lines)
-  if (test_comments) {
-    example_lines <- convert_comments_to_expectations(example_lines)
-  }
 
   example_text <- paste(example_lines, collapse = "\n")
   example_exprs <- rlang::parse_exprs(example_text)
@@ -81,7 +78,8 @@ rewrite_expectation_list <- function(exprs) {
         # e.g. if ix+1 was 5 we now have 1,2,3,4, 5 (was 6), 6 (was 7)
         if (length(exprs) > ix + 1) {
           remaining <- seq(ix + 1, length(exprs))
-          exprs[remaining] <- rewrite_expectation_list(exprs[remaining])
+          remaining_exprs <- rewrite_expectation_list(exprs[remaining])
+          exprs <- c(exprs[seq(1, ix)], remaining_exprs)
         }
         return(exprs)
       } else {
@@ -114,34 +112,6 @@ rewrite_expectation <- function (expect_expr, target_expr) {
   }
 
   expect_expr
-}
-
-
-convert_comments_to_expectations <- function (lines) {
-  parsed <- parse(text = lines, keep.source = TRUE)
-  parse_data <- utils::getParseData(parsed)
-
-  comments <- parse_data[parse_data$token == "COMMENT", ]
-  comments <- comments[grepl("#\\s*expect(Raw)?\\s+", comments$text), ]
-
-  comment_lines <- comments$line1
-  expectations <- gsub("#\\s*expect\\s+(.+)", ".doctest_expect_\\1",
-                       comments$text)
-  expectations <- gsub("#\\s*expectRaw\\s+(.+)", ".doctest_raw_expect_\\1",
-                       expectations)
-
-  other_stuff <- parse_data$line1 %in% comment_lines &
-                 parse_data$token != "COMMENT"
-  if (any(other_stuff)) {
-    cli::cli_abort(c("Found code on same line as expectation comment",
-                     i = "doctest comments must be on their own line"))
-  }
-
-  if (length(comment_lines) > 0L) {
-    lines[comment_lines] <- expectations
-  }
-
-  lines
 }
 
 

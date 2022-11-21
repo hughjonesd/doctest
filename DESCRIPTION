@@ -16,8 +16,7 @@ Imports:
     pkgload,
     purrr,
     rlang,
-    roxygen2,
-    stringr
+    roxygen2
 Suggests:
     testthat,
     lifecycle

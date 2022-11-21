@@ -1,4 +1,67 @@
 
+library(roxygen2)
+dedent <- function (x) gsub("\n\\s+", "\n", x)
+
+
+test_that("Rd output", {
+  ex <- "
+         #' Title
+         #'
+         #' @doctest
+         #' x <- 1
+         #' @expect gt(0)
+         #' x
+         #' @expect lt(0)
+         #' -x
+         foo <- function() 1
+        " |> dedent()
+
+  results <- roc_proc_text(rd_roclet(), ex)
+  expect_snapshot_output(
+    print(results) # seems to work
+  )
+
+  ex_complex <- "
+                 #' Title
+                 #'
+                 #' @doctest
+                 #' x <- 1
+                 #' if (x > 0) {
+                 #' @expect gt(0)
+                 #'   x
+                 #' } else {
+                 #' @expect lt(0)
+                 #'   -x
+                 #' }
+                 foo <- function() 1
+                " |> dedent()
+
+  results <- roc_proc_text(rd_roclet(), ex_complex)
+  expect_snapshot_output(
+    print(results)
+  )
+})
+
+
+
+test_that("dontrun", {
+
+  test_dontrun <- "
+                   #' Title
+                   #'
+                   #' @doctest
+                   #' \\dontrun{
+                   #' @expect error(., 'foo')
+                   #' stop('foo')
+                   #' }
+                   foo <- 1
+                  " |> dedent()
+  results <- roc_proc_text(rd_roclet(), test_dontrun)
+  expect_snapshot_output(
+    print(results)
+  )
+})
+
 
 test_that("rd_roclet output", {
   r_file <- file.path("testPackage", "R", "safe-arithmetic.R")

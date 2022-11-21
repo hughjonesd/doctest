@@ -6,8 +6,7 @@ dedent <- function (x) gsub("\n\\s+", "\n", x)
 
 test_that("@expectRaw", {
   raw_expectation <- "
-                      #' @examples
-                      #' 1
+                      #' @doctest
                       #' @expectRaw equal(2 + 2, 4)
                       NULL
                      " |> dedent()

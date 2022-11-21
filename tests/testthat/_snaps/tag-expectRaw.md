@@ -8,7 +8,6 @@
     # Created from @examples for `unknown`
     # Source file: '<text>'
     # Source line: 2
-      1
       expect_equal(2 + 2, 4)
     })
     

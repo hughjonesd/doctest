@@ -28,21 +28,19 @@ roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
 
 
 build_result_from_block <- function (block) {
-  if (! roxygen2::block_has_tags(block, c("expect", "expectRaw", "doctest",
-                                          "testComments"))) {
+  if (! roxygen2::block_has_tags(block, c("expect", "expectRaw", "doctest"))) {
     return(NULL)
   }
 
 
   tags <- roxygen2::block_get_tags(block, c("expect", "expectRaw",
-                                            "doctest", "testComments",
-                                            "skipTest", "resumeTest"))
+                                            "doctest", "skipTest",
+                                            "resumeTest"))
 
   result <- structure(list(tests = list()), class = "doctest_result")
 
   result$file <- basename(block$file)
   result$object <- block_name(block)
-  result$test_comments <- roxygen2::block_has_tags(block, "testComments")
 
   test <- NULL
   for (tag in tags) {
@@ -141,12 +139,6 @@ add_tag_to_test.roxy_tag_expectRaw <- function (tag, test, ...) {
 }
 
 
-
-add_tag_to_test.roxy_tag_testComments <- function (tag, test, ...) {
-  add_lines_to_test(tag, test)
-}
-
-
 add_tag_to_test.roxy_tag_resumeTest <- function (tag, test, ...) {
   add_lines_to_test(tag, test)
 }
@@ -163,8 +155,7 @@ add_tag_to_test.roxy_tag_skipTest <- function (tag, test, ...) {
 
 
 add_lines_to_test <- function (tag, test) {
-  if (length(tag$raw) == 0L) return(test)
-  example_lines <- strsplit(tag$raw, "\n", fixed = TRUE)[[1]]
+  example_lines <- tag$val
   test$lines <- c(test$lines, example_lines)
 
   test
@@ -172,7 +163,7 @@ add_lines_to_test <- function (tag, test) {
 
 
 process_test <- function (test, result) {
-  test <- create_expectations(test, test_comments = result$test_comments)
+  test <- create_expectations(test)
   result$tests <- c(result$tests, list(test))
 
   result
