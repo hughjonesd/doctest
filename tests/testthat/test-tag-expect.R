@@ -6,6 +6,7 @@ test_that("@expectation", {
   dot_expectation <- "
                       #' @examples
                       #' 1
+                      #' @doctest
                       #' @expect equal(., 2)
                       #' sum(1, 1)
                       NULL
@@ -18,6 +19,7 @@ test_that("@expectation", {
   operator_expectation <- "
                            #' @examples
                            #' 1
+                           #' @doctest
                            #' @expect equal(., 2)
                            #' 1 + 1
                            NULL
@@ -30,6 +32,7 @@ test_that("@expectation", {
   namespace_expectation <- "
                             #' @examples
                             #' 1
+                            #' @doctest
                             #' @expect equal(., 2)
                             #' base::sum(1, 1)
                             NULL
@@ -42,6 +45,7 @@ test_that("@expectation", {
   donttest_expectation <- "
                            #' @examples
                            #' 1
+                           #' @doctest
                            #' @expect equal(., 2)
                            #' \\donttest{
                            #' sum(1, 1)
@@ -56,6 +60,8 @@ test_that("@expectation", {
 
   custom_operator_expectation <- "
                                   #' @examples
+                                  #' 1
+                                  #' @doctest
                                   #' 1 %plus% 1
                                   #' @expect equal(., 4)
                                   #' 2 %plus% 2
@@ -72,6 +78,7 @@ test_that("@expectation", {
   misplaced_dot_expectation <- "
                                 #' @examples
                                 #' 1
+                                #' @doctest
                                 #' @expect equal(., 4)
                                 NULL
                                " |> dedent()

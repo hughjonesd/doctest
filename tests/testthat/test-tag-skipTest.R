@@ -6,6 +6,8 @@ dedent <- function (x) gsub("\n\\s+", "\n", x)
 test_that("@skipTest", {
   skip_test <- "
                #' @examples
+               #' 1
+               #' @doctest
                #' a <- 1
                #' @skipTest
                #'

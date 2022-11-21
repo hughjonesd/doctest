@@ -7,6 +7,7 @@ test_that("@testComments", {
   test_comment <- "
                    #' @examples
                    #' 1
+                   #' @doctest
                    #' @testComments
                    #' a <- 1
                    #' # expect equal(a, 1)
@@ -23,6 +24,7 @@ test_that("@testComments", {
   complex_test_comment <- "
                            #' @examples
                            #' 1
+                           #' @doctest
                            #' @testComments
                            #' if (TRUE) {
                            #'   # expect equal(a, 1)
@@ -44,6 +46,7 @@ test_that("@testComments", {
   bad_test_comment <- "
                        #' @examples
                        #' 1
+                       #' @doctest
                        #' @testComments
                        #'
                        #' a <- 1 # expect equal(a, 1)
@@ -57,6 +60,7 @@ test_that("@testComments", {
   misplaced_dot_comment <- "
                            #' @examples
                            #' 1
+                           #' @doctest
                            #' @testComments
                            #' if (TRUE) {
                            #'   # expect equal(., 4)

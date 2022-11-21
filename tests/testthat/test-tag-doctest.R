@@ -7,6 +7,7 @@ test_that("@doctest", {
     test_ex <- "
                 #' @examples
                 #' 1
+                #' @doctest
                 #' @expect equal(1, 1)
                 #'
                 #' @doctest is TRUE true?

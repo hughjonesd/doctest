@@ -7,8 +7,7 @@
     test_that("Example: unknown", {
     # Created from @examples for `unknown`
     # Source file: '<text>'
-    # Source line: 2
-      1
+    # Source line: 4
       a <- 1
       expect_equal(a, 1)
       expect_equal(2 + 2, 4)
@@ -24,8 +23,7 @@
     test_that("Example: unknown", {
     # Created from @examples for `unknown`
     # Source file: '<text>'
-    # Source line: 2
-      1
+    # Source line: 4
       if (TRUE) {
         expect_equal(a, 1)
         expect_equal(2 + 2, 4)
