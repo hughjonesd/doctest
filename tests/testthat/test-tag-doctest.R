@@ -31,6 +31,20 @@ test_that("@doctest", {
 })
 
 
+test_that("empty test", {
+
+  test_empty <- "
+                 #' @doctest
+                 #' mean(1:3)
+                 NULL
+                " |> dedent()
+  results <- roc_proc_text(dt_roclet(), test_empty)
+  expect_snapshot_output(
+    roclet_output(dt_roclet(), results)
+  )
+})
+
+
 test_that("dontrun", {
 
   test_dontrun <- "
