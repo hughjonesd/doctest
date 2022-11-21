@@ -176,9 +176,9 @@ top_and_tail <- function (test) {
   test$lines <- paste0("  ", test$lines)
   test_opener <- c(
                    sprintf('test_that("%s", {', test$name),
-                   sprintf("  # Created from @examples for `%s`",
+                   sprintf("  # Created from @doctest for `%s`",
                            test$source_object),
-                   sprintf("  # Source file: '%s'", test$source_file),
+                   sprintf("  # Source file: %s", test$source_file),
                    sprintf("  # Source line: %s", test$source_line)
                   )
 

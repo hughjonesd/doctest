@@ -1,4 +1,12 @@
-#' Write testthat files using roxygen tags
+#' Write testthat tests and examples together
+#'
+#' Doctest lets you combine tests and examples. For more information, see
+#' [@doctest] and [@expect].
+#'
+#' @section Example:
+#'
+#' ```{r child = "example.Rmd"}
+#' ```
 #'
 #' To use doctest in your package, add
 #' ```r
