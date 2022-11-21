@@ -3,15 +3,21 @@
 \name{doctest-tag}
 \alias{doctest-tag}
 \alias{@doctest}
-\title{Start a new test}
+\title{Start a  doctest}
 \description{
-\verb{@doctest} starts a new test.
+\verb{@doctest} starts a doctest.
 }
 \details{
-By default, a test labelled "Example: <object name>" is created. Use
-\verb{@doctest} to create separate tests within a single example:
+Use \verb{@doctest} where you would usually use \verb{@examples}. Then add
+\link{@expect} and \link{@expectRaw} tags beneath it to create expectations.
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
+You can have more than one \verb{@doctest} tag. Each doctest will create
+a new test, but they will all be merged into a single Rd example.
+
+By default, a test labelled "Example: <object name>" is created. You
+can put a different label after \verb{@doctest}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest Positive numbers
 #'
 #' x <- 1
 #' @expect equal(x)
