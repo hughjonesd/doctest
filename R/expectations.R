@@ -1,5 +1,8 @@
 create_expectations <- function (test) {
-  example_lines <- clean_donts(test$lines)
+  example_lines <- test$lines
+  if (any(grepl("donttest|dontrun|dontshow", example_lines))) {
+    example_lines <- clean_donts(example_lines)
+  }
 
   example_text <- paste(example_lines, collapse = "\n")
   example_exprs <- rlang::parse_exprs(example_text)
@@ -123,12 +126,10 @@ clean_donts <- function (lines) {
   # We need to do this to e.g. convert %plus% to \%plus\% ...
   # otherwise tools::Rd2ex() will do bad things
   # add in starting roxygen tags
-  dummy_rox <- paste0("#' ", lines, collapse = "\n")
+  dummy_rox <- paste0(lines, collapse = "\n")
   # calls escape_examples() but uses an exported function
   dummy_rox <- roxygen2::tag_examples(list(raw = dummy_rox))
   dummy_rd <- as.character(dummy_rox$val)
-  # get rid of starting roxygen tags.
-  dummy_rd <- gsub("(^|\n)#'", "\n", dummy_rd)
 
   dummy_rd <- c("\\name{dummy}", "\\title{dummy}", "\\examples{", dummy_rd, "}")
   cat(dummy_rd, file = tf_in, sep = "\n")
