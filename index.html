@@ -123,7 +123,7 @@
 <p>Then in the package directory run:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">roxygen2</span><span class="fu">::</span><span class="fu"><a href="https://roxygen2.r-lib.org/reference/roxygenize.html" class="external-link">roxygenize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>as normal to create documentation. Any doctests will then be created as files labelled <code>test-doctest-&lt;topic&gt;.R</code> the <code>tests/testthat</code> directory.</p>
+<p>as normal to create documentation. Any doctests will then be created as files labelled <code>test-doctest-&lt;topic&gt;.R</code> in the <code>tests/testthat</code> directory.</p>
 <p>At present, you can’t use doctest from the RStudio keyboard shortcut <code>Ctrl + Shift + D</code>, because this always uses the standard roxygen2 roclets. However, you can bind the RStudio addin “Devtools: document a package” to a keyboard shortcut. This will use the roclets from your package DESCRIPTION file.</p>
 </div>
 <div class="section level2">
