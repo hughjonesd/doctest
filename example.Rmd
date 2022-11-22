@@ -5,7 +5,7 @@ output: github_document
 
 ## Example
 
-Here's some documentation for a function:
+Here's some [roxygen](https://roxygen2.r-lib.org) documentation for a function:
 
 ```r
 ```{r, echo = FALSE, results = "asis"}

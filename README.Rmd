@@ -21,23 +21,26 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-Documentation examples and tests share certain features. They are both usually
-self-contained pieces of code. They should cover the software's most important
-functions and typical uses. They should both be simple and clear: complex
-examples are hard for users to understand, and complex test code can introduce
-testing bugs. This similarity makes it attractive to use "doctests", which
-provide both documentation and testing. Indeed, several languages, including
-Python and Rust, have doctests built in.[^1] R also checks for errors in
-examples when running `R CMD check`.
+Documentation examples and tests are similar in some ways:
+
+* They are self-contained pieces of code. 
+
+* They should cover the software's most important functions and typical uses. 
+
+* They should be simple and clear: complex examples are hard for users to
+  understand, and complex test code can introduce testing bugs. 
+  
+This similarity makes it attractive to use "doctests", which combine
+tests and documentation. Indeed, several languages, including Python and Rust,
+have doctests built in.[^1] R also checks for errors in examples when running `R
+CMD check`.
 
 [^1]: https://docs.python.org/3/library/doctest.html,
 https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html
 
-The doctest package extends this idea. It lets you write  
-[testthat](https://testthat.r-lib.org/) tests,
+The doctest package extends this idea. It lets you write [testthat](https://testthat.r-lib.org/) tests,
 by adding tags to your [roxygen](https://roxygen2.r-lib.org/) documentation.
-So, as well as checking that your examples run, you can also check they
-do what they are supposed to do.
+This helps you check that your examples do what they are supposed to do.
 
 ```{r, child="example.Rmd"}
 ```
@@ -70,9 +73,8 @@ Then in the package directory run:
 roxygen2::roxygenize()
 ```
 
-as normal to create documentation. This will also create tests in
-`tests/testthat`, named `test-example-xxx.R`. One file is created for each
-example.
+as normal to create documentation. Any doctests will then
+be created as files labelled `test-doctest-<topic>.R` the `tests/testthat` directory.
 
 At present, you can't use doctest from the RStudio keyboard shortcut
 `Ctrl + Shift + D`, because this always uses the standard roxygen2 roclets. 
