@@ -109,7 +109,8 @@ roxygen2::roxygenize()
 ```
 
 as normal to create documentation. Any doctests will then be created as
-files labelled `test-doctest-<topic>.R` the `tests/testthat` directory.
+files labelled `test-doctest-<topic>.R` in the `tests/testthat`
+directory.
 
 At present, you can’t use doctest from the RStudio keyboard shortcut
 `Ctrl + Shift + D`, because this always uses the standard roxygen2
