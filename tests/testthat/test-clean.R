@@ -17,4 +17,9 @@ test_that("roclet_clean", {
     list.files("tests/testthat", pattern = "test-doctest"),
     0L
   )
+
+  expect_length(
+    list.files("tests/testthat", pattern = "test-dont-delete"),
+    1L
+  )
 })
