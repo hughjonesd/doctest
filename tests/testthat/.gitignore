@@ -1,2 +1,2 @@
-testPackage/tests/testthat/*.R
+testPackage/tests/testthat/test-doctest*.R
 testPackage/man/*.Rd
