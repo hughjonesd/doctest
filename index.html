@@ -55,12 +55,18 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>Documentation examples and tests share certain features. They are both usually self-contained pieces of code. They should cover the software’s most important functions and typical uses. They should both be simple and clear: complex examples are hard for users to understand, and complex test code can introduce testing bugs. This similarity makes it attractive to use “doctests”, which provide both documentation and testing. Indeed, several languages, including Python and Rust, have doctests built in.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;a href="https://docs.python.org/3/library/doctest.html" class="external-link uri"&gt;https://docs.python.org/3/library/doctest.html&lt;/a&gt;, &lt;a href="https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html" class="external-link uri"&gt;https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a> R also checks for errors in examples when running <code>R CMD check</code>.</p>
-<p>The doctest package extends this idea. It lets you write<br><a href="https://testthat.r-lib.org/" class="external-link">testthat</a> tests, by adding tags to your <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen</a> documentation. So, as well as checking that your examples run, you can also check they do what they are supposed to do.</p>
+<p>Documentation examples and tests are similar in some ways:</p>
+<ul>
+<li><p>They are self-contained pieces of code.</p></li>
+<li><p>They should cover the software’s most important functions and typical uses.</p></li>
+<li><p>They should be simple and clear: complex examples are hard for users to understand, and complex test code can introduce testing bugs.</p></li>
+</ul>
+<p>This similarity makes it attractive to use “doctests”, which combine tests and documentation. Indeed, several languages, including Python and Rust, have doctests built in.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;a href="https://docs.python.org/3/library/doctest.html" class="external-link uri"&gt;https://docs.python.org/3/library/doctest.html&lt;/a&gt;, &lt;a href="https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html" class="external-link uri"&gt;https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a> R also checks for errors in examples when running <code>R CMD check</code>.</p>
+<p>The doctest package extends this idea. It lets you write <a href="https://testthat.r-lib.org/" class="external-link">testthat</a> tests, by adding tags to your <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen</a> documentation. This helps you check that your examples do what they are supposed to do.</p>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>Here’s some documentation for a function:</p>
+<p>Here’s some <a href="https://roxygen2.r-lib.org" class="external-link">roxygen</a> documentation for a function:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">#' Safe mean</span></span>
@@ -117,7 +123,7 @@
 <p>Then in the package directory run:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">roxygen2</span><span class="fu">::</span><span class="fu"><a href="https://roxygen2.r-lib.org/reference/roxygenize.html" class="external-link">roxygenize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>as normal to create documentation. This will also create tests in <code>tests/testthat</code>, named <code>test-example-xxx.R</code>. One file is created for each example.</p>
+<p>as normal to create documentation. Any doctests will then be created as files labelled <code>test-doctest-&lt;topic&gt;.R</code> the <code>tests/testthat</code> directory.</p>
 <p>At present, you can’t use doctest from the RStudio keyboard shortcut <code>Ctrl + Shift + D</code>, because this always uses the standard roxygen2 roclets. However, you can bind the RStudio addin “Devtools: document a package” to a keyboard shortcut. This will use the roclets from your package DESCRIPTION file.</p>
 </div>
 <div class="section level2">
