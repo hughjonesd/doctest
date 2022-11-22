@@ -33,7 +33,7 @@ examples when running `R CMD check`.
 [^1]: https://docs.python.org/3/library/doctest.html,
 https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html
 
-The doctest package extends this idea. It lets you write 
+The doctest package extends this idea. It lets you write  
 [testthat](https://testthat.r-lib.org/) tests,
 by adding tags to your [roxygen](https://roxygen2.r-lib.org/) documentation.
 So, as well as checking that your examples run, you can also check they
@@ -159,12 +159,8 @@ expect_equal(c("T", "E", "N", "E", "T"), rev(c("T", "E", "N", "E", "T")))
 
 ### `@skipTest` and `@resumeTest`
 
-By default, the test uses the whole example, since example code may depend
-on previous code.
-
-`@skipTest` omits lines of the example from the test. `@resumeTest` stops
-omitting lines. You can use this to skip irrelevant code or code that
-produces output.
+By default, the doctest uses the whole example. `@skipTest` omits lines of the example from the test until the next expectation or other tag. You can use `@resumeTest` to stop omitting lines without creating
+a new expectation. 
 
 ```r
 #' myfunc(1)
@@ -177,6 +173,27 @@ produces output.
 
 ## How to use doctest
 
+Here's a simple workflow for converting a function to use doctest.
+
+1. Replace `@examples` by `@doctest`.
+
+2. Run `roxygen::roxygenize()` (or `devtools::document()`. 
+   If you get a warning, check that you've added 
+  `"doctest::dt_roclet"` to your package DESCRIPTION file, as above.
+
+3. Check that your Rd file in `man/*.Rd` is unchanged, and that an empty test
+  has been generated in `tests/testthat/test-doclet-<function name>.R`.
+
+4. Add `@expect` tags to your `@doctest`.
+
+5. Run `roxygenize()` again.
+
+6. Run `devtools::test()` and check that your tests pass.
+
+### Writing good doctests
+
+Tests and documentation are similar, but not identical. Tests need to cover
+difficult corner cases. Examples need to convey the basics to the user. 
 I like the following advice:
 
 > ... write the best possible documentation, and [R] makes sure the code
@@ -186,9 +203,8 @@ I like the following advice:
 *Programming Rust*, Blandy, Orendorff and Tindall, 2021
 
 In particular, use doctest as an *addition* to manually created tests, not a 
-*substitute* for them. For example, testing difficult corner cases
-would not usually be appropriate in documentation. Use doctest for relatively simple tests of basic functionality, or to catch when user-visible output
-changes using `expect_snapshot()`:
+*substitute* for them. Use doctest for relatively simple tests of basic functionality. If it's hard to specify what to test for, consider using
+`testthat::expect_snapshot()` to capture output. For more complex test cases, write a test file manually.
 
 ```r
 #' @expect snapshot()

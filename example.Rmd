@@ -15,10 +15,7 @@ rox <- r"--[
 #' @param x Numeric vector
 #' @return The mean of `x`
 #' 
-#' @export
-#'
 #' @doctest
-#' 
 #' @expect equal(2)
 #' safe_mean(1:3)
 #' 
