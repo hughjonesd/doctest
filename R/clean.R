@@ -7,7 +7,8 @@ roclet_clean.roclet_doctest <- function (x, base_path) {
 
   test_files <- test_files[! file.info(test_files)$isdir]
 
-  test_files <- Filter(made_by_doctest, test_files)
+  test_files <- purrr::keep(test_files, made_by_doctest)
+  test_files <- purrr::keep(test_files, grepl, "^test-doctest-")
   unlink(test_files)
 }
 
