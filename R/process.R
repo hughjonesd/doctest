@@ -32,6 +32,13 @@ build_result_from_block <- function (block) {
     return(NULL)
   }
 
+  if (roxygen2::block_has_tags(block, "examples")) {
+    exes <- block_get_tags(block, "examples")
+    roxygen2::warn_roxy_tag(exes[[1]], c(
+          "{.code @examples} and {.code @doctest} sections in the same block",
+          "i" = "Change {.code @examples} to {.code @doctest}"
+          ))
+  }
 
   tags <- roxygen2::block_get_tags(block, c("expect", "expectRaw",
                                             "doctest", "skipTest",

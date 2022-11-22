@@ -115,11 +115,11 @@ NULL
 
 #' Exclude example code from a test
 #'
-#' `@skipTest` excludes the following code from a test. `@resumeTest` stops excluding
-#' code.
+#' `@skipTest` excludes code from a test until the next tag.
+#' Use `@resumeTest` to restart including code without creating an expectation.
 #'
 #' @details
-#' Use these tags to avoid redundant or noisy code:
+#' Use `@skipTest` to avoid redundant or noisy code:
 #'
 #'     #' @examples
 #'     #'
@@ -128,7 +128,6 @@ NULL
 #'     #'
 #'     #' @skipTest
 #'     #' curve(sin(x), 0, 2 * pi)
-#'     #' @resumeTest
 #'     #'
 #'     #' @expect equal(1)
 #'     #' cos(0)

@@ -6,11 +6,11 @@
 \alias{@resumeTest}
 \title{Exclude example code from a test}
 \description{
-\verb{@skipTest} excludes the following code from a test. \verb{@resumeTest} stops excluding
-code.
+\verb{@skipTest} excludes code from a test until the next tag.
+Use \verb{@resumeTest} to restart including code without creating an expectation.
 }
 \details{
-Use these tags to avoid redundant or noisy code:
+Use \verb{@skipTest} to avoid redundant or noisy code:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
 #'
@@ -19,7 +19,6 @@ Use these tags to avoid redundant or noisy code:
 #'
 #' @skipTest
 #' curve(sin(x), 0, 2 * pi)
-#' @resumeTest
 #'
 #' @expect equal(1)
 #' cos(0)
