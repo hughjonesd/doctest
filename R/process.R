@@ -65,6 +65,8 @@ build_result_from_block <- function (block) {
   }
   result <- process_test(test, result)
 
+  result$lines <- test_file_contents(result)
+
   result
 }
 

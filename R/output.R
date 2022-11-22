@@ -3,9 +3,8 @@
 #' @export
 roclet_output.roclet_doctest <- function (x, results, base_path, ...) {
   for (result in results) {
-    contents <- test_file_contents(result)
     filename <- test_file_name(result)
-    write_test_file(filename, contents, base_path = base_path)
+    write_test_file(filename, result$lines, base_path = base_path)
   }
 }
 
@@ -23,7 +22,7 @@ write_test_file <- function (filename, contents, base_path) {
 
 
 test_file_name <- function (result) {
-  sprintf("test-examples-%s.R", result_name(result))
+  sprintf("test-doctest-%s.R", result_name(result))
 }
 
 
