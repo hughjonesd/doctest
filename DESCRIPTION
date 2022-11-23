@@ -1,6 +1,6 @@
 Package: doctest
 Type: Package
-Title: Generate Tests From Examples Using 'roxygen' and 'testthat'
+Title: Generate Tests from Examples Using 'roxygen' and 'testthat'
 Version: 0.1.0
 Authors@R: person("David", "Hugh-Jones",
                           email = "davidhughjones@gmail.com",

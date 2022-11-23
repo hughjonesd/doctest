@@ -90,8 +90,12 @@ You can install the development version of doctest like this:
 devtools::install("hughjonesd/doctest")
 ```
 
-To use doctest, alter your package DESCRIPTION to add the `doctest`
-roclet to roxygen, like this:
+Here’s a simple workflow to start using doctest:
+
+1.  Alter your package DESCRIPTION to add the `doctest` roclet to
+    roxygen:
+
+<!-- -->
 
     Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet")) 
 
@@ -99,18 +103,23 @@ You can also add `doctest` as a dependency:
 
 ``` r
 usethis::use_dev_package("doctest", type = "Suggests", 
-                         remote = "hughjonesd/doctest")
+                       remote = "hughjonesd/doctest")
 ```
 
-Then in the package directory run:
+2.  In your roxygen documentation, replace `@examples` by `@doctest`.
 
-``` r
-roxygen2::roxygenize()
-```
+3.  In the package directory run `roxygen2::roxygenize()` or
+    `devtools::document()` to create documentation. You will see new
+    files labelled `test-doctest-<topic>.R` in the `tests/testthat`
+    directory. You should also see Rd files created as normal in the
+    `man/` directory, including `\examples` sections.
 
-as normal to create documentation. Any doctests will then be created as
-files labelled `test-doctest-<topic>.R` in the `tests/testthat`
-directory.
+4.  Add `@expect` tags to your `@doctest` sections.
+
+5.  Run `roxygenize()` again. Your tests will be recreated with new
+    expectations.
+
+6.  Run `devtools::test()` and check that your tests pass.
 
 At present, you can’t use doctest from the RStudio keyboard shortcut
 `Ctrl + Shift + D`, because this always uses the standard roxygen2
@@ -209,27 +218,7 @@ expectation.
 #' @resumeTest
 ```
 
-## How to use doctest
-
-Here’s a simple workflow for converting a function to use doctest.
-
-1.  Replace `@examples` by `@doctest`.
-
-2.  Run `roxygen::roxygenize()` (or `devtools::document()`. If you get a
-    warning, check that you’ve added `"doctest::dt_roclet"` to your
-    package DESCRIPTION file, as above.
-
-3.  Check that your Rd file in `man/*.Rd` is unchanged, and that an
-    empty test has been generated in
-    `tests/testthat/test-doclet-<function name>.R`.
-
-4.  Add `@expect` tags to your `@doctest`.
-
-5.  Run `roxygenize()` again.
-
-6.  Run `devtools::test()` and check that your tests pass.
-
-### Writing good doctests
+## Writing good doctests
 
 Tests and documentation are similar, but not identical. Tests need to
 cover difficult corner cases. Examples need to convey the basics to the
