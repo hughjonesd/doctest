@@ -14,6 +14,10 @@ Use \verb{@doctest} where you would usually use \verb{@examples}. Then add
 You can have more than one \verb{@doctest} tag. Each doctest will create
 a new test, but they will all be merged into a single Rd example.
 
+A test will only be written if your \verb{@doctest} section has some
+expectations in it. This lets you change \verb{@examples} to \verb{@doctest} without
+generating unexpected tests.
+
 By default, a test labelled "Example: <object name>" is created. You
 can put a different label after \verb{@doctest}:
 

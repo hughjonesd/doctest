@@ -94,6 +94,10 @@ NULL
 #' You can have more than one `@doctest` tag. Each doctest will create
 #' a new test, but they will all be merged into a single Rd example.
 #'
+#' A test will only be written if your `@doctest` section has some
+#' expectations in it. This lets you change `@examples` to `@doctest` without
+#' generating unexpected tests.
+#'
 #' By default, a test labelled "Example: &lt;object name&gt;" is created. You
 #' can put a different label after `@doctest`:
 #'
