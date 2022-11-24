@@ -9,9 +9,9 @@
 #' @doctest
 #' p <- palindrome()
 #' @expectRaw match(p, "Panama")
-#' @skipTest
+#' @pause
 #' print(p)
-#' @resumeTest
+#' @resume
 #' pal_letters <- p |>
 #'   tolower() |>
 #'   (\(x) gsub("[^A-z]", "", x))() |>

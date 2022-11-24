@@ -40,9 +40,8 @@ build_result_from_block <- function (block) {
           ))
   }
 
-  tags <- roxygen2::block_get_tags(block, c("expect", "expectRaw",
-                                            "doctest", "skipTest",
-                                            "resumeTest"))
+  tags <- roxygen2::block_get_tags(block, c("doctest", "expect", "expectRaw",
+                                            "pause", "resume"))
 
   result <- structure(list(tests = list()), class = "doctest_result")
 
@@ -148,19 +147,20 @@ add_tag_to_test.roxy_tag_expectRaw <- function (tag, test, ...) {
 }
 
 
-add_tag_to_test.roxy_tag_resumeTest <- function (tag, test, ...) {
-  add_lines_to_test(tag, test)
-}
-
-
 add_tag_to_test.roxy_tag_doctest <- function (tag, test, ...) {
   add_lines_to_test(tag, test)
 }
 
 
-add_tag_to_test.roxy_tag_skipTest <- function (tag, test, ...) {
+add_tag_to_test.roxy_tag_pause <- function (tag, test, ...) {
   test
 }
+
+
+add_tag_to_test.roxy_tag_resume <- function (tag, test, ...) {
+  add_lines_to_test(tag, test)
+}
+
 
 
 add_lines_to_test <- function (tag, test) {

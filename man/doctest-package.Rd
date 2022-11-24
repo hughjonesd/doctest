@@ -13,7 +13,7 @@ Doctest lets you combine tests and examples. For more information, see
 
 \subsection{Example}{
 
-Here's some documentation for a function:
+Here's some \href{https://roxygen2.r-lib.org}{roxygen} documentation for a function:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{
 #' Safe mean
@@ -21,10 +21,7 @@ Here's some documentation for a function:
 #' @param x Numeric vector
 #' @return The mean of `x`
 #' 
-#' @export
-#'
 #' @doctest
-#' 
 #' @expect equal(2)
 #' safe_mean(1:3)
 #' 
@@ -50,7 +47,7 @@ This will create tests like:
 test_that("Example: safe_mean", \{
   # Created from @doctest for `safe_mean`
   # Source file: <text>
-  # Source line: 9
+  # Source line: 7
   expect_equal(safe_mean(1:3), 2)
   expect_warning(safe_mean("a"), "not numeric")
   expect_warning(safe_mean(c(1, NA)), "NA elements")

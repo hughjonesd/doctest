@@ -203,19 +203,24 @@ expression:
 #' @expectRaw equal(x, 4)
 ```
 
-### `@skipTest` and `@resumeTest`
+### `@pause` and `@resume`
 
-By default, the doctest uses the whole example. `@skipTest` omits lines
-of the example from the test until the next expectation or other tag.
-You can use `@resumeTest` to stop omitting lines without creating a new
+By default, the doctest uses the whole example. `@pause` stops including
+the example in the doctest until the next expectation or other tag. You
+can use `@resume` to restart including lines without creating a new
 expectation.
 
 ``` r
 #' myfunc(1)
-#' @skipTest
+#' 
+#' @pause
 #' # No need to test plotting
 #' plot(1:10, my_func(1:10))
-#' @resumeTest
+#' 
+#' @resume
+#' x <- NA
+#' @expect warning()
+#' myfunc(x)
 ```
 
 ## Writing good doctests

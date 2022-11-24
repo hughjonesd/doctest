@@ -34,7 +34,7 @@ roxy_tag_parse.roxy_tag_doctest <- function (x) {
 
 
 #' @export
-roxy_tag_parse.roxy_tag_skipTest <- function (x) {
+roxy_tag_parse.roxy_tag_pause <- function (x) {
   x <- strip_first_line(x)
 
   x
@@ -42,7 +42,7 @@ roxy_tag_parse.roxy_tag_skipTest <- function (x) {
 
 
 #' @export
-roxy_tag_parse.roxy_tag_resumeTest <- function (x) {
+roxy_tag_parse.roxy_tag_resume <- function (x) {
   x <- strip_first_line(x)
 
   x
@@ -87,11 +87,11 @@ roxy_tag_rd.roxy_tag_expectRaw <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
-roxy_tag_rd.roxy_tag_skipTest <- roxy_tag_rd.roxy_tag_doctest
+roxy_tag_rd.roxy_tag_pause <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
-roxy_tag_rd.roxy_tag_resumeTest <- roxy_tag_rd.roxy_tag_doctest
+roxy_tag_rd.roxy_tag_resume <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
