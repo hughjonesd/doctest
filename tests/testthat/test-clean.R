@@ -9,7 +9,7 @@ test_that("roclet_clean", {
     suppressMessages(roxygenise(roclets = "doctest::dt_roclet"))
   }
 
-  expect_no_error(
+  expect_message(
     roclet_clean(dt_roclet(), ".")
   )
 

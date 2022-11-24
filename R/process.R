@@ -212,7 +212,6 @@ top_and_tail <- function (test) {
 test_file_contents <- function (result) {
   test_file_name <- test_file_name(result)
   lines <- doctest_stamp()
-  rel_path <- file.path("tests", "testthat", test_file_name)
   source_path <- file.path("R", result$file)
   lines <- c(lines, sprintf("# Please edit file in %s", source_path))
 

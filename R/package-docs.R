@@ -170,4 +170,3 @@ NULL
 #' @name pause-tag
 #' @aliases @pause @resume resume-tag
 NULL
-

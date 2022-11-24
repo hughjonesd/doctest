@@ -15,7 +15,7 @@
 #' pal_letters <- p |>
 #'   tolower() |>
 #'   (\(x) gsub("[^A-z]", "", x))() |>
-#'   strsplit() |>
+#'   strsplit("") |>
 #'   unlist()
 #' @expectRaw equal(pal_letters, rev(pal_letters))
 palindrome <- function () {
