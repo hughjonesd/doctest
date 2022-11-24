@@ -188,17 +188,22 @@
 <span><span class="co">#' @expectRaw equal(x, 4)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="skiptest-and-resumetest">
-<code>@skipTest</code> and <code>@resumeTest</code>
-<a class="anchor" aria-label="anchor" href="#skiptest-and-resumetest"></a>
+<h3 id="pause-and-resume">
+<code>@pause</code> and <code>@resume</code>
+<a class="anchor" aria-label="anchor" href="#pause-and-resume"></a>
 </h3>
-<p>By default, the doctest uses the whole example. <code>@skipTest</code> omits lines of the example from the test until the next expectation or other tag. You can use <code>@resumeTest</code> to stop omitting lines without creating a new expectation.</p>
+<p>By default, the doctest uses the whole example. <code>@pause</code> stops including the example in the doctest until the next expectation or other tag. You can use <code>@resume</code> to restart including lines without creating a new expectation.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' myfunc(1)</span></span>
-<span><span class="co">#' @skipTest</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' @pause</span></span>
 <span><span class="co">#' # No need to test plotting</span></span>
 <span><span class="co">#' plot(1:10, my_func(1:10))</span></span>
-<span><span class="co">#' @resumeTest</span></span></code></pre></div>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' @resume</span></span>
+<span><span class="co">#' x &lt;- NA</span></span>
+<span><span class="co">#' @expect warning()</span></span>
+<span><span class="co">#' myfunc(x)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
