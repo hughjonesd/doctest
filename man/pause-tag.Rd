@@ -4,6 +4,7 @@
 \alias{pause-tag}
 \alias{@pause}
 \alias{@resume}
+\alias{resume-tag}
 \title{Exclude example code from a test}
 \description{
 \verb{@pause} excludes code from a test until the next tag.
@@ -12,7 +13,7 @@ Use \verb{@resume} to restart including code without creating an expectation.
 \details{
 Use \verb{@pause} to avoid redundant or noisy code:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest
 #'
 #' @expect equal(0)
 #' sin(0)

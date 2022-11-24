@@ -10,7 +10,7 @@
 \details{
 Use \verb{@expect} to create a testthat expectation.
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest
 #'
 #' @expect equals(4)
 #' 2 + 2

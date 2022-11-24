@@ -11,7 +11,7 @@
 \verb{@expectRaw} creates a testthat expectation. Unlike \link{@expect}, it doesn't
 insert the next expression:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @examples
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest
 #'
 #'x <- 2 + 2
 #' @expectRaw equals(x, 4)
