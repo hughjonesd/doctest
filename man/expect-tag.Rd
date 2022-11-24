@@ -32,3 +32,9 @@ place or places, use a dot \code{.}:
 c("T", "E", "N", "E", "T")
 }\if{html}{\out{</div>}}
 }
+\seealso{
+Other Expectations: 
+\code{\link{expectRaw-tag}},
+\code{\link{snap-tag}}
+}
+\concept{Expectations}

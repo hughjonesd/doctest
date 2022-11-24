@@ -57,13 +57,14 @@ NULL
 #'
 #' @name expect-tag
 #' @aliases @expect
+#' @family Expectations
 NULL
 
 
 
 #' Create a snapshot test
 #'
-#' `@test` creates a
+#' `@snap` creates a
 #' [snapshot test](https://testthat.r-lib.org/articles/snapshotting.html)
 #' for your example. It is shorthand for `@expect snapshot()`.
 #'
@@ -80,6 +81,7 @@ NULL
 #'
 #' @name snap-tag
 #' @aliases @snap
+#' @family Expectations
 NULL
 
 
@@ -103,6 +105,7 @@ NULL
 #'
 #' @name expectRaw-tag
 #' @aliases @expectRaw
+#' @family Expectations
 NULL
 
 

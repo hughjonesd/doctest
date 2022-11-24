@@ -22,3 +22,9 @@ insert the next expression:
 
 Don't include the \code{expect_} prefix.
 }
+\seealso{
+Other Expectations: 
+\code{\link{expect-tag}},
+\code{\link{snap-tag}}
+}
+\concept{Expectations}

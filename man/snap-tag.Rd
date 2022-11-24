@@ -5,7 +5,7 @@
 \alias{@snap}
 \title{Create a snapshot test}
 \description{
-\verb{@test} creates a
+\verb{@snap} creates a
 \href{https://testthat.r-lib.org/articles/snapshotting.html}{snapshot test}
 for your example. It is shorthand for \verb{@expect snapshot()}.
 }
@@ -21,3 +21,9 @@ the new output.
 #' summary(lm(Petal.Width ~ Species, data = iris))
 }\if{html}{\out{</div>}}
 }
+\seealso{
+Other Expectations: 
+\code{\link{expect-tag}},
+\code{\link{expectRaw-tag}}
+}
+\concept{Expectations}
