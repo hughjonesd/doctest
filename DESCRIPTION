@@ -16,9 +16,9 @@ Imports:
     pkgload,
     purrr,
     rlang,
-    roxygen2
+    roxygen2,
+    testthat
 Suggests:
-    testthat,
     lifecycle
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
