@@ -15,6 +15,15 @@ roxy_tag_parse.roxy_tag_expect <- function (x) {
 
 
 #' @export
+roxy_tag_parse.roxy_tag_snap <- function (x) {
+  x <- strip_first_line(x)
+  x$doctest_expect <- "snapshot()"
+
+  x
+}
+
+
+#' @export
 roxy_tag_parse.roxy_tag_expectRaw <- function (x) {
   x <- strip_first_line(x, first_line_name = "expect_raw")
   if (is.null(x$doctest_expect_raw) || x$doctest_expect_raw == "") {
@@ -83,6 +92,10 @@ roxy_tag_rd.roxy_tag_expect <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
+roxy_tag_rd.roxy_tag_snap <- roxy_tag_rd.roxy_tag_doctest
+
+
+#' @export
 roxy_tag_rd.roxy_tag_expectRaw <- roxy_tag_rd.roxy_tag_doctest
 
 
@@ -122,20 +135,3 @@ format.rd_section_doctest <- function (x, ...) {
     return(rd)
   }
 }
-
-
-
-# THE PROBLEM
-# ===========
-# - if roxy_tag_rd returns an rd_section("examples"),
-#   - then it gets merged nicely with the real @examples section...
-#   - BUT any tags that aren't at top level cause a "mismatched braces"
-#     error or similar, and we get no example section in the Rd
-# - if roxy_tag_rd returns its own kind of rd_section(),
-#   - then we can merge all the sections nicely with each other...
-#   - BUT they dont' get merged with the real examples section
-#
-# One radical solution is to *replace* the @examples tag with a doctest
-# tag. This then does all the work. It might seem a bit scary to people?
-# But it would allow for use of ordinary tags in the middle of the prose
-# and we'd cut down on the crap...!

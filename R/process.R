@@ -28,7 +28,8 @@ roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
 
 
 build_result_from_block <- function (block) {
-  if (! roxygen2::block_has_tags(block, c("expect", "expectRaw", "doctest"))) {
+  if (! roxygen2::block_has_tags(block,
+          c("doctest", "expect", "expectRaw", "snap"))) {
     return(NULL)
   }
 
@@ -41,7 +42,7 @@ build_result_from_block <- function (block) {
   }
 
   tags <- roxygen2::block_get_tags(block, c("doctest", "expect", "expectRaw",
-                                            "pause", "resume"))
+                                            "snap", "pause", "resume"))
 
   result <- structure(list(tests = list(), has_expectation = FALSE),
                       class = "doctest_result")
@@ -137,6 +138,10 @@ add_tag_to_test.roxy_tag_expect <- function (tag, test, ...) {
 
   test
 }
+
+
+add_tag_to_test.roxy_tag_snap <- add_tag_to_test.roxy_tag_expect
+
 
 add_tag_to_test.roxy_tag_expectRaw <- function (tag, test, ...) {
   # we put the expectation back, because we have to get rid of

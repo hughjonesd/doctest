@@ -129,7 +129,7 @@ package DESCRIPTION file.
 
 ## doctest tags
 
-The doctest package adds five tags to roxygen:
+The doctest package adds these tags to roxygen:
 
 ### `@doctest`
 
@@ -203,6 +203,12 @@ expression:
 #' @expectRaw equal(x, 4)
 ```
 
+### `@snap`
+
+`@snap` is shorthand for `@expect snapshot()`. This creates a [snapshot
+test](https://testthat.r-lib.org/articles/snapshotting.html), which is
+useful for checking that complex examples haven’t changed.
+
 ### `@pause` and `@resume`
 
 By default, the doctest uses the whole example. `@pause` stops including
@@ -238,11 +244,11 @@ user. I like the following advice:
 In particular, use doctest as an *addition* to manually created tests,
 not a *substitute* for them. Use doctest for relatively simple tests of
 basic functionality. If it’s hard to specify what to test for, consider
-using `testthat::expect_snapshot()` to capture output. For more complex
-test cases, write a test file manually.
+using `@snap` to capture output. For more complex test cases, write a
+test file manually.
 
 ``` r
-#' @expect snapshot()
+#' @snap
 summary(model)
 ```
 
