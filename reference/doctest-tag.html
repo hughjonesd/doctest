@@ -47,6 +47,9 @@
 <a href="expect-tag.html">@expect</a> and <a href="expectRaw-tag.html">@expectRaw</a> tags beneath it to create expectations.</p>
 <p>You can have more than one <code>@doctest</code> tag. Each doctest will create
 a new test, but they will all be merged into a single Rd example.</p>
+<p>A test will only be written if your <code>@doctest</code> section has some
+expectations in it. This lets you change <code>@examples</code> to <code>@doctest</code> without
+generating unexpected tests.</p>
 <p>By default, a test labelled "Example: &lt;object name&gt;" is created. You
 can put a different label after <code>@doctest</code>:</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' @doctest Positive numbers</span></span>
