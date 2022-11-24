@@ -125,9 +125,9 @@
 <span>                       remote <span class="op">=</span> <span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>In your roxygen documentation, replace <code>@examples</code> by <code>@doctest</code>.</p></li>
-<li><p>In the package directory run <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html" class="external-link">roxygen2::roxygenize()</a></code> or <code>devtools::document()</code> to create documentation. You will see new files labelled <code>test-doctest-&lt;topic&gt;.R</code> in the <code>tests/testthat</code> directory. You should also see Rd files created as normal in the <code>man/</code> directory, including <code>\examples</code> sections.</p></li>
+<li><p>In the package directory run <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html" class="external-link">roxygen2::roxygenize()</a></code> or <code>devtools::document()</code> to create documentation. You should see Rd files created as normal in the <code>man/</code> directory, including <code>\examples</code> sections.</p></li>
 <li><p>Add <code>@expect</code> tags to your <code>@doctest</code> sections.</p></li>
-<li><p>Run <code>roxygenize()</code> again. Your tests will be recreated with new expectations.</p></li>
+<li><p>Run <code>roxygenize()</code> again. You will now see new files created in the <code>tests/testthat</code> directory, with the name <code>test-doctest-&lt;topic name&gt;.R</code>.</p></li>
 <li><p>Run <code>devtools::test()</code> and check that your tests pass.</p></li>
 </ol>
 <p>At present, you can’t use doctest from the RStudio keyboard shortcut <code>Ctrl + Shift + D</code>, because this always uses the standard roxygen2 roclets. However, you can bind the RStudio addin “Devtools: document a package” to a keyboard shortcut. This will use the roclets from your package DESCRIPTION file.</p>
