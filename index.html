@@ -135,7 +135,7 @@
 <div class="section level2">
 <h2 id="doctest-tags">doctest tags<a class="anchor" aria-label="anchor" href="#doctest-tags"></a>
 </h2>
-<p>The doctest package adds five tags to roxygen:</p>
+<p>The doctest package adds these tags to roxygen:</p>
 <div class="section level3">
 <h3 id="doctest-1">
 <code>@doctest</code><a class="anchor" aria-label="anchor" href="#doctest-1"></a>
@@ -188,6 +188,12 @@
 <span><span class="co">#' @expectRaw equal(x, 4)</span></span></code></pre></div>
 </div>
 <div class="section level3">
+<h3 id="snap">
+<code>@snap</code><a class="anchor" aria-label="anchor" href="#snap"></a>
+</h3>
+<p><code>@snap</code> is shorthand for <code>@expect snapshot()</code>. This creates a <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="external-link">snapshot test</a>, which is useful for checking that complex examples haven’t changed.</p>
+</div>
+<div class="section level3">
 <h3 id="pause-and-resume">
 <code>@pause</code> and <code>@resume</code>
 <a class="anchor" aria-label="anchor" href="#pause-and-resume"></a>
@@ -214,9 +220,9 @@
 <p>… write the best possible documentation, and [R] makes sure the code samples in your documentation actually compile and run [and do what they are supposed to do]</p>
 </blockquote>
 <p><em>Programming Rust</em>, Blandy, Orendorff and Tindall, 2021</p>
-<p>In particular, use doctest as an <em>addition</em> to manually created tests, not a <em>substitute</em> for them. Use doctest for relatively simple tests of basic functionality. If it’s hard to specify what to test for, consider using <code><a href="https://testthat.r-lib.org/reference/expect_snapshot.html" class="external-link">testthat::expect_snapshot()</a></code> to capture output. For more complex test cases, write a test file manually.</p>
+<p>In particular, use doctest as an <em>addition</em> to manually created tests, not a <em>substitute</em> for them. Use doctest for relatively simple tests of basic functionality. If it’s hard to specify what to test for, consider using <code>@snap</code> to capture output. For more complex test cases, write a test file manually.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @expect snapshot()</span></span>
+<code class="sourceCode R"><span><span class="co">#' @snap</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
