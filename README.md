@@ -109,15 +109,15 @@ usethis::use_dev_package("doctest", type = "Suggests",
 2.  In your roxygen documentation, replace `@examples` by `@doctest`.
 
 3.  In the package directory run `roxygen2::roxygenize()` or
-    `devtools::document()` to create documentation. You will see new
-    files labelled `test-doctest-<topic>.R` in the `tests/testthat`
-    directory. You should also see Rd files created as normal in the
-    `man/` directory, including `\examples` sections.
+    `devtools::document()` to create documentation. You should see Rd
+    files created as normal in the `man/` directory, including
+    `\examples` sections.
 
 4.  Add `@expect` tags to your `@doctest` sections.
 
-5.  Run `roxygenize()` again. Your tests will be recreated with new
-    expectations.
+5.  Run `roxygenize()` again. You will now see new files created in the
+    `tests/testthat` directory, with the name
+    `test-doctest-<topic name>.R`.
 
 6.  Run `devtools::test()` and check that your tests pass.
 

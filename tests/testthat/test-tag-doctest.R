@@ -39,8 +39,9 @@ test_that("empty test", {
                  NULL
                 " |> dedent()
   results <- roc_proc_text(dt_roclet(), test_empty)
-  expect_snapshot_output(
-    roclet_output(dt_roclet(), results)
+  expect_output(
+    roclet_output(dt_roclet(), results),
+    NA  # no output
   )
 })
 
