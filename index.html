@@ -22,7 +22,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
     
     <a class="navbar-brand me-2" href="index.html">doctest</a>
 
@@ -36,6 +36,9 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
+  <a class="nav-link" href="articles/doctest.html">Get started</a>
+</li>
+<li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
       </ul>
@@ -43,7 +46,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/hughjonesd/doctest/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -51,10 +61,13 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="doctest">doctest<a class="anchor" aria-label="anchor" href="#doctest"></a>
+<div class="page-header"><h1 id="doctest">Doctest<a class="anchor" aria-label="anchor" href="#doctest"></a>
 </h1></div>
 <!-- badges: start -->
 
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>Documentation examples and tests are similar in some ways:</p>
 <ul>
 <li><p>They are self-contained pieces of code.</p></li>
@@ -63,6 +76,7 @@
 </ul>
 <p>This similarity makes it attractive to use “doctests”, which combine tests and documentation. Indeed, several languages, including Python and Rust, have doctests built in.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;a href="https://docs.python.org/3/library/doctest.html" class="external-link uri"&gt;https://docs.python.org/3/library/doctest.html&lt;/a&gt;, &lt;a href="https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html" class="external-link uri"&gt;https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a> R also checks for errors in examples when running <code>R CMD check</code>.</p>
 <p>The doctest package extends this idea. It lets you write <a href="https://testthat.r-lib.org/" class="external-link">testthat</a> tests, by adding tags to your <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen</a> documentation. This helps you check that your examples do what they are supposed to do.</p>
+</div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
@@ -114,126 +128,20 @@
 <p>You can install the development version of doctest like this:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
-<p>Here’s a simple workflow to start using doctest:</p>
-<ol style="list-style-type: decimal">
-<li>Alter your package DESCRIPTION to add the <code>doctest</code> roclet to roxygen:</li>
-</ol>
-<!-- --><div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Roxygen<span class="sc">:</span> <span class="fu">list</span>(<span class="at">roclets =</span> <span class="fu">c</span>(<span class="st">"collate"</span>, <span class="st">"rd"</span>, <span class="st">"namespace"</span>, <span class="st">"doctest::dt_roclet"</span>)) </span></code></pre></div>
-<p>You can also add <code>doctest</code> as a dependency:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_dev_package</span><span class="op">(</span><span class="st">"doctest"</span>, type <span class="op">=</span> <span class="st">"Suggests"</span>, </span>
-<span>                       remote <span class="op">=</span> <span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
-<ol start="2" style="list-style-type: decimal">
-<li><p>In your roxygen documentation, replace <code>@examples</code> by <code>@doctest</code>.</p></li>
-<li><p>In the package directory run <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html" class="external-link">roxygen2::roxygenize()</a></code> or <code>devtools::document()</code> to create documentation. You should see Rd files created as normal in the <code>man/</code> directory, including <code>\examples</code> sections.</p></li>
-<li><p>Add <code>@expect</code> tags to your <code>@doctest</code> sections.</p></li>
-<li><p>Run <code>roxygenize()</code> again. You will now see new files created in the <code>tests/testthat</code> directory, with the name <code>test-doctest-&lt;topic name&gt;.R</code>.</p></li>
-<li><p>Run <code>devtools::test()</code> and check that your tests pass.</p></li>
-</ol>
-<p>At present, you can’t use doctest from the RStudio keyboard shortcut <code>Ctrl + Shift + D</code>, because this always uses the standard roxygen2 roclets. However, you can bind the RStudio addin “Devtools: document a package” to a keyboard shortcut. This will use the roclets from your package DESCRIPTION file.</p>
-</div>
-<div class="section level2">
-<h2 id="doctest-tags">doctest tags<a class="anchor" aria-label="anchor" href="#doctest-tags"></a>
-</h2>
-<p>The doctest package adds these tags to roxygen:</p>
-<div class="section level3">
-<h3 id="doctest-1">
-<code>@doctest</code><a class="anchor" aria-label="anchor" href="#doctest-1"></a>
-</h3>
-<p>Use <code>@doctest</code> instead of <code>@examples</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @doctest</span></span>
-<span><span class="co">#' </span></span>
-<span><span class="co">#' # ... examples for your function</span></span></code></pre></div>
-<p>The content of <code>@doctest</code> will be used in the .Rd “examples” section, and in a testthat test.</p>
-<p>You can have more than one <code>@doctest</code> section. Each section creates one test like <code>test_that("Test name", {...})</code>. You can name the doctest, or leave it blank for a default name. All the sections will be merged into a single .Rd example.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @doctest Positive numbers</span></span>
-<span><span class="co">#' x &lt;- 1</span></span>
-<span><span class="co">#' @expect equal(x)</span></span>
-<span><span class="co">#' abs(x)</span></span>
-<span><span class="co">#'</span></span>
-<span><span class="co">#' @doctest Negative numbers</span></span>
-<span><span class="co">#' x &lt;- -1</span></span>
-<span><span class="co">#' @expect equal(-x)</span></span>
-<span><span class="co">#' abs(x)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="expect">
-<code>@expect</code><a class="anchor" aria-label="anchor" href="#expect"></a>
-</h3>
-<p><code>@expect</code> writes a testthat expectation.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @expect equal(4)</span></span>
-<span><span class="co">#' 2 + 2</span></span></code></pre></div>
-<p>You can use any <code>expect_*</code> function from <code>testthat</code>. Omit the <code>expect_</code> at the start of the call.</p>
-<p>The expression on the next line will be substituted as the first argument into the <code>expect</code> call:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">expect_equal</span><span class="op">(</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p>Use a dot <code>.</code> to substitute in different places:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @expect equal(., rev(.))</span></span>
-<span><span class="co">#' c("T", "E", "N", "E", "T")</span></span></code></pre></div>
-<p>becomes:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">expect_equal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"E"</span>, <span class="st">"N"</span>, <span class="st">"E"</span>, <span class="st">"T"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"E"</span>, <span class="st">"N"</span>, <span class="st">"E"</span>, <span class="st">"T"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="expectraw">
-<code>@expectRaw</code><a class="anchor" aria-label="anchor" href="#expectraw"></a>
-</h3>
-<p><code>@expectRaw</code> writes an expectation, without substituting the next expression:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' x &lt;- 2 + 2</span></span>
-<span><span class="co">#' @expectRaw equal(x, 4)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="snap">
-<code>@snap</code><a class="anchor" aria-label="anchor" href="#snap"></a>
-</h3>
-<p><code>@snap</code> is shorthand for <code>@expect snapshot()</code>. This creates a <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="external-link">snapshot test</a>, which is useful for checking that complex examples haven’t changed.</p>
-</div>
-<div class="section level3">
-<h3 id="omit-and-resume">
-<code>@omit</code> and <code>@resume</code>
-<a class="anchor" aria-label="anchor" href="#omit-and-resume"></a>
-</h3>
-<p>By default, the doctest uses the whole example. <code>@omit</code> stops including the example in the doctest until the next expectation or other tag. You can use <code>@resume</code> to restart including lines without creating a new expectation.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' myfunc(1)</span></span>
-<span><span class="co">#' </span></span>
-<span><span class="co">#' @omit</span></span>
-<span><span class="co">#' # No need to test plotting</span></span>
-<span><span class="co">#' plot(1:10, my_func(1:10))</span></span>
-<span><span class="co">#' </span></span>
-<span><span class="co">#' @resume</span></span>
-<span><span class="co">#' x &lt;- NA</span></span>
-<span><span class="co">#' @expect warning()</span></span>
-<span><span class="co">#' myfunc(x)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="writing-good-doctests">Writing good doctests<a class="anchor" aria-label="anchor" href="#writing-good-doctests"></a>
-</h2>
-<p>Tests and documentation are similar, but not identical. Tests need to cover difficult corner cases. Examples need to convey the basics to the user. I like the following advice:</p>
-<blockquote>
-<p>… write the best possible documentation, and [R] makes sure the code samples in your documentation actually compile and run [and do what they are supposed to do]</p>
-</blockquote>
-<p><em>Programming Rust</em>, Blandy, Orendorff and Tindall, 2021</p>
-<p>In particular, use doctest as an <em>addition</em> to manually created tests, not a <em>substitute</em> for them. Use doctest for relatively simple tests of basic functionality. If it’s hard to specify what to test for, consider using <code>@snap</code> to capture output. For more complex test cases, write a test file manually.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @snap</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="related-packages">Related packages<a class="anchor" aria-label="anchor" href="#related-packages"></a>
-</h2>
-<p>The <a href="https://mikldk.github.io/roxytest/" class="external-link">roxytest</a> and <a href="https://github.com/bryanhanson/roxut" class="external-link">roxut</a> packages both allow you to write tests in roxygen blocks. Doctest is slightly different because it combines tests with examples. The <a href="https://github.com/rorynolan/exampletestr/" class="external-link">exampletestr</a> package uses roxygen examples to generate a test skeleton which you can fill in yourself.</p>
+<p>For more information, see the <a href="https://hughjonesd.github.io/doctest/docs/articles/doctest.html">package vignette</a>.</p>
 </div>
 </div>
 
 
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/hughjonesd/doctest/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/hughjonesd/doctest/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

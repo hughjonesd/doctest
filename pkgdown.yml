@@ -1,8 +1,9 @@
 pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-11-25T08:12Z
+articles:
+  doctest: doctest.html
+last_built: 2022-11-25T18:55Z
 urls:
   reference: https://hughjonesd.github.io/doctest/reference
   article: https://hughjonesd.github.io/doctest/articles
