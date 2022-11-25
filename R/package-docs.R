@@ -20,7 +20,6 @@
 #'
 #' Doctest is `r lifecycle::badge("experimental")`.
 #'
-#' @keywords internal
 "_PACKAGE"
 
 ## usethis namespace: start

@@ -39,7 +39,7 @@ Here's a simple workflow to start using doctest:
         "doctest::dt_roclet")) 
     ```
     
-  You can also add `doctest` as a dependency:
+    You can also add `doctest` as a dependency:
 
     ```r
     usethis::use_dev_package("doctest", type = "Suggests", 
