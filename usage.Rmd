@@ -15,12 +15,12 @@ To use doctest in your package, alter its DESCRIPTION file to add the
 
     ```r
     Roxygen: list(roclets = c("collate", "rd", "namespace", 
-        "doctest::dt_roclet")) 
+                  "doctest::dt_roclet")) 
     ```
     
 Add doctest to "Suggests" as a dependency:
 
     ```r
     usethis::use_dev_package("doctest", type = "Suggests", 
-                           remote = "hughjonesd/doctest")
+                             remote = "hughjonesd/doctest")
     ```
