@@ -22,13 +22,13 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
-```{r, child="intro.Rmd"}
+```{r, child="vignettes/intro.Rmd"}
 ```
 
-```{r, child="example.Rmd"}
+```{r, child="vignettes/example.Rmd"}
 ```
 
-```{r, child="usage.Rmd"}
+```{r, child="vignettes/usage.Rmd"}
 ```
 
 For more information, see the [package vignette](https://hughjonesd.github.io/doctest/articles/doctest.html). 
