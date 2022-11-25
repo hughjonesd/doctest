@@ -82,6 +82,7 @@ Doctest is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#
 Useful links:
 \itemize{
   \item \url{https://hughjonesd.github.io/doctest/}
+  \item Report bugs at \url{https://github.com/hughjonesd/doctest/issues}
 }
 
 }
@@ -89,4 +90,3 @@ Useful links:
 \strong{Maintainer}: David Hugh-Jones \email{davidhughjones@gmail.com}
 
 }
-\keyword{internal}
