@@ -40,7 +40,7 @@ Here's a simple workflow to start using doctest:
     ```
     
   You can also add `doctest` as a dependency:
-  
+
     ```r
     usethis::use_dev_package("doctest", type = "Suggests", 
                            remote = "hughjonesd/doctest")
