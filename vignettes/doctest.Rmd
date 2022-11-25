@@ -21,13 +21,13 @@ knitr::opts_chunk$set(
 
 # Introduction to doctest
 
-```{r, child="../intro.Rmd"}
+```{r, child="../man/rmd/intro.Rmd"}
 ```
 
-```{r, child="../example.Rmd"}
+```{r, child="../man/rmd/example.Rmd"}
 ```
 
-```{r, child="../usage.Rmd"}
+```{r, child="../man/rmd/usage.Rmd"}
 ```
 
 Here's a simple workflow to start using doctest:

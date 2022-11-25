@@ -10,3 +10,5 @@
 ^pkgdown$
 ^example\.Rmd$
 ^example\.md$
+^doc$
+^Meta$

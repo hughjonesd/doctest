@@ -3,10 +3,10 @@
 #' Doctest lets you combine tests and examples. For more information, see
 #' [@doctest] and [@expect].
 #'
-#' ```{r child = "vignettes/example.Rmd"}
+#' ```{r child = "man/rmd/example.Rmd"}
 #' ```
 #'
-#' ```{r child = "vignettes/usage.Rmd"}
+#' ```{r child = "man/rmd/usage.Rmd"}
 #' ```
 #'
 #' Then run [roxygen2::roxygenize()] or [devtools::document()] from the
