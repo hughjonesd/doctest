@@ -65,9 +65,6 @@
 </h1></div>
 <!-- badges: start -->
 
-<div class="section level2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
 <p>Documentation examples and tests are similar in some ways:</p>
 <ul>
 <li><p>They are self-contained pieces of code.</p></li>
@@ -76,7 +73,6 @@
 </ul>
 <p>This similarity makes it attractive to use “doctests”, which combine tests and documentation. Indeed, several languages, including Python and Rust, have doctests built in.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;a href="https://docs.python.org/3/library/doctest.html" class="external-link uri"&gt;https://docs.python.org/3/library/doctest.html&lt;/a&gt;, &lt;a href="https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html" class="external-link uri"&gt;https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a> R also checks for errors in examples when running <code>R CMD check</code>.</p>
 <p>The doctest package extends this idea. It lets you write <a href="https://testthat.r-lib.org/" class="external-link">testthat</a> tests, by adding tags to your <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen</a> documentation. This helps you check that your examples do what they are supposed to do.</p>
-</div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
@@ -128,7 +124,7 @@
 <p>You can install the development version of doctest like this:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
-<p>For more information, see the <a href="https://hughjonesd.github.io/doctest/docs/articles/doctest.html">package vignette</a>.</p>
+<p>For more information, see the <a href="https://hughjonesd.github.io/doctest/articles/doctest.html">package vignette</a>.</p>
 </div>
 </div>
 
