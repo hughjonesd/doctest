@@ -152,12 +152,12 @@ safe_mean(c(1, NA))
 <code>dt_roclet</code> roclet to roxygen:</p>
 <pre><code>```r
 Roxygen: list(roclets = c("collate", "rd", "namespace", 
-    "doctest::dt_roclet")) 
+              "doctest::dt_roclet")) 
 ```</code></pre>
 <p>Add doctest to “Suggests” as a dependency:</p>
 <pre><code>```r
 usethis::use_dev_package("doctest", type = "Suggests", 
-                       remote = "hughjonesd/doctest")
+                         remote = "hughjonesd/doctest")
 ```</code></pre>
 <p>Here’s a simple workflow to start using doctest:</p>
 <ol style="list-style-type: decimal">
