@@ -90,6 +90,21 @@ You can install the development version of doctest like this:
 devtools::install("hughjonesd/doctest")
 ```
 
+To use doctest in your package, alter its DESCRIPTION file to add the
+`dt_roclet` roclet to roxygen:
+
+    ```r
+    Roxygen: list(roclets = c("collate", "rd", "namespace", 
+        "doctest::dt_roclet")) 
+    ```
+
+Add doctest to “Suggests” as a dependency:
+
+    ```r
+    usethis::use_dev_package("doctest", type = "Suggests", 
+                           remote = "hughjonesd/doctest")
+    ```
+
 For more information, see the [package
 vignette](https://hughjonesd.github.io/doctest/articles/doctest.html).
 
