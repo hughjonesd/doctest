@@ -31,5 +31,5 @@ knitr::opts_chunk$set(
 ```{r, child="usage.Rmd"}
 ```
 
-For more information, see the [package vignette](https://hughjonesd.github.io/doctest/docs/articles/doctest.html). 
+For more information, see the [package vignette](https://hughjonesd.github.io/doctest/articles/doctest.html). 
 

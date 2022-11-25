@@ -10,8 +10,6 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-## Introduction
-
 Documentation examples and tests are similar in some ways:
 
 - They are self-contained pieces of code.
@@ -93,7 +91,7 @@ devtools::install("hughjonesd/doctest")
 ```
 
 For more information, see the [package
-vignette](https://hughjonesd.github.io/doctest/docs/articles/doctest.html).
+vignette](https://hughjonesd.github.io/doctest/articles/doctest.html).
 
 [^1]: <https://docs.python.org/3/library/doctest.html>,
     <https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html>
