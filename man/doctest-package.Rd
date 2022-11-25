@@ -9,8 +9,7 @@
 Doctest lets you combine tests and examples. For more information, see
 \link{@doctest} and \link{@expect}.
 }
-\section{Example}{
-
+\details{
 \subsection{Example}{
 
 Here's some \href{https://roxygen2.r-lib.org}{roxygen} documentation for a function:
@@ -62,14 +61,27 @@ safe_mean("a")
 safe_mean(c(1, NA))
 \}
 }\if{html}{\out{</div>}}
+}
 
-To use doctest in your package, add
+\subsection{Usage}{
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet"))
+You can install the development version of doctest like this:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{devtools::install("hughjonesd/doctest")
 }\if{html}{\out{</div>}}
 
-to the DESCRIPTION file. You may also optionally
-add doctest to your 'Suggests:' dependencies.
+To use doctest in your package, alter its DESCRIPTION file to add the
+\code{dt_roclet} roclet to roxygen:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{Roxygen: list(roclets = c("collate", "rd", "namespace", 
+              "doctest::dt_roclet")) 
+}\if{html}{\out{</div>}}
+
+Add doctest to "Suggests" as a dependency:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{usethis::use_dev_package("doctest", type = "Suggests", 
+                         remote = "hughjonesd/doctest")
+}\if{html}{\out{</div>}}
 
 Then run \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} or \code{\link[devtools:document]{devtools::document()}} from the
 command line.
@@ -77,7 +89,6 @@ command line.
 Doctest is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}.
 }
 }
-
 \seealso{
 Useful links:
 \itemize{

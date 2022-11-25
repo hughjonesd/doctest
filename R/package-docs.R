@@ -3,15 +3,11 @@
 #' Doctest lets you combine tests and examples. For more information, see
 #' [@doctest] and [@expect].
 #'
-#' ```{r child = "example.Rmd"}
+#' ```{r child = "vignettes/example.Rmd"}
 #' ```
 #'
-#' To use doctest in your package, add
-#' ```r
-#' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet"))
+#' ```{r child = "vignettes/usage.Rmd"}
 #' ```
-#' to the DESCRIPTION file. You may also optionally
-#' add doctest to your 'Suggests:' dependencies.
 #'
 #' Then run [roxygen2::roxygenize()] or [devtools::document()] from the
 #' command line.
@@ -158,6 +154,11 @@ NULL
 #'     #'
 #'     #' @expect equal(1)
 #'     #' cos(0)
+#'
+#' `@omit` is separate from `\donttest` and `\dontrun` tags in Rd files. This
+#' allows you to test code that would cause an error if run by R CMD CHECK. If
+#' you also want R CMD CHECK to skip your code, you should use `\donttest{}`
+#' separately (see [writing R extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files)).
 #'
 #' Remember that the main purpose of examples is to document your package for
 #' your users. If your code is getting too different from your example, consider
