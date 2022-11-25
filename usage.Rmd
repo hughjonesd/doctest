@@ -1,0 +1,11 @@
+---
+output: github_document
+---
+
+## Usage
+
+You can install the development version of doctest like this:
+
+``` r
+devtools::install("hughjonesd/doctest")
+```

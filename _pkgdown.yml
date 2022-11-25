@@ -1,4 +1,5 @@
 url: https://hughjonesd.github.io/doctest/
 template:
   bootstrap: 5
+  bootswatch: flatly
 

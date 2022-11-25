@@ -19,7 +19,11 @@ Imports:
     roxygen2,
     testthat
 Suggests:
-    lifecycle
+    knitr,
+    lifecycle,
+    rmarkdown
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
 URL: https://hughjonesd.github.io/doctest/
+BugReports: https://github.com/hughjonesd/doctest/issues
+VignetteBuilder: knitr

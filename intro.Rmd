@@ -1,0 +1,25 @@
+---
+output: github_document
+---
+
+
+Documentation examples and tests are similar in some ways:
+
+* They are self-contained pieces of code. 
+
+* They should cover the software's most important functions and typical uses. 
+
+* They should be simple and clear: complex examples are hard for users to
+  understand, and complex test code can introduce testing bugs. 
+  
+This similarity makes it attractive to use "doctests", which combine
+tests and documentation. Indeed, several languages, including Python and Rust,
+have doctests built in.[^1] R also checks for errors in examples when running `R
+CMD check`.
+
+[^1]: https://docs.python.org/3/library/doctest.html,
+https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html
+
+The doctest package extends this idea. It lets you write [testthat](https://testthat.r-lib.org/) tests,
+by adding tags to your [roxygen](https://roxygen2.r-lib.org/) documentation.
+This helps you check that your examples do what they are supposed to do.
