@@ -194,15 +194,15 @@
 <p><code>@snap</code> is shorthand for <code>@expect snapshot()</code>. This creates a <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="external-link">snapshot test</a>, which is useful for checking that complex examples haven’t changed.</p>
 </div>
 <div class="section level3">
-<h3 id="pause-and-resume">
-<code>@pause</code> and <code>@resume</code>
-<a class="anchor" aria-label="anchor" href="#pause-and-resume"></a>
+<h3 id="omit-and-resume">
+<code>@omit</code> and <code>@resume</code>
+<a class="anchor" aria-label="anchor" href="#omit-and-resume"></a>
 </h3>
-<p>By default, the doctest uses the whole example. <code>@pause</code> stops including the example in the doctest until the next expectation or other tag. You can use <code>@resume</code> to restart including lines without creating a new expectation.</p>
+<p>By default, the doctest uses the whole example. <code>@omit</code> stops including the example in the doctest until the next expectation or other tag. You can use <code>@resume</code> to restart including lines without creating a new expectation.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' myfunc(1)</span></span>
 <span><span class="co">#' </span></span>
-<span><span class="co">#' @pause</span></span>
+<span><span class="co">#' @omit</span></span>
 <span><span class="co">#' # No need to test plotting</span></span>
 <span><span class="co">#' plot(1:10, my_func(1:10))</span></span>
 <span><span class="co">#' </span></span>
