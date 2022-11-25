@@ -3,7 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   doctest: doctest.html
-last_built: 2022-11-25T19:18Z
+last_built: 2022-11-25T19:41Z
 urls:
   reference: https://hughjonesd.github.io/doctest/reference
   article: https://hughjonesd.github.io/doctest/articles

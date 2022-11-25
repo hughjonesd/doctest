@@ -54,11 +54,10 @@
 
 
     <div class="section level2">
-    <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a></h2>
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     
-
 <div class="section">
-<h3 id="example-1">Example<a class="anchor" aria-label="anchor" href="#example-1"></a></h3>
+<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a></h3>
 
 
 <p>Here's some <a href="https://roxygen2.r-lib.org" class="external-link">roxygen</a> documentation for a function:</p>
@@ -101,10 +100,21 @@
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">safe_mean</span>(<span class="st">"a"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">safe_mean</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>))</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre><p></p></div>
-<p>To use doctest in your package, add</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">Roxygen</span><span class="op">:</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>roclets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"collate"</span>, <span class="st">"rd"</span>, <span class="st">"namespace"</span>, <span class="st">"doctest::dt_roclet"</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
-<p>to the DESCRIPTION file. You may also optionally
-add doctest to your 'Suggests:' dependencies.</p>
+</div>
+
+<div class="section">
+<h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h3>
+
+
+<p>You can install the development version of doctest like this:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>To use doctest in your package, alter its DESCRIPTION file to add the
+<code>dt_roclet</code> roclet to roxygen:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">Roxygen</span><span class="op">:</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>roclets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"collate"</span>, <span class="st">"rd"</span>, <span class="st">"namespace"</span>, </span>
+<span>              <span class="st">"doctest::dt_roclet"</span><span class="op">)</span><span class="op">)</span> </span></code></pre><p></p></div>
+<p>Add doctest to "Suggests" as a dependency:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_dev_package</span><span class="op">(</span><span class="st">"doctest"</span>, type <span class="op">=</span> <span class="st">"Suggests"</span>, </span>
+<span>                         remote <span class="op">=</span> <span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Then run <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html" class="external-link">roxygen2::roxygenize()</a></code> or <code>devtools::document()</code> from the
 command line.</p>
 <p>Doctest is <a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>.</p>
