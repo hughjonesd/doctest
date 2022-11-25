@@ -6,7 +6,7 @@ output: github_document
 
 You can install the development version of doctest like this:
 
-``` r
+```r
 devtools::install("hughjonesd/doctest")
 ```
 

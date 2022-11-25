@@ -44,7 +44,6 @@ or `devtools::document()` to create documentation. You should see Rd files creat
 5. Run `roxygenize()` again. You will now see new files created in 
 the `tests/testthat` directory, with the name `test-doctest-<topic name>.R`.
 
-
 6. Run `devtools::test()` and check that your tests pass. 
 
 At present, you can't use doctest from the RStudio keyboard shortcut
