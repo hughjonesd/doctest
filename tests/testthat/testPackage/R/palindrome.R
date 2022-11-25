@@ -9,7 +9,7 @@
 #' @doctest
 #' p <- palindrome()
 #' @expectRaw match(p, "Panama")
-#' @pause
+#' @omit
 #' print(p)
 #' @resume
 #' pal_letters <- p |>

@@ -43,7 +43,7 @@ roxy_tag_parse.roxy_tag_doctest <- function (x) {
 
 
 #' @export
-roxy_tag_parse.roxy_tag_pause <- function (x) {
+roxy_tag_parse.roxy_tag_omit <- function (x) {
   x <- strip_first_line(x)
 
   x
@@ -100,7 +100,7 @@ roxy_tag_rd.roxy_tag_expectRaw <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
-roxy_tag_rd.roxy_tag_pause <- roxy_tag_rd.roxy_tag_doctest
+roxy_tag_rd.roxy_tag_omit <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export

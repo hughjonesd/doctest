@@ -170,16 +170,16 @@ expect_equal(c("T", "E", "N", "E", "T"), rev(c("T", "E", "N", "E", "T")))
 which is useful for checking that complex examples haven't changed.
 
 
-### `@pause` and `@resume`
+### `@omit` and `@resume`
 
-By default, the doctest uses the whole example. `@pause` stops including the
+By default, the doctest uses the whole example. `@omit` stops including the
 example in the doctest until the next expectation or other tag. You can use
 `@resume` to restart including lines without creating a new expectation.
 
 ```r
 #' myfunc(1)
 #' 
-#' @pause
+#' @omit
 #' # No need to test plotting
 #' plot(1:10, my_func(1:10))
 #' 

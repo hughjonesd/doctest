@@ -209,9 +209,9 @@ expression:
 test](https://testthat.r-lib.org/articles/snapshotting.html), which is
 useful for checking that complex examples haven’t changed.
 
-### `@pause` and `@resume`
+### `@omit` and `@resume`
 
-By default, the doctest uses the whole example. `@pause` stops including
+By default, the doctest uses the whole example. `@omit` stops including
 the example in the doctest until the next expectation or other tag. You
 can use `@resume` to restart including lines without creating a new
 expectation.
@@ -219,7 +219,7 @@ expectation.
 ``` r
 #' myfunc(1)
 #' 
-#' @pause
+#' @omit
 #' # No need to test plotting
 #' plot(1:10, my_func(1:10))
 #' 

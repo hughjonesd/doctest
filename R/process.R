@@ -42,7 +42,7 @@ build_result_from_block <- function (block) {
   }
 
   tags <- roxygen2::block_get_tags(block, c("doctest", "expect", "expectRaw",
-                                            "snap", "pause", "resume"))
+                                            "snap", "omit", "resume"))
 
   result <- structure(list(tests = list(), has_expectation = FALSE),
                       class = "doctest_result")
@@ -161,7 +161,7 @@ add_tag_to_test.roxy_tag_doctest <- function (tag, test, ...) {
 }
 
 
-add_tag_to_test.roxy_tag_pause <- function (tag, test, ...) {
+add_tag_to_test.roxy_tag_omit <- function (tag, test, ...) {
   test
 }
 

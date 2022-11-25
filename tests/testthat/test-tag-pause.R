@@ -3,11 +3,11 @@ library(roxygen2)
 dedent <- function (x) gsub("\n\\s+", "\n", x)
 
 
-test_that("@pause", {
+test_that("@omit", {
   skip_test <- "
                #' @doctest
                #' a <- 1
-               #' @pause
+               #' @omit
                #'
                #' a <- 2
                #' @resume
