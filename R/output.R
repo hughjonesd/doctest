@@ -12,10 +12,7 @@ roclet_output.roclet_doctest <- function (x, results, base_path, ...) {
     old_filenames <- setdiff(old_filenames, filenames)
     old_filepaths <- file.path(package_test_path(base_path), old_filenames)
     old_filepaths <- purrr::keep(old_filepaths, made_by_doctest)
-    for (path in old_filepaths) {
-      cli::cli_inform("Deleting {.file {basename(path)}}")
-      unlink(path)
-    }
+    warn_and_unlink(old_filepaths)
   }
 }
 
@@ -25,10 +22,14 @@ roclet_clean.roclet_doctest <- function (x, base_path) {
   test_files <- doctest_test_files(base_path)
   test_filepaths <- file.path(package_test_path(base_path), test_files)
   test_filepaths <- purrr::keep(test_filepaths, made_by_doctest)
+  warn_and_unlink(test_filepaths)
+}
 
-  for (path in test_filepaths) {
+
+warn_and_unlink <- function (paths) {
+  for (path in paths) {
     cli::cli_inform("Deleting {.file {basename(path)}}")
-    unlink(test_filepaths)
+    unlink(path)
   }
 }
 

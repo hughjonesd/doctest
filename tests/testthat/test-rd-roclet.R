@@ -85,7 +85,7 @@ test_that("rd_roclet output", {
   expect_snapshot_file(file.path("man", "safe_mean.Rd"),
                        compare = compare_file_text)
 
-  expect_snapshot_file(file.path("man", "safe_mean.Rd"),
+  expect_snapshot_file(file.path("man", "palindrome.Rd"),
                        compare = compare_file_text)
 })
 

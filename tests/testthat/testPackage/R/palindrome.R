@@ -21,3 +21,13 @@
 palindrome <- function () {
    "A man, a plan, a canal - Panama"
 }
+
+
+#' @export
+#' @rdname palindrome
+#' @doctest palindrome_letters
+#' @expect equal(., rev(.))
+#' tenet <- palindrome_letters()
+palindrome_letters <- function () {
+  c("t", "e", "n", "e", "t")
+}
