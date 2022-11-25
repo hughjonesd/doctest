@@ -128,7 +128,7 @@ Use a dot `.` to substitute in different places:
 #' c("T", "E", "N", "E", "T")
 ```
 
-becomes:
+This becomes:
 
 ```r
 expect_equal(c("T", "E", "N", "E", "T"), rev(c("T", "E", "N", "E", "T")))
