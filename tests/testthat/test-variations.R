@@ -51,6 +51,21 @@ test_that("assignment", {
 
 
 
+test_that("assignment with dot", {
+  assignment_dot_expectation <- "
+                                 #' @doctest
+                                 #' @expect equal(x <- ., rev(x))
+                                 #' c('t', 'e', 'n', 'e', 't')
+                                 NULL
+                                " |> dedent()
+
+  results <- roc_proc_text(dt_roclet(), assignment_dot_expectation)
+  expect_snapshot_output(
+    roclet_output(dt_roclet(), results)
+  )
+})
+
+
 test_that("comment", {
   comment_expectation <- "
                           #' @doctest
