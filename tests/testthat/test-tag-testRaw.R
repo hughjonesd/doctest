@@ -4,10 +4,12 @@ library(roxygen2)
 dedent <- function (x) gsub("\n\\s+", "\n", x)
 
 
-test_that("@expectRaw", {
+test_that("@testRaw", {
   raw_expectation <- "
                       #' @doctest
-                      #' @expectRaw equal(2 + 2, 4)
+                      #' @testRaw skip_on_cran()
+                      #' @expect error()
+                      #' stop(\"Argh, CRAN won't like it\")
                       NULL
                      " |> dedent()
   results <- roc_proc_text(dt_roclet(), raw_expectation)
@@ -15,3 +17,4 @@ test_that("@expectRaw", {
     roclet_output(dt_roclet(), results)
   )
 })
+

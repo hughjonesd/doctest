@@ -42,7 +42,7 @@ build_result_from_block <- function (block) {
   }
 
   tags <- roxygen2::block_get_tags(block, c("doctest", "expect", "expectRaw",
-                                            "snap", "omit", "resume"))
+                                           "testRaw", "snap", "omit", "resume"))
 
   result <- structure(list(tests = list(), has_expectation = FALSE),
                       class = "doctest_result")
@@ -151,6 +151,14 @@ add_tag_to_test.roxy_tag_expectRaw <- function (tag, test, ...) {
   test$lines <- c(test$lines, expect_line)
   test <- add_lines_to_test(tag, test)
   test$has_expectation <- TRUE
+
+  test
+}
+
+
+add_tag_to_test.roxy_tag_testRaw <- function (tag, test, ...) {
+  test$lines <- c(test$lines, tag$doctest_test_raw)
+  test <- add_lines_to_test(tag, test)
 
   test
 }

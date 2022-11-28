@@ -35,6 +35,19 @@ roxy_tag_parse.roxy_tag_expectRaw <- function (x) {
 
 
 #' @export
+roxy_tag_parse.roxy_tag_testRaw <- function (x) {
+  x <- strip_first_line(x, first_line_name = "test_raw")
+  if (is.null(x$doctest_test_raw) || x$doctest_test_raw == "") {
+    roxygen2::warn_roxy_tag(x, c("has no content",
+                                 i = "Add R code on the same line as @testRaw.")
+                            )
+  }
+
+  x
+}
+
+
+#' @export
 roxy_tag_parse.roxy_tag_doctest <- function (x) {
   x <- strip_first_line(x, first_line_name = "test_name")
 
@@ -97,6 +110,10 @@ roxy_tag_rd.roxy_tag_snap <- roxy_tag_rd.roxy_tag_doctest
 
 #' @export
 roxy_tag_rd.roxy_tag_expectRaw <- roxy_tag_rd.roxy_tag_doctest
+
+
+#' @export
+roxy_tag_rd.roxy_tag_testRaw <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
