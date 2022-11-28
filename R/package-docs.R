@@ -21,6 +21,40 @@
 NULL
 
 
+#' Start a doctest
+#'
+#' `@doctest` starts a doctest.
+#'
+#' @details
+#' Use `@doctest` where you would usually use `@examples`. Then add
+#' [@expect] and [@expectRaw] tags beneath it to create expectations.
+#'
+#' You can have more than one `@doctest` tag. Each doctest will create
+#' a new test, but they will all be merged into a single Rd example.
+#'
+#' A test will only be written if your `@doctest` section has at least one
+#' [@expect] or [@expectRaw] in it. This lets you change `@examples` to
+#' `@doctest` without generating unexpected tests.
+#'
+#' By default, a test labelled "Example: &lt;object name&gt;" is created. You
+#' can put a different label after `@doctest`:
+#'
+#'     #' @doctest Positive numbers
+#'     #'
+#'     #' x <- 1
+#'     #' @expect equal(x)
+#'     #' abs(x)
+#'     #'
+#'     #' @doctest Negative numbers
+#'     #' x <- -1
+#'     #' @expect equal(-x)
+#'     #' abs(x)
+#
+#' @name doctest-tag
+#' @aliases @doctest
+NULL
+
+
 #' Create an expectation
 #'
 #' `@expect` creates an expectation for your example code.
@@ -54,7 +88,6 @@ NULL
 NULL
 
 
-
 #' Create a snapshot test
 #'
 #' `@snap` creates a
@@ -76,7 +109,6 @@ NULL
 #' @aliases @snap
 #' @family Expectations
 NULL
-
 
 
 #' Add a line of code to the test
@@ -128,40 +160,6 @@ NULL
 #' @name expectRaw-tag
 #' @aliases @expectRaw
 #' @family Expectations
-NULL
-
-
-#' Start a  doctest
-#'
-#' `@doctest` starts a doctest.
-#'
-#' @details
-#' Use `@doctest` where you would usually use `@examples`. Then add
-#' [@expect] and [@expectRaw] tags beneath it to create expectations.
-#'
-#' You can have more than one `@doctest` tag. Each doctest will create
-#' a new test, but they will all be merged into a single Rd example.
-#'
-#' A test will only be written if your `@doctest` section has some
-#' expectations in it. This lets you change `@examples` to `@doctest` without
-#' generating unexpected tests.
-#'
-#' By default, a test labelled "Example: &lt;object name&gt;" is created. You
-#' can put a different label after `@doctest`:
-#'
-#'     #' @doctest Positive numbers
-#'     #'
-#'     #' x <- 1
-#'     #' @expect equal(x)
-#'     #' abs(x)
-#'     #'
-#'     #' @doctest Negative numbers
-#'     #' x <- -1
-#'     #' @expect equal(-x)
-#'     #' abs(x)
-#
-#' @name doctest-tag
-#' @aliases @doctest
 NULL
 
 
