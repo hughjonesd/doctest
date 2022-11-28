@@ -26,5 +26,6 @@ pal_letters <- p |>
   unlist()
 
 
+
 tenet <- palindrome_letters()
 }
