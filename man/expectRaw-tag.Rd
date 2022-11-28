@@ -5,11 +5,12 @@
 \alias{@expectRaw}
 \title{Create an expectation as-is}
 \description{
-\verb{@expect} creates an expectation for your example code.
+\verb{@expectRaw} creates an expectation for your example code, without adding
+the next expression as the subject.
 }
 \details{
 \verb{@expectRaw} creates a testthat expectation. Unlike \link{@expect}, it doesn't
-insert the next expression:
+insert the following expression inside the expectation:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest
 #'
