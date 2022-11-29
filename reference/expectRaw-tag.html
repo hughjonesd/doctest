@@ -43,7 +43,7 @@ the next expression as the subject."><!-- mathjax --><script src="https://cdnjs.
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Create an expectation as-is</h1>
-      <small class="dont-index">Source: <a href="https://github.com/hughjonesd/doctest/blob/HEAD/R/package-docs.R" class="external-link"><code>R/package-docs.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hughjonesd/doctest/blob/HEAD/R/docs.R" class="external-link"><code>R/docs.R</code></a></small>
       <div class="d-none name"><code>expectRaw-tag.Rd</code></div>
     </div>
 
@@ -55,8 +55,9 @@ the next expression as the subject.</p>
 
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>@expectRaw</code> creates a testthat expectation. Unlike <a href="expect-tag.html">@expect</a>, it doesn't
-insert the following expression inside the expectation:</p>
+    <p><code>@expectRaw</code> creates a <a href="https://testthat.r-lib.org/reference/testthat-package.html" class="external-link">testthat</a> expectation.
+Unlike <a href="expect-tag.html">@expect</a>, it doesn't insert the subsequent expression as the first
+argument.</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' @doctest</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#'x &lt;- 2 + 2</span></span>
