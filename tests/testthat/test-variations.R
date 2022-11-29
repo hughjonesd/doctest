@@ -117,8 +117,7 @@ test_that("Multiple @doctest tags, invalid syntax", {
                         NULL
                        " |> dedent()
 
-  results <- roc_proc_text(dt_roclet(), bad_multi_doctest)
-  expect_snapshot_output(
-    roclet_output(dt_roclet(), results)
+  expect_error(
+    roc_proc_text(dt_roclet(), bad_multi_doctest)
   )
 })

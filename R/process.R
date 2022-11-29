@@ -94,7 +94,7 @@ test_name <- function (tag, result) {
   # works with NULL and character(0):
   test_name <- paste(tag$doctest_test_name, collapse = "")
   if (test_name == "") {
-    sprintf("Example: %s", result$object)
+    sprintf("Doctest: %s", result$object)
   } else {
     test_name
   }
