@@ -100,3 +100,25 @@ test_that("Multiple @doctest tags", {
     roclet_output(dt_roclet(), results)
   )
 })
+
+
+
+test_that("Multiple @doctest tags, invalid syntax", {
+  bad_multi_doctest <- "
+                        #' @doctest
+                        #' if (TRUE) {
+                        #' @expect equal(4)
+                        #' 2 + 2
+                        #' } else {
+                        #' @doctest
+                        #' @expect equal(4)
+                        #' 2 + 2
+                        #' }
+                        NULL
+                       " |> dedent()
+
+  results <- roc_proc_text(dt_roclet(), bad_multi_doctest)
+  expect_snapshot_output(
+    roclet_output(dt_roclet(), results)
+  )
+})

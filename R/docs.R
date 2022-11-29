@@ -29,13 +29,6 @@ NULL
 #' Use `@doctest` where you would usually use `@examples`. Then add
 #' [@expect] and [@expectRaw] tags beneath it to create expectations.
 #'
-#' You can have more than one `@doctest` tag. Each doctest will create
-#' a new test, but they will all be merged into a single Rd example.
-#'
-#' A test will only be written if your `@doctest` section has at least one
-#' [@expect] or [@expectRaw] in it. This lets you change `@examples` to
-#' `@doctest` without generating unexpected tests.
-#'
 #' By default, a test labelled "Example: &lt;object name&gt;" is created. You
 #' can put a different label after `@doctest`:
 #'
@@ -49,7 +42,25 @@ NULL
 #'     #' x <- -1
 #'     #' @expect equal(-x)
 #'     #' abs(x)
-#
+#'
+#' You can have more than one `@doctest` tag in a roxygen block. Each doctest
+#' will create a new test, but they will all be merged into a single Rd example.
+#' Each doctest must contain an independent unit of code. For example, this
+#' won't work:
+#'
+#'     #' @doctest Test x
+#'     #' @expect equal(2)
+#'     #' x <- 1 + 1
+#'     #'
+#'     #' @doctest Keep testing x
+#'     #' @expect equal(4)
+#'     #' x^2
+#'     #' # Test will error, because `x` has not been defined here
+#'
+#' A test will only be written if the `@doctest` section has at least one
+#' [@expect] or [@expectRaw] in it. This lets you change `@examples` to
+#' `@doctest` in your code, without generating unexpected tests.
+#'
 #' @name doctest-tag
 #' @aliases @doctest
 NULL
