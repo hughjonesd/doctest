@@ -1,8 +1,4 @@
 
-library(roxygen2)
-dedent <- function (x) gsub("\n\\s+", "\n", x)
-
-# donttest/run/show
 
 test_that("@examples tag", {
   examples_expectation <- "
@@ -18,7 +14,6 @@ test_that("@examples tag", {
     results <- roc_proc_text(dt_roclet(), examples_expectation)
   }, "@examples")
 })
-
 
 
 test_that("Tags outside @doctest", {

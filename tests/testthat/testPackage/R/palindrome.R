@@ -26,7 +26,7 @@ palindrome <- function () {
 #' @export
 #' @rdname palindrome
 #' @doctest palindrome_letters
-#' @testRaw skip_on_cran("Would take too long to run")
+#' @testRaw skip_on_cran()
 #' @expect equal(., rev(.))
 #' tenet <- palindrome_letters()
 palindrome_letters <- function () {

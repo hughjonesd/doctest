@@ -1,9 +1,5 @@
 
 
-library(roxygen2)
-dedent <- function (x) gsub("\n\\s+", "\n", x)
-
-
 test_that("@doctest", {
     test_ex <- "
                 #' @doctest is 1 1?

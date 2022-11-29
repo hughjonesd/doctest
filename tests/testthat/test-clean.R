@@ -1,5 +1,4 @@
 
-library(roxygen2)
 
 test_that("roclet_clean", {
   setwd("testPackage")
