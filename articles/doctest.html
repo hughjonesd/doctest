@@ -254,9 +254,8 @@ test</a>, which is useful for checking that complex examples haven’t
 changed.</p>
 </div>
 <div class="section level4">
-<h4 id="testraw-omit-and-resume">
-<code>@testRaw</code>, <code>@omit</code> and
-<code>@resume</code><a class="anchor" aria-label="anchor" href="#testraw-omit-and-resume"></a>
+<h4 id="testraw">
+<code>@testRaw</code><a class="anchor" aria-label="anchor" href="#testraw"></a>
 </h4>
 <p><code>@testRaw</code> adds an arbitrary line of code to your
 test:</p>
@@ -268,6 +267,11 @@ test:</p>
 <p>Tests are only written if they contain at least one
 <code>@expect</code> or <code>@expectRaw</code> tag, so use those tags
 to create expectations, not <code>@testRaw</code>.</p>
+</div>
+<div class="section level4">
+<h4 id="omit-and-resume">
+<code>@omit</code> and <code>@resume</code><a class="anchor" aria-label="anchor" href="#omit-and-resume"></a>
+</h4>
 <p>While <code>@testRaw</code> includes a line of code in the test but
 not the example, <code>@omit</code> does the opposite: it includes all
 following code in the example but not the test. You can use
