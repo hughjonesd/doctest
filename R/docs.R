@@ -23,7 +23,8 @@ NULL
 
 #' Start a doctest
 #'
-#' `@doctest` starts a doctest.
+#' `@doctest` starts a doctest: a code example that also contains one or more
+#' [testthat][testthat::testthat-package] expectations.
 #'
 #' @details
 #' Use `@doctest` where you would usually use `@examples`. Then add
@@ -71,7 +72,7 @@ NULL
 #' `@expect` creates an expectation for your example code.
 #'
 #' @details
-#' Use `@expect` to create a testthat expectation.
+#' Use `@expect` to create a [testthat][testthat::testthat-package] expectation.
 #'
 #'     #' @doctest
 #'     #'
@@ -124,14 +125,13 @@ NULL
 
 #' Add a line of code to the test
 #'
-#' `@testRaw` creates an expectation for your example code.
+#' `@testRaw` adds an arbitrary line of code to your test, without including it
+#' in the .Rd example.
 #'
 #' @details
-#' `@testRaw` adds an arbitrary line of code to your test.
+#' `@testRaw` adds an arbitrary line of code to your test:
 #'
 #'     #' @doctest
-#'     #'
-#'     #'x <- 2 + 2
 #'     #' @testRaw skip_on_cran("This code will take too long")
 #'     #' @expect equal(55)
 #'     #' fibonacci(10)
@@ -155,8 +155,9 @@ NULL
 #' the next expression as the subject.
 #'
 #' @details
-#' `@expectRaw` creates a testthat expectation. Unlike [@expect], it doesn't
-#' insert the following expression inside the expectation:
+#' `@expectRaw` creates a [testthat][testthat::testthat-package] expectation.
+#' Unlike [@expect], it doesn't insert the subsequent expression as the first
+#' argument.
 #'
 #'     #' @doctest
 #'     #'
@@ -176,7 +177,7 @@ NULL
 
 #' Exclude example code from a test
 #'
-#' `@omit` excludes code from a test until the next tag.
+#' `@omit` excludes example code from a test until the next tag.
 #' Use `@resume` to restart including code without creating an expectation.
 #'
 #' @details

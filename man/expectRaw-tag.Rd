@@ -9,8 +9,9 @@
 the next expression as the subject.
 }
 \details{
-\verb{@expectRaw} creates a testthat expectation. Unlike \link{@expect}, it doesn't
-insert the following expression inside the expectation:
+\verb{@expectRaw} creates a \link[testthat:testthat-package]{testthat} expectation.
+Unlike \link{@expect}, it doesn't insert the subsequent expression as the first
+argument.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest
 #'

@@ -7,7 +7,7 @@
 \alias{resume-tag}
 \title{Exclude example code from a test}
 \description{
-\verb{@omit} excludes code from a test until the next tag.
+\verb{@omit} excludes example code from a test until the next tag.
 Use \verb{@resume} to restart including code without creating an expectation.
 }
 \details{

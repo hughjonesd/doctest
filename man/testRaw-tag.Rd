@@ -5,14 +5,13 @@
 \alias{@testRaw}
 \title{Add a line of code to the test}
 \description{
-\verb{@testRaw} creates an expectation for your example code.
+\verb{@testRaw} adds an arbitrary line of code to your test, without including it
+in the .Rd example.
 }
 \details{
-\verb{@testRaw} adds an arbitrary line of code to your test.
+\verb{@testRaw} adds an arbitrary line of code to your test:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest
-#'
-#'x <- 2 + 2
 #' @testRaw skip_on_cran("This code will take too long")
 #' @expect equal(55)
 #' fibonacci(10)

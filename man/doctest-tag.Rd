@@ -5,7 +5,8 @@
 \alias{@doctest}
 \title{Start a doctest}
 \description{
-\verb{@doctest} starts a doctest.
+\verb{@doctest} starts a doctest: a code example that also contains one or more
+\link[testthat:testthat-package]{testthat} expectations.
 }
 \details{
 Use \verb{@doctest} where you would usually use \verb{@examples}. Then add

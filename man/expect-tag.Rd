@@ -8,7 +8,7 @@
 \verb{@expect} creates an expectation for your example code.
 }
 \details{
-Use \verb{@expect} to create a testthat expectation.
+Use \verb{@expect} to create a \link[testthat:testthat-package]{testthat} expectation.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest
 #'
