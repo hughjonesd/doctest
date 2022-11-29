@@ -138,7 +138,7 @@ expect_equal(c("T", "E", "N", "E", "T"), rev(c("T", "E", "N", "E", "T")))
 which is useful for checking that complex examples haven't changed.
 
 
-### `@testRaw`, `@omit` and `@resume`
+### `@testRaw`
 
 `@testRaw` adds an arbitrary line of code to your test:
 
@@ -152,10 +152,13 @@ which is useful for checking that complex examples haven't changed.
 Tests are only written if they contain at least one `@expect` or 
 `@expectRaw` tag, so use those tags to create expectations, not `@testRaw`.
 
+
+### `@omit` and `@resume`
+
 While `@testRaw` includes a line of code in the test but not the example, 
 `@omit` does the opposite: it includes all following code in the example
-but not the test. You can use
-`@resume` to restart including lines without creating a new expectation.
+but not the test. You can use `@resume` to restart including lines without 
+creating a new expectation.
 
 ```r
 #' myfunc(1)
