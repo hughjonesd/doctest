@@ -1,23 +1,5 @@
 
 
-#' Create the doctest roclet
-#'
-#' You can use this in your package DESCRIPTION like this:
-#' ```r
-#' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet"))
-#' ```
-#'
-#' @return The doctest roclet
-#' @export
-#' @examples
-#' \dontrun{
-#' roxygen2::roxygenize(roclets = "doctest::dt_roclet")
-#' }
-dt_roclet <- function () {
-  roxygen2::roclet("doctest")
-}
-
-
 #' @export
 roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
   results <- lapply(blocks, build_result_from_block)

@@ -1,5 +1,23 @@
 
 
+#' Create the doctest roclet
+#'
+#' You can use this in your package DESCRIPTION like this:
+#' ```r
+#' Roxygen: list(roclets = c("collate", "rd", "namespace", "doctest::dt_roclet"))
+#' ```
+#'
+#' @return The doctest roclet
+#' @export
+#' @examples
+#' \dontrun{
+#' roxygen2::roxygenize(roclets = "doctest::dt_roclet")
+#' }
+dt_roclet <- function () {
+  roxygen2::roclet("doctest")
+}
+
+
 #' Test doctests in a package
 #'
 #' This is a utility function to run doctests in a local source package.
