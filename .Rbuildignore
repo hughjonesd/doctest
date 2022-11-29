@@ -12,3 +12,4 @@
 ^example\.md$
 ^doc$
 ^Meta$
+^codecov\.yml$

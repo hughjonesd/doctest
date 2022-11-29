@@ -8,6 +8,8 @@
 [![R-CMD-check](https://github.com/hughjonesd/doctest/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hughjonesd/doctest/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test
+coverage](https://codecov.io/gh/hughjonesd/doctest/branch/master/graph/badge.svg)](https://app.codecov.io/gh/hughjonesd/doctest?branch=master)
 <!-- badges: end -->
 
 Documentation examples and tests are similar in some ways:

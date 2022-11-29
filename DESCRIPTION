@@ -19,6 +19,7 @@ Imports:
     roxygen2,
     testthat
 Suggests:
+    covr,
     knitr,
     lifecycle,
     rmarkdown
