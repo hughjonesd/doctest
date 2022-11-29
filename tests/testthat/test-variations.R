@@ -30,6 +30,48 @@ test_that("Tags outside @doctest", {
 })
 
 
+test_that("Empty @expect tag", {
+  empty_expectation <- "
+                        #' @doctest
+                        #' @expect
+                        #' TRUE
+                        NULL
+                       " |> dedent()
+
+  expect_warning({
+    results <- roc_proc_text(dt_roclet(), empty_expectation)
+  }, "@expect")
+})
+
+
+test_that("Empty @expectRaw tag", {
+  empty_expectation <- "
+                        #' @doctest
+                        #' @expectRaw
+                        #' TRUE
+                        NULL
+                       " |> dedent()
+
+  expect_warning({
+    results <- roc_proc_text(dt_roclet(), empty_expectation)
+  }, "@expectRaw")
+})
+
+
+test_that("Empty @testRaw tag", {
+  empty_expectation <- "
+                        #' @doctest
+                        #' @testRaw
+                        #' TRUE
+                        NULL
+                       " |> dedent()
+
+  expect_warning({
+    results <- roc_proc_text(dt_roclet(), empty_expectation)
+  }, "@testRaw")
+})
+
+
 test_that("assignment", {
   assignment_expectation <- "
                              #' @doctest
