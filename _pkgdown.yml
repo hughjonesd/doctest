@@ -2,4 +2,16 @@ url: https://hughjonesd.github.io/doctest/
 template:
   bootstrap: 5
   bootswatch: flatly
+reference:
+- title: "Package overview"
+  contents:
+  - doctest-package
+- title: "Tags"
+  contents:
+  - starts_with("@")
+- title: "Functions"
+  contents:
+  - dt_roclet
+  - test_doctests
+
 

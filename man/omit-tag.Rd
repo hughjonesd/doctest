@@ -2,9 +2,9 @@
 % Please edit documentation in R/docs.R
 \name{omit-tag}
 \alias{omit-tag}
+\alias{resume-tag}
 \alias{@omit}
 \alias{@resume}
-\alias{resume-tag}
 \title{Exclude example code from a test}
 \description{
 \verb{@omit} excludes example code from a test until the next tag.
