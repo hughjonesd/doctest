@@ -9,7 +9,7 @@ Here's some [roxygen](https://roxygen2.r-lib.org) documentation for a function:
 ```r
 ```{r, echo = FALSE, results = "asis"}
 rox <- r"--[
-#' Fibonaccie 
+#' Fibonacci function 
 #' 
 #' @param n Integer
 #' @return The nth Fibonacci number

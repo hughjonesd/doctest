@@ -39,7 +39,7 @@ function:
 
 ``` r
 
-#' Fibonaccie 
+#' Fibonacci function 
 #' 
 #' @param n Integer
 #' @return The nth Fibonacci number
