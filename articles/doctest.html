@@ -101,24 +101,29 @@ do.</p>
 documentation for a function:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co">#' Safe mean</span></span>
+<span><span class="co">#' Fibonaccie </span></span>
 <span><span class="co">#' </span></span>
-<span><span class="co">#' @param x Numeric vector</span></span>
-<span><span class="co">#' @return The mean of `x`</span></span>
+<span><span class="co">#' @param n Integer</span></span>
+<span><span class="co">#' @return The nth Fibonacci number</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @doctest</span></span>
-<span><span class="co">#' @expect equal(2)</span></span>
-<span><span class="co">#' safe_mean(1:3)</span></span>
+<span><span class="co">#' n &lt;- 6 </span></span>
+<span><span class="co">#' @expect equal(8)</span></span>
+<span><span class="co">#' fib(n)</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @expect warning("not numeric")</span></span>
-<span><span class="co">#' safe_mean("a")</span></span>
+<span><span class="co">#' fib("a")</span></span>
 <span><span class="co">#'</span></span>
-<span><span class="co">#' @expect warning("NA elements")</span></span>
-<span><span class="co">#' safe_mean(c(1, NA))</span></span>
-<span><span class="va">safe_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"x is not numeric"</span><span class="op">)</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"x contains NA elements"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#' @expect warning("NA")</span></span>
+<span><span class="co">#' fib(NA)</span></span>
+<span><span class="va">fib</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"n is not numeric"</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"n is NA"</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fl">1</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="fu">fib</span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu">fib</span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Instead of an <code>@examples</code> section, we have a
 <code>@doctest</code> section.</p>
@@ -126,20 +131,22 @@ documentation for a function:</p>
 <pre><code><span><span class="co"># Generated by doctest: do not edit by hand</span></span>
 <span><span class="co"># Please edit file in R/&lt;text&gt;</span></span>
 <span></span>
-<span><span class="fu">test_that</span><span class="op">(</span><span class="st">"Doctest: safe_mean"</span>, <span class="op">{</span></span>
-<span>  <span class="co"># Created from @doctest for `safe_mean`</span></span>
+<span><span class="fu">test_that</span><span class="op">(</span><span class="st">"Doctest: fib"</span>, <span class="op">{</span></span>
+<span>  <span class="co"># Created from @doctest for `fib`</span></span>
 <span>  <span class="co"># Source file: &lt;text&gt;</span></span>
 <span>  <span class="co"># Source line: 7</span></span>
-<span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="fu">safe_mean</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span>  <span class="fu">expect_warning</span><span class="op">(</span><span class="fu">safe_mean</span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span>, <span class="st">"not numeric"</span><span class="op">)</span></span>
-<span>  <span class="fu">expect_warning</span><span class="op">(</span><span class="fu">safe_mean</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>, <span class="st">"NA elements"</span><span class="op">)</span></span>
+<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">6</span></span>
+<span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="fu">fib</span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, <span class="fl">8</span><span class="op">)</span></span>
+<span>  <span class="fu">expect_warning</span><span class="op">(</span><span class="fu">fib</span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span>, <span class="st">"not numeric"</span><span class="op">)</span></span>
+<span>  <span class="fu">expect_warning</span><span class="op">(</span><span class="fu">fib</span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>, <span class="st">"NA"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre>
 <p>The .Rd file will be created as normal, with an example section
 like:</p>
 <pre><code>\examples{
-safe_mean(1:3)
-safe_mean("a")
-safe_mean(c(1, NA))
+n &lt;- 6 
+fib(n)
+fib("a")
+fib(NA)
 }</code></pre>
 </div>
 <div class="section level3">
