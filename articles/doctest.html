@@ -117,13 +117,7 @@ documentation for a function:</p>
 <span><span class="co">#' @expect warning("NA")</span></span>
 <span><span class="co">#' fib(NA)</span></span>
 <span><span class="va">fib</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"n is not numeric"</span><span class="op">)</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"n is NA"</span><span class="op">)</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fl">1</span></span>
-<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="fu">fib</span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu">fib</span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
+<span>  <span class="va">...</span>  </span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Instead of an <code>@examples</code> section, we have a
 <code>@doctest</code> section.</p>
