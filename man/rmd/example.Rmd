@@ -25,13 +25,7 @@ rox <- r"--[
 #' @expect warning("NA")
 #' fib(NA)
 fib <- function (n) {
-  if (! is.numeric(n)) warning("n is not numeric")
-  if (is.na(n)) warning("n is NA")
-  if (n <= 2) {
-    1
-  } else {
-    fib(n - 1) + fib(n - 2)
-  }
+  ...  
 }
 ]--"
 cat(rox)
