@@ -149,10 +149,10 @@ which is useful for checking that complex examples haven't changed.
 `@testRaw` adds an arbitrary line of code to your test:
 
 ```r
-#' @testRaw skip_on_cran("This code will take too long")
-#' x <- 10
-#' @expect equal(55)
-#' fibonacci(x)
+#' @testRaw skip_on_cran("Takes too long to run")
+#' 
+#' @expect equal(6765)
+#' fib(20)
 ```
 
 Tests are only written if they contain at least one `@expect` or 
