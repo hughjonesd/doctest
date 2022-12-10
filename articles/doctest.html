@@ -107,6 +107,10 @@ documentation for a function:</p>
 <span><span class="co">#' @return The nth Fibonacci number</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @doctest</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @expect type("integer")</span></span>
+<span><span class="co">#' fib(2)</span></span>
+<span><span class="co">#'</span></span>
 <span><span class="co">#' n &lt;- 6 </span></span>
 <span><span class="co">#' @expect equal(8)</span></span>
 <span><span class="co">#' fib(n)</span></span>
@@ -117,7 +121,8 @@ documentation for a function:</p>
 <span><span class="co">#' @expect warning("NA")</span></span>
 <span><span class="co">#' fib(NA)</span></span>
 <span><span class="va">fib</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">...</span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"n is not numeric"</span><span class="op">)</span></span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Instead of an <code>@examples</code> section, we have a
 <code>@doctest</code> section.</p>
@@ -129,6 +134,7 @@ documentation for a function:</p>
 <span>  <span class="co"># Created from @doctest for `fib`</span></span>
 <span>  <span class="co"># Source file: &lt;text&gt;</span></span>
 <span>  <span class="co"># Source line: 7</span></span>
+<span>  <span class="fu">expect_type</span><span class="op">(</span><span class="fu">fib</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, <span class="st">"integer"</span><span class="op">)</span></span>
 <span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">6</span></span>
 <span>  <span class="fu">expect_equal</span><span class="op">(</span><span class="fu">fib</span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, <span class="fl">8</span><span class="op">)</span></span>
 <span>  <span class="fu">expect_warning</span><span class="op">(</span><span class="fu">fib</span><span class="op">(</span><span class="st">"a"</span><span class="op">)</span>, <span class="st">"not numeric"</span><span class="op">)</span></span>
@@ -137,6 +143,8 @@ documentation for a function:</p>
 <p>The .Rd file will be created as normal, with an example section
 like:</p>
 <pre><code>\examples{
+fib(2)
+
 n &lt;- 6 
 fib(n)
 fib("a")
@@ -160,6 +168,10 @@ fib(NA)
 <span>                         remote <span class="op">=</span> <span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
 <p>Then use <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html" class="external-link">roxygen2::roxygenize()</a></code> to build your package
 documentation.</p>
+</div>
+<div class="section level3">
+<h3 id="adding-doctests-to-your-package">Adding doctests to your package<a class="anchor" aria-label="anchor" href="#adding-doctests-to-your-package"></a>
+</h3>
 <p>Here’s a simple workflow to start using doctest:</p>
 <ol style="list-style-type: decimal">
 <li><p>Alter your package DESCRIPTION as above.</p></li>
