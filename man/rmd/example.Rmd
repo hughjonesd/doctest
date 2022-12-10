@@ -15,6 +15,10 @@ rox <- r"--[
 #' @return The nth Fibonacci number
 #' 
 #' @doctest
+#'
+#' @expect type("integer")
+#' fib(2)
+#'
 #' n <- 6 
 #' @expect equal(8)
 #' fib(n)
@@ -25,7 +29,8 @@ rox <- r"--[
 #' @expect warning("NA")
 #' fib(NA)
 fib <- function (n) {
-  ...  
+  if (! is.numeric(n)) warning("n is not numeric")
+  ...
 }
 ]--"
 cat(rox)

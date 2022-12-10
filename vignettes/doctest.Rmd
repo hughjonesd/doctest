@@ -30,6 +30,8 @@ knitr::opts_chunk$set(
 ```{r, child="../man/rmd/usage.Rmd"}
 ```
 
+## Adding doctests to your package
+
 Here's a simple workflow to start using doctest:
 
 1. Alter your package DESCRIPTION as above.
