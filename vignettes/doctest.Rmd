@@ -54,10 +54,16 @@ However, you can bind the RStudio addin "Devtools: document a package" to a
 keyboard shortcut. This will use the roclets from your package DESCRIPTION 
 file.
 
-You don't need to add doctest as a dependency to your package. You can
-use it to create help files and tests without it being installed for
-users. However, you may want to add it in `Suggests:` as a signpost to
-other people developing the package.
+You don't need to add doctest as a dependency to your package. Just like
+roxygen2 itself, you can use it to create help files and tests without it 
+being installed for users. However, you may wish to add it in `Suggests:`, 
+to help other developers working on the package:
+
+```r
+usethis::use_dev_package("doctest", type = "Suggests", 
+                         remote = "hughjonesd/doctest")
+```
+
 
 ## Tags
 

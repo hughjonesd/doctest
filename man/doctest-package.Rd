@@ -6,8 +6,9 @@
 \alias{doctest-package}
 \title{Write testthat tests and examples together}
 \description{
-Doctest lets you combine tests and examples. For more information, see
-\link{@doctest} and \link{@expect}.
+The doctest package lets you test the code in your "Examples"
+section in .Rd files. It uses the roxygen2 and testthat packages.
+For more information, see \link{@doctest} and \link{@expect}.
 }
 \details{
 \subsection{Example}{
@@ -86,17 +87,8 @@ To use doctest in your package, alter its DESCRIPTION file to add the
               "doctest::dt_roclet")) 
 }\if{html}{\out{</div>}}
 
-Optionally, add doctest to "Suggests" as a dependency:
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{usethis::use_dev_package("doctest", type = "Suggests", 
-                         remote = "hughjonesd/doctest")
-}\if{html}{\out{</div>}}
-
-Then use \code{roxygen2::roxygenize()} to build
+Then use \code{roxygen2::roxygenize()} or \code{devtools::document()} to build
 your package documentation.
-
-Then run \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}} or \code{\link[devtools:document]{devtools::document()}} from the
-command line.
 
 Doctest is \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}.
 }

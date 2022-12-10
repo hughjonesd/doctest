@@ -1,16 +1,14 @@
 #' Write testthat tests and examples together
 #'
-#' Doctest lets you combine tests and examples. For more information, see
-#' [@doctest] and [@expect].
+#' The doctest package lets you test the code in your "Examples" 
+#' section in .Rd files. It uses the roxygen2 and testthat packages.
+#' For more information, see [@doctest] and [@expect].
 #'
 #' ```{r child = "man/rmd/example.Rmd"}
 #' ```
 #'
 #' ```{r child = "man/rmd/usage.Rmd"}
 #' ```
-#'
-#' Then run [roxygen2::roxygenize()] or [devtools::document()] from the
-#' command line.
 #'
 #' Doctest is `r lifecycle::badge("experimental")`.
 #'

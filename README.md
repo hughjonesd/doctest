@@ -109,14 +109,8 @@ Roxygen: list(roclets = c("collate", "rd", "namespace",
               "doctest::dt_roclet")) 
 ```
 
-Optionally, add doctest to “Suggests” as a dependency:
-
-``` r
-usethis::use_dev_package("doctest", type = "Suggests", 
-                         remote = "hughjonesd/doctest")
-```
-
-Then use `roxygen2::roxygenize()` to build your package documentation.
+Then use `roxygen2::roxygenize()` or `devtools::document()` to build
+your package documentation.
 
 For more information, see the [package
 vignette](https://hughjonesd.github.io/doctest/articles/doctest.html).
