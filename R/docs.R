@@ -96,7 +96,7 @@ NULL
 #'
 #' @name expect-tag
 #' @aliases @expect
-#' @family Expectations
+#' @family expectations
 NULL
 
 
@@ -119,7 +119,7 @@ NULL
 #'
 #' @name snap-tag
 #' @aliases @snap
-#' @family Expectations
+#' @family expectations
 NULL
 
 
@@ -132,9 +132,9 @@ NULL
 #' `@testRaw` adds an arbitrary line of code to your test:
 #'
 #'     #' @doctest
-#'     #' @testRaw skip_on_cran("This code will take too long")
-#'     #' @expect equal(55)
-#'     #' fibonacci(10)
+#'     #' @testRaw skip_on_cran("Takes too long")
+#'     #' @expect equal(6765)
+#'     #' fibonacci(20)
 #'
 #' Unless your doctest has at least one [@expect] or [@expectRaw] tag, no test
 #' will be created. So use those tags, not `@testRaw`, to add expectations.
@@ -161,7 +161,7 @@ NULL
 #'
 #'     #' @doctest
 #'     #'
-#'     #'x <- 2 + 2
+#'     #' x <- 2 + 2
 #'     #' @expectRaw equals(x, 4)
 #'     #'
 #'     #' f <- function () warning("Watch out")
@@ -171,7 +171,7 @@ NULL
 #'
 #' @name expectRaw-tag
 #' @aliases @expectRaw
-#' @family Expectations
+#' @family expectations
 NULL
 
 
@@ -197,7 +197,8 @@ NULL
 #' `@omit` is separate from `\donttest` and `\dontrun` tags in Rd files. This
 #' allows you to test code that would cause an error if run by R CMD CHECK. If
 #' you also want R CMD CHECK to skip your code, you should use `\donttest{}`
-#' separately (see [writing R extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files)).
+#' separately (see 
+#' [writing R extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files)).
 #'
 #' Remember that the main purpose of examples is to document your package for
 #' your users. If your code is getting too different from your example, consider

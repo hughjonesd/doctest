@@ -12,9 +12,9 @@ in the .Rd example.
 \verb{@testRaw} adds an arbitrary line of code to your test:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest
-#' @testRaw skip_on_cran("This code will take too long")
-#' @expect equal(55)
-#' fibonacci(10)
+#' @testRaw skip_on_cran("Takes too long")
+#' @expect equal(6765)
+#' fibonacci(20)
 }\if{html}{\out{</div>}}
 
 Unless your doctest has at least one \link{@expect} or \link{@expectRaw} tag, no test

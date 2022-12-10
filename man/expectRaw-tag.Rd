@@ -15,7 +15,7 @@ argument.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#' @doctest
 #'
-#'x <- 2 + 2
+#' x <- 2 + 2
 #' @expectRaw equals(x, 4)
 #'
 #' f <- function () warning("Watch out")
@@ -25,8 +25,8 @@ argument.
 Don't include the \code{expect_} prefix.
 }
 \seealso{
-Other Expectations: 
+Other expectations: 
 \code{\link{expect-tag}},
 \code{\link{snap-tag}}
 }
-\concept{Expectations}
+\concept{expectations}

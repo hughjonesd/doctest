@@ -33,8 +33,8 @@ c("T", "E", "N", "E", "T")
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other Expectations: 
+Other expectations: 
 \code{\link{expectRaw-tag}},
 \code{\link{snap-tag}}
 }
-\concept{Expectations}
+\concept{expectations}

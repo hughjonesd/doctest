@@ -22,8 +22,8 @@ the new output.
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other Expectations: 
+Other expectations: 
 \code{\link{expect-tag}},
 \code{\link{expectRaw-tag}}
 }
-\concept{Expectations}
+\concept{expectations}

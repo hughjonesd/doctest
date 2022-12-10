@@ -28,7 +28,8 @@ Use \verb{@omit} to avoid redundant or noisy code:
 \verb{@omit} is separate from \verb{\donttest} and \verb{\dontrun} tags in Rd files. This
 allows you to test code that would cause an error if run by R CMD CHECK. If
 you also want R CMD CHECK to skip your code, you should use \verb{\donttest{}}
-separately (see \href{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files}{writing R extensions}).
+separately (see
+\href{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files}{writing R extensions}).
 
 Remember that the main purpose of examples is to document your package for
 your users. If your code is getting too different from your example, consider
