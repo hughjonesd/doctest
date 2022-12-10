@@ -1,4 +1,4 @@
-#' Write testthat tests and examples together
+#' Write testthat tests for your examples, using roxygen tags
 #'
 #' The doctest package lets you test the code in your "Examples" 
 #' section in .Rd files. It uses the roxygen2 and testthat packages.
