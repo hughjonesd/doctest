@@ -242,6 +242,11 @@ summary(model)
 
 For more complex test cases,  write a test file manually.
 
+You can see an example of using the doctest package "in production" at
+https://github.com/hughjonesd/onetime. In particular, see the commits adding
+doctest, 
+[starting here](https://github.com/hughjonesd/onetime/commit/1c6400cac3528c27ffd2d397250da527fa2dbf7d) and [finishing here](https://github.com/hughjonesd/onetime/commit/1c6400cac3528c27ffd2d397250da527fa2dbf7d).
+
 ## Related packages
 
 The [roxytest](https://mikldk.github.io/roxytest/) and

@@ -48,9 +48,7 @@ build_result_from_block <- function (block) {
       # we may add the @doctest tag to the test here
       test <- add_tag_to_test(tag, test)
     } else {
-      roxygen2::warn_roxy_tag(tag,
-                      c("cannot be used before a @doctest block",
-                        i = "Place a @doctest tag in your @examples section"))
+      roxygen2::warn_roxy_tag(tag, "cannot be used before a @doctest block")
     }
   }
   result <- process_test(test, result)
