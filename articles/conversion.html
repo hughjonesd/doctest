@@ -80,8 +80,6 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hughjonesd.github.io/doctest/">doctest</a></span><span class="op">)</span></span></code></pre></div>
 <p><a href="https://hughjonesd.github.io/doctest">Doctest</a> is an R
 package to let you write doctests. Doctests are chunks of code which act
 as both examples for your users, and tests of your package’s
@@ -96,7 +94,7 @@ roxygen. Both packages have documentation and tutorials elsewhere.</p>
 <h2 id="setting-up-doctest">Setting up doctest<a class="anchor" aria-label="anchor" href="#setting-up-doctest"></a>
 </h2>
 <p>My first step, obviously, was to install the doctest package:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
 <p>Doctest is not on CRAN yet, but don’t worry, because you don’t need
 to add it as a package dependency. You can just use it on your own
@@ -110,7 +108,7 @@ doctests in the <code>tests/testthat</code> directory, as well doing the
 usual roxygen tasks like writing .Rd files. I already had
 <code>tests/testthat</code> set up so I didn’t need to do anything more
 in this direction.</p>
-<p>One caveat: if you hit <code>Ctrl+Shift+D</code> in Rstudio, it won’t
+<p>One caveat: if you hit <code>Ctrl+Shift+D</code> in RStudio, it won’t
 run the doctest roclet. You need to type
 <code>devtools::document()</code> or <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html" class="external-link">roxygen2::roxygenize()</a></code>
 on the command line. Otherwise your doctest tags won’t be
@@ -128,81 +126,73 @@ difference to the output from <code>document()</code>.</p>
 <div class="section level4">
 <h4 id="before">Before<a class="anchor" aria-label="anchor" href="#before"></a>
 </h4>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @examples</span></span>
 <span><span class="co">#' oo &lt;- options(onetime.dir = tempdir(check = TRUE))</span></span>
 <span><span class="co">#' id &lt;- sample(10000L, 1)</span></span>
-<span><span class="co">#'</span></span>
-<span><span class="co">#' for (n in 1:3) {</span></span>
-<span><span class="co">#'   onetime_warning("will be shown once", id = id)</span></span>
-<span><span class="co">#' }</span></span>
-<span><span class="co">#'</span></span>
-<span><span class="co">#' onetime_reset(id = id)</span></span>
-<span><span class="co">#' options(oo)</span></span></code></pre></div>
+<span><span class="co">#' ...</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="after">After<a class="anchor" aria-label="anchor" href="#after"></a>
 </h4>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @doctest</span></span>
 <span><span class="co">#' oo &lt;- options(onetime.dir = tempdir(check = TRUE))</span></span>
 <span><span class="co">#' id &lt;- sample(10000L, 1)</span></span>
-<span><span class="co">#'</span></span>
-<span><span class="co">#' for (n in 1:3) {</span></span>
-<span><span class="co">#'   onetime_warning("will be shown once", id = id)</span></span>
-<span><span class="co">#' }</span></span>
-<span><span class="co">#'</span></span>
-<span><span class="co">#' onetime_reset(id = id)</span></span>
-<span><span class="co">#' options(oo)</span></span></code></pre></div>
+<span><span class="co">#' ...</span></span></code></pre></div>
 <p>Indeed, after I ran <code>devtools::document()</code>, my .Rd files
 were unchanged, apart from a few deleted empty lines in the examples. I
-thought these were unimportant, so I was now ready to make my first
-commit.</p>
-<p>At this stage, you might want to create a new branch with your
+judged that these were not important, so I made my first commit.</p>
+<p>At this stage, you might want to create a new branch for your
 commits, using <code>git branch</code> on the command line, or clicking
-the “new branch” button in RStudio’s git pane. I was gung ho, so I just
-put <a href="https://github.com/hughjonesd/onetime/commit/1c6400cac3528c27ffd2d397250da527fa2dbf7d?diff=split" class="external-link">my
+the “new branch” button in RStudio. I was gung ho, so I just put <a href="https://github.com/hughjonesd/onetime/commit/1c6400cac3528c27ffd2d397250da527fa2dbf7d?diff=split" class="external-link">my
 commit</a> on the master branch.</p>
-<p>I actually made one exception: I left the <code>@examples</code> tag
-unchanged in the <code>set_ok_to_store()</code> function. This is a
-function with side effects on the user’s installation; testing it needs
-to be done carefully. I thought that a doctest would not be the right
-approach here, so I left it as is.</p>
+<p>I made one exception: I left the <code>@examples</code> tag unchanged
+in the <code>set_ok_to_store()</code> function. This is a function with
+side effects on the user’s installation; testing it needs to be done
+carefully. I thought that a doctest would need too much complex setup,
+so I left it as is. There is an existing test for
+<code>set_ok_to_store()</code> anyway.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="adding-doctests">Adding doctests<a class="anchor" aria-label="anchor" href="#adding-doctests"></a>
+<h2 id="creating-doctests-by-adding-expectations">Creating doctests by adding expectations<a class="anchor" aria-label="anchor" href="#creating-doctests-by-adding-expectations"></a>
 </h2>
 <p>So far, nothing has actually changed. To generate doctests from my
-examples, I needed to add some testthat expectations to my code.</p>
+examples, I needed to add some <em>expectations</em> to my code.</p>
 <p>If you know testthat, doctest expectations will look very familiar.
 In testthat, you write:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">expect_equal</span><span class="op">(</span><span class="va">x</span>, <span class="fl">2.718282</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">expect_equal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="fl">2.71828183</span><span class="op">)</span></span></code></pre></div>
 <p>In a <code>@doctest</code> roxygen section, this becomes:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' @expect equal(2.718282)</span></span>
-<span><span class="co">#' x</span></span></code></pre></div>
-<p>where <code>x</code> is part of your example. Similarly, where in
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#' @expect equal(2.71828183)</span></span>
+<span><span class="co">#' exp(1)</span></span></code></pre></div>
+<p>where <code>exp(1)</code> is part of your example code. Similarly, in
 testthat you might write:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">expect_warning</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="st">"foo"</span><span class="op">)</span>, <span class="st">"not numeric"</span><span class="op">)</span></span></code></pre></div>
-<p>in a <code>@doctest</code> section this would be:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p>In a <code>@doctest</code> section you might write:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @expect warning("not numeric")</span></span>
 <span><span class="co">#' mean("foo")</span></span></code></pre></div>
 <p>In other words:</p>
 <ul>
-<li>You use the <code>@expect</code> tag to create an expectation;</li>
-<li>After <code>@expect</code>, you write a testthat expectation, minus
-the <code>expect_</code> prefix to the function call;</li>
+<li>Use the <code>@expect</code> tag to create an expectation.</li>
+<li>After <code>@expect</code>, write a testthat expectation, without
+the <code>expect_</code> prefix.</li>
 <li>The next R object after the <code>@expect</code> line becomes the
 first argument to the expectation.</li>
 </ul>
+</div>
+<div class="section level2">
+<h2 id="doctests-for-messaging-functions">Doctests for messaging functions<a class="anchor" aria-label="anchor" href="#doctests-for-messaging-functions"></a>
+</h2>
 <p>I started with onetime’s messaging functions, which print a message
 or warning only once. For example,
-<code>onetime_message_confirm()</code> had the following doctest:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code>onetime_message_confirm()</code> had the following
+<code>@doctest</code> section:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @doctest</span></span>
 <span><span class="co">#' oo &lt;- options(onetime.dir = tempdir(check = TRUE))</span></span>
 <span><span class="co">#' id &lt;- sample(10000L, 1L)</span></span>
@@ -213,7 +203,7 @@ or warning only once. For example,
 <span><span class="co">#' options(oo)</span></span></code></pre></div>
 <p>I want to check that when this example code runs, the user indeed
 sees a message. So I added an expectation:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @doctest</span></span>
 <span><span class="co">#' oo &lt;- options(onetime.dir = tempdir(check = TRUE))</span></span>
 <span><span class="co">#' id &lt;- sample(10000L, 1L)</span></span>
@@ -223,10 +213,10 @@ sees a message. So I added an expectation:</p>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' onetime_reset(id = id)</span></span></code></pre></div>
 <p>That was simple. To check everything was working, I ran
-<code>devtools::document()</code> again. Lo, it produced a new file
-under <code>tests/testthat</code>, called
+<code>devtools::document()</code> again. It produced a new file under
+<code>tests/testthat</code>, called
 <code>test-doctest-onetime_message_confirm.R</code>:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generated by doctest: do not edit by hand</span></span>
 <span><span class="co"># Please edit file in R/messages.R</span></span>
 <span></span>
@@ -243,17 +233,17 @@ under <code>tests/testthat</code>, called
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>This looked fine, so I ran my tests using <code>Ctrl+Shift+T</code>,
 and the new test passed.</p>
-<p>Notice that the test file has a warning at the top. If you edit this
-file, it will be overwritten next time you run the doctest roclet. If
-you want to edit it manually, you should change its name to something
-without <code>doctest</code>, and remove the
+<p>Notice the warning in the comment at the top of the test file. If you
+edit this file, it will be overwritten next time you run the doctest
+roclet. If you want to edit it manually, you should change its name to
+something without <code>doctest</code>, and remove the
 <code>Generated by doctest</code> stamp. Then you’ll just have a normal
 testthat test which you can edit as you please. If you don’t want to
 regenerate the automated test file again, then remember to edit the
-relevant <code>@doctest</code> section, removing expectations or even
+relevant <code>@doctest</code> section, removing expectations or
 replacing <code>@doctest</code> back with <code>@examples</code>.</p>
-<p>My next doctest was more complex. The code looked like this:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<p>My next doctest was more complex. The roxygen looked like this:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @doctest</span></span>
 <span><span class="va">...</span></span>
 <span><span class="co">#'</span></span>
@@ -268,7 +258,7 @@ that I expected different things each time.
 is called. So on the first time round the loop, I would expect a
 warning. Afterwards I would expect no output.</p>
 <p>I could have unrolled the loop, like this:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @expect warning()</span></span>
 <span><span class="co">#' onetime_warning("will be shown once", id = id)</span></span>
 <span><span class="co">#' @expect silent()</span></span>
@@ -280,7 +270,7 @@ warning. Afterwards I would expect no output.</p>
 “write great documentation, then add tests where appropriate” rather
 than “turn your documentation into a test suite”.</p>
 <p>So, I bit the bullet and wrote a more complex expectation:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' for (n in 1:3) {</span></span>
 <span><span class="co">#' @expect warning(regexp = if (n == 1L) "once" else NA)</span></span>
 <span><span class="co">#'   onetime_warning("will be shown once", id = id)</span></span>
@@ -295,7 +285,7 @@ have to come straight after the starting <code>#'</code> characters,
 with at most one space.</p>
 <p>Again, I ran <code>devtools::document()</code> and checked the new
 test:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu">expect_warning</span><span class="op">(</span><span class="fu">onetime_warning</span><span class="op">(</span><span class="st">"will be shown once"</span>, id <span class="op">=</span> <span class="va">id</span><span class="op">)</span>, regexp <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">==</span></span>
 <span>    <span class="fl">1L</span><span class="op">)</span> <span class="st">"once"</span> <span class="kw">else</span> <span class="cn">NA</span><span class="op">)</span></span>
@@ -314,7 +304,7 @@ various aspects of onetime’s on-disk records. Mostly these don’t print
 output, so instead I tested their return value. For example,
 <code>onetime_been_done()</code>, which checks if a particular onetime
 call has already been made, got a doctest like this:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @expect false()</span></span>
 <span><span class="co">#' onetime_been_done(id = id)</span></span>
 <span><span class="co">#' onetime_message("Creating an ID",  id = id)</span></span>
@@ -322,7 +312,7 @@ call has already been made, got a doctest like this:</p>
 <span><span class="co">#' onetime_been_done(id = id)</span></span></code></pre></div>
 <p>The function <code>onetime_dir()</code> is very simple and just
 returns a file path. Its example was simple too:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @doctest</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' onetime_dir("my-folder")</span></span>
@@ -330,22 +320,23 @@ returns a file path. Its example was simple too:</p>
 <span><span class="co">#' oo &lt;- options(onetime.dir = tempdir(check = TRUE))</span></span>
 <span><span class="co">#' onetime_dir("my-folder")</span></span>
 <span><span class="co">#' options(oo)</span></span></code></pre></div>
-<p>I decided to just test the first call to <code>onetime_dir()</code>.
-The second call would return a temporary directory, which would be
-different between different R sessions, so I wasn’t sure how to test it
-usefully, and I wanted to keep things simple. In fact, to skip
-unnecessary code from the test, I used the <code>@omit</code> tag:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<p>I decided to just test the first call to <code>onetime_dir()</code>,
+confirming that the result ended with the subfolder I passed in. The
+second call would return a temporary directory, which would be different
+between different R sessions, so I wasn’t sure how to test it usefully.
+In fact, to skip unnecessary code from the test, I used the
+<code>@omit</code> tag:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @expect match("my-folder$")</span></span>
 <span><span class="co">#' onetime_dir("my-folder")</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' @omit</span></span>
 <span><span class="co">#' oo &lt;- options(onetime.dir = tempdir(check = TRUE))</span></span>
 <span><span class="va">...</span></span></code></pre></div>
-<p><code>@omit</code> omits everything after it from the generated test,
-so this created a very simple test file in
-<code>test-doctest-onetime_dir</code>:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<p><code>@omit</code> omits everything after it from the generated test.
+This code created a very simple test file in
+<code>test-doctest-onetime_dir.R</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generated by doctest: do not edit by hand</span></span>
 <span><span class="co"># Please edit file in R/utils.R</span></span>
 <span></span>
@@ -357,8 +348,9 @@ so this created a very simple test file in
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>I ran these tests and <a href="https://github.com/hughjonesd/onetime/commit/cec1949a0129f00310dec23a12b411092dfbe3fe?diff=split" class="external-link">committed</a>
 them.</p>
-<p>Lastly, I added tests for my final functions. There’s nothing new to
-see here, so I’ll just let you examine the <a href="https://github.com/hughjonesd/onetime/commit/d3be66faabee09929deceafc9598488efd0ae8ee?diff=split" class="external-link">commit</a>.</p>
+<p>Lastly, I added tests for my final functions. There’s nothing new
+here. You can see the <a href="https://github.com/hughjonesd/onetime/commit/d3be66faabee09929deceafc9598488efd0ae8ee?diff=split" class="external-link">commit</a>
+on GitHub.</p>
 </div>
 <div class="section level2">
 <h2 id="adding-doctest-to-suggests">Adding doctest to Suggests:<a class="anchor" aria-label="anchor" href="#adding-doctest-to-suggests"></a>
@@ -368,7 +360,7 @@ other developers to work on my package too. In the onetime DESCRIPTION
 file, I added doctest to <code>Suggests:</code>, and added a
 <code>Remotes:</code> field pointing to the <a href="https://github.com/hughjonesd/doctest" class="external-link">github repository</a>. This
 is a oneliner with the usethis package:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_dev_package</span><span class="op">(</span><span class="st">"doctest"</span>, type <span class="op">=</span> <span class="st">"Suggests"</span>, </span>
 <span>                         remote <span class="op">=</span> <span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
 <p>There is a tradeoff here: adding the doctest dependency will help
@@ -396,11 +388,10 @@ changes, or if your expectations are becoming complex, consider
 splitting them out into a “proper” testthat test.</p></li>
 </ul>
 <p>There are many features of doctest that I didn’t need to use for this
-small package, including the <span class="citation">[@expectRaw]</span>
-and <span class="citation">[@snap]</span> tags to generate other
-expectations, and the <span class="citation">[@testRaw]</span> tag to
-add code to your tests. You can read about those in the package
-documentation or in the main vignette:
+small package, including the <code>@expectRaw</code> and
+<code>@snap</code> tags to generate other expectations, and the
+<code>@testRaw</code> tag to add code to your tests. You can read about
+those in the package documentation or in the main vignette:
 <code><a href="../articles/doctest.html">vignette("doctest")</a></code>.</p>
 <p>If you are using doctest in your package, I’d love to hear about it.
 There is a <a href="https://github.com/hughjonesd/doctest/issues/8" class="external-link">github issue</a>
