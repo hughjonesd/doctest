@@ -9,7 +9,7 @@ Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Creates 'testthat' tests from 'roxygen' examples using simple tags.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Imports: 
     cli,
     fs,
