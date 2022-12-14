@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(doctest)
-```
-
 [Doctest](https://hughjonesd.github.io/doctest) is an R package to let you 
 write doctests. Doctests are chunks of code which act as both examples for your 
 users, and tests of your package's functionality. The doctest package does this 
@@ -57,7 +53,7 @@ Now, whenever I run `devtools::document()`, it will create doctests in the
 .Rd files. I already had `tests/testthat` set up so I didn't need to do anything
 more in this direction.
 
-One caveat: if you hit `Ctrl+Shift+D` in Rstudio, it won't run the doctest roclet.
+One caveat: if you hit `Ctrl+Shift+D` in RStudio, it won't run the doctest roclet.
 You need to type `devtools::document()` or `roxygen2::roxygenize()` on the command
 line. Otherwise your doctest tags won't be recognized.
 
@@ -73,13 +69,7 @@ from `document()`.
 #' @examples
 #' oo <- options(onetime.dir = tempdir(check = TRUE))
 #' id <- sample(10000L, 1)
-#'
-#' for (n in 1:3) {
-#'   onetime_warning("will be shown once", id = id)
-#' }
-#'
-#' onetime_reset(id = id)
-#' options(oo)
+#' ...
 ```
 
 ### After
@@ -87,57 +77,53 @@ from `document()`.
 #' @doctest
 #' oo <- options(onetime.dir = tempdir(check = TRUE))
 #' id <- sample(10000L, 1)
-#'
-#' for (n in 1:3) {
-#'   onetime_warning("will be shown once", id = id)
-#' }
-#'
-#' onetime_reset(id = id)
-#' options(oo)
+#' ...
 ```
 
 Indeed, after I ran `devtools::document()`, my .Rd files were unchanged, apart from
-a few deleted empty lines in the examples. I thought these were unimportant, so 
-I was now ready to make my first commit.
+a few deleted empty lines in the examples. I judged that these were not important, 
+so I made my first commit.
 
-At this stage, you might want to create a new branch with your commits, using
-`git branch` on the command line, or clicking the "new branch" button in RStudio's
-git pane. I was gung ho, so I just put 
+At this stage, you might want to create a new branch for your commits, using
+`git branch` on the command line, or clicking the "new branch" button in RStudio. 
+I was gung ho, so I just put 
 [my commit](https://github.com/hughjonesd/onetime/commit/1c6400cac3528c27ffd2d397250da527fa2dbf7d?diff=split) 
 on the master branch.
 
-I actually made one exception: I left the `@examples` tag unchanged in the
+I made one exception: I left the `@examples` tag unchanged in the
 `set_ok_to_store()` function. This is a function with side effects on the
 user's installation; testing it needs to be done carefully. I thought that
-a doctest would not be the right approach here, so I left it as is.
+a doctest would need too much complex setup, so I left it as is. There is an
+existing test for `set_ok_to_store()` anyway.
 
 
-# Adding doctests
+# Creating doctests by adding expectations
 
 So far, nothing has actually changed. To generate doctests from my examples,
-I needed to add some testthat expectations to my code. 
+I needed to add some *expectations* to my code. 
 
 If you know testthat, doctest expectations will look very familiar. In testthat,
 you write:
 
 ```r
-expect_equal(x, 2.718282)
+expect_equal(exp(1), 2.71828183)
 ```
 
 In a `@doctest` roxygen section, this becomes:
 
 ```r
-#' @expect equal(2.718282)
-#' x
+#' @expect equal(2.71828183)
+#' exp(1)
 ```
 
-where `x` is part of your example. Similarly, where in testthat you might write:
+where `exp(1)` is part of your example code. Similarly, in testthat you 
+might write:
 
 ```r
 expect_warning(mean("foo"), "not numeric")
 ```
 
-in a `@doctest` section this would be:
+In a `@doctest` section you might write:
 
 ```r
 #' @expect warning("not numeric")
@@ -146,14 +132,17 @@ in a `@doctest` section this would be:
 
 In other words:
 
-* You use the `@expect` tag to create an expectation;
-* After `@expect`, you write a testthat expectation, minus the `expect_` prefix 
-  to the function call;
+* Use the `@expect` tag to create an expectation.
+* After `@expect`, write a testthat expectation, without the `expect_` prefix.
 * The next R object after the `@expect` line becomes the first argument to the
   expectation.
 
+
+# Doctests for messaging functions
+
 I started with onetime's messaging functions, which print a message or warning 
-only once. For example, `onetime_message_confirm()` had the following doctest:
+only once. For example, `onetime_message_confirm()` had the following `@doctest`
+section:
 
 ```r
 #' @doctest
@@ -181,7 +170,7 @@ message. So I added an expectation:
 ```
 
 That was simple. To check everything was working, I ran `devtools::document()`
-again. Lo, it produced a new file under `tests/testthat`, called
+again. It produced a new file under `tests/testthat`, called
 `test-doctest-onetime_message_confirm.R`:
 
 ```r
@@ -203,14 +192,14 @@ test_that("Doctest: onetime_message_confirm", {
 
 This looked fine, so I ran my tests using `Ctrl+Shift+T`, and the new test passed.
 
-Notice that the test file has a warning at the top. If you edit this file,
+Notice the warning in the comment at the top of the test file. If you edit this file,
 it will be overwritten next time you run the doctest roclet. If you want
 to edit it manually, you should change its name to something without `doctest`,
 and remove the `Generated by doctest` stamp. Then you'll just have a normal
 testthat test which you can edit as you please. If you don't want to regenerate the automated test file again, then remember to edit the relevant `@doctest` section,
-removing expectations or even replacing `@doctest` back with `@examples`.
+removing expectations or replacing `@doctest` back with `@examples`.
 
-My next doctest was more complex. The code looked like this:
+My next doctest was more complex. The roxygen looked like this:
 
 ```r
 #' @doctest
@@ -306,11 +295,11 @@ Its example was simple too:
 #' options(oo)
 ```
 
-I decided to just test the first call to `onetime_dir()`. The second call
+I decided to just test the first call to `onetime_dir()`, confirming that
+the result ended with the subfolder I passed in. The second call
 would return a temporary directory, which would be different between different
-R sessions, so I wasn't sure how to test it usefully, and I wanted to
-keep things simple. In fact, to skip unnecessary code from the test, I used
-the `@omit` tag:
+R sessions, so I wasn't sure how to test it usefully. In fact, to skip 
+unnecessary code from the test, I used the `@omit` tag:
 
 ```r
 #' @expect match("my-folder$")
@@ -321,8 +310,8 @@ the `@omit` tag:
 ...
 ```
 
-`@omit` omits everything after it from the generated test, so this created
-a very simple test file in `test-doctest-onetime_dir`:
+`@omit` omits everything after it from the generated test. This code created
+a very simple test file in `test-doctest-onetime_dir.R`:
 
 ```r
 # Generated by doctest: do not edit by hand
@@ -338,8 +327,8 @@ test_that("Doctest: onetime_dir", {
 
 I ran these tests and [committed](https://github.com/hughjonesd/onetime/commit/cec1949a0129f00310dec23a12b411092dfbe3fe?diff=split) them.
 
-Lastly, I added tests for my final functions. There's nothing new to see here,
-so I'll just let you examine the [commit](https://github.com/hughjonesd/onetime/commit/d3be66faabee09929deceafc9598488efd0ae8ee?diff=split).
+Lastly, I added tests for my final functions. There's nothing new here. You can
+see the [commit](https://github.com/hughjonesd/onetime/commit/d3be66faabee09929deceafc9598488efd0ae8ee?diff=split) on GitHub.
 
 # Adding doctest to Suggests:
 
@@ -378,8 +367,8 @@ I followed some principles when making these changes to my package:
   a "proper" testthat test.
 
 There are many features of doctest that I didn't need to use for this small 
-package, including the [@expectRaw] and [@snap] tags to generate other expectations,
-and the [@testRaw] tag to add code to your tests. You can read about those
+package, including the `@expectRaw` and `@snap` tags to generate other expectations,
+and the `@testRaw` tag to add code to your tests. You can read about those
 in the package documentation or in the main vignette: `vignette("doctest")`.
 
 If you are using doctest in your package, I'd love to hear about it. There
