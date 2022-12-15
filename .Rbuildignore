@@ -13,4 +13,4 @@
 ^doc$
 ^Meta$
 ^codecov\.yml$
-^vignette/rsconnect
+^vignettes/rsconnect
