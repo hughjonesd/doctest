@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   conversion: conversion.html
   doctest: doctest.html
-last_built: 2022-12-15T04:53Z
+last_built: 2022-12-15T10:52Z
 urls:
   reference: https://hughjonesd.github.io/doctest/reference
   article: https://hughjonesd.github.io/doctest/articles
