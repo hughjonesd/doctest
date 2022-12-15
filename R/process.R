@@ -124,9 +124,6 @@ add_tag_to_test.roxy_tag_snap <- add_tag_to_test.roxy_tag_expect
 
 
 add_tag_to_test.roxy_tag_expectRaw <- function (tag, test, ...) {
-  # we put the expectation back, because we have to get rid of
-  # \donttest etc.
-  # we use .doctest_expect_ as a string to search for
   expect_line <- sprintf(".doctest_raw_expect_%s", tag$doctest_expect)
   test$lines <- c(test$lines, expect_line)
   test <- add_lines_to_test(tag, test)

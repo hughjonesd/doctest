@@ -134,7 +134,7 @@ In other words:
 
 * Use the `@expect` tag to create an expectation.
 * After `@expect`, write a testthat expectation, without the `expect_` prefix.
-* The next R object after the `@expect` line becomes the first argument to the
+* The next R expression after the `@expect` line becomes the first argument to the
   expectation.
 
 
