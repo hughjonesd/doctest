@@ -9,7 +9,7 @@ create_expectations <- function (test) {
 
   example_exprs <- recursively_rewrite(example_exprs)
 
-  example_lines_list <- purrr::map(example_exprs, rlang::expr_deparse)
+  example_lines_list <- purrr::map(as.list(example_exprs), rlang::expr_deparse)
   test$lines <- purrr::flatten_chr(example_lines_list)
 
   test
@@ -29,12 +29,12 @@ recursively_rewrite <- function(x) {
     constant = x,
     pairlist = x, # pairlist can't be toplevel, can't be a ._doctest_expr call
     call = {
-      purrr::modify(x, recursively_rewrite)
+      as.call(purrr::modify(as.list(x), recursively_rewrite))
     },
     list = , # only at top level
     "{" = {
       x <- rewrite_expectation_list(x)
-      purrr::modify(x, recursively_rewrite)
+      as.call(purrr::modify(as.list(x), recursively_rewrite))
     }
   )
 }
@@ -89,7 +89,7 @@ rewrite_expectation_list <- function(exprs) {
 
 
 rewrite_expectation <- function (expect_expr, target_expr) {
-  has_dot <- purrr::map_lgl(expect_expr, ast_has_dot)
+  has_dot <- purrr::map_lgl(as.list(expect_expr), ast_has_dot)
   if (any(has_dot)) {
     # replace dot with sibling
     expect_expr <- do.call("substitute",
