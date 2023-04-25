@@ -19,14 +19,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-[Doctest](https://hughjonesd.github.io/doctest) is an R package to let you 
+[Doctest](https://hughjonesd.github.io/doctest/) is an R package to let you 
 write doctests. Doctests are chunks of code which act as both examples for your 
 users, and tests of your package's functionality. The doctest package does this 
 by letting you add [testthat](https://testthat.r-lib.org) tests to your 
 [roxygen](https://roxygen2.r-lib.org) documentation.
 
 This article gives a real world example of how to convert an R package to use
-doctest. I'll use [onetime](https://hughjonesd.github.io/onetime/dev), a small 
+doctest. I'll use [onetime](https://hughjonesd.github.io/onetime/dev/), a small 
 package which lets you run code only once. Onetime 0.1.0 is on CRAN, so
 we will be dogfooding real production code.
 

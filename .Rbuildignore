@@ -14,3 +14,4 @@
 ^Meta$
 ^codecov\.yml$
 ^vignettes/rsconnect
+^cran-comments\.md$
