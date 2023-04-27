@@ -1,5 +1,6 @@
-# doctest 0.3.0
+# doctest (development version)
 
+* Added a `@doctestExample` tag as a drop-in replacement for `@example`.
 
 # doctest 0.2.0
 

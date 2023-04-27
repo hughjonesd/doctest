@@ -15,16 +15,18 @@ build_result_from_block <- function (block) {
     return(NULL)
   }
 
-  examples <- roxygen2::block_get_tags(block, "examples")
+  examples <- roxygen2::block_get_tags(block, c("examples", "example"))
   if (length(examples) > 0) {
     roxygen2::warn_roxy_tag(examples[[1]], c(
           "has {.code @examples} and {.code @doctest} sections in the same block",
-          "i" = "Change {.code @examples} to {.code @doctest}"
+          "i" = "Change {.code @examples} to {.code @doctest}",
+          "i" = "Change {.code @example} to {.code @doctestExample}"
           ))
   }
 
   tags <- roxygen2::block_get_tags(block, c("doctest", "expect", "expectRaw",
-                                           "testRaw", "snap", "omit", "resume"))
+                                           "testRaw", "snap", "omit", "resume",
+                                           "doctestExample"))
 
   result <- structure(list(tests = list(), has_expectation = FALSE),
                       class = "doctest_result")
@@ -143,6 +145,11 @@ add_tag_to_test.roxy_tag_testRaw <- function (tag, test, ...) {
 
 add_tag_to_test.roxy_tag_doctest <- function (tag, test, ...) {
   add_lines_to_test(tag, test)
+}
+
+
+add_tag_to_test.roxy_tag_doctestExample <- function (tag, test, ...) {
+  test
 }
 
 

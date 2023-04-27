@@ -1,6 +1,6 @@
 #' Write testthat tests for your examples, using roxygen tags
 #'
-#' The doctest package lets you test the code in your "Examples" 
+#' The doctest package lets you test the code in your "Examples"
 #' section in .Rd files. It uses the roxygen2 and testthat packages.
 #' For more information, see [@doctest] and [@expect].
 #'
@@ -195,7 +195,7 @@ NULL
 #' `@omit` is separate from `\donttest` and `\dontrun` tags in Rd files. This
 #' allows you to test code that would cause an error if run by R CMD CHECK. If
 #' you also want R CMD CHECK to skip your code, you should use `\donttest{}`
-#' separately (see 
+#' separately (see
 #' [writing R extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-documentation-files)).
 #'
 #' Remember that the main purpose of examples is to document your package for
@@ -205,4 +205,38 @@ NULL
 #'
 #' @name omit-tag
 #' @aliases resume-tag @omit @resume
+NULL
+
+
+#' Add an example from a file
+#'
+#' `@doctestExample path/to/file.R` is a drop-in replacement for
+#' `@example path/to/file.R`. It doesn't add the contents of `file.R` to
+#' the test.
+#'
+#' @details
+#' If you have complex examples you may want to store them separately.
+#' Roxygen2 uses the `@example` tag for this. `@doctestExample` does the
+#' same: it adds the contents of its file to the resulting example.
+#' Suppose `man/R/example-code.R` contains the line:
+#'
+#'     2 + 2
+#'
+#' Then the following roxygen:
+#'
+#'     #' @doctest
+#'     #'
+#'     #' @expect equal(2)
+#'     #' 1 + 1
+#'     #' @doctestExample man/R/example-code.R
+#'
+#' will generate an example like:
+#'
+#'     1 + 1
+#'     2 + 2
+#'
+#' At present, `@doctestExample` doesn't add any code to the tests.
+#'
+#' @name doctestExample-tag
+#' @aliases @doctestExample
 NULL

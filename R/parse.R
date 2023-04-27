@@ -72,6 +72,12 @@ roxy_tag_parse.roxy_tag_resume <- function (x) {
 }
 
 
+#' @export
+roxy_tag_parse.roxy_tag_doctestExample <- function (x) {
+  x <- roxygen2::tag_value(x)
+}
+
+
 strip_first_line <- function (x, first_line_name = NULL) {
   if (is.null(x$raw)) x$raw <- ""
   lines <- strsplit(x$raw, "\n", fixed = TRUE)[[1]]
@@ -98,6 +104,23 @@ roxy_tag_rd.roxy_tag_doctest <- function(x, base_path, env) {
   #
   sect$tag <- x
   sect
+}
+
+
+#' @export
+roxy_tag_rd.roxy_tag_doctestExample <- function (x, base_path, env) {
+    path <- file.path(base_path, x$val)
+    if (!file.exists(path)) {
+        roxygen2::warn_roxy_tag(x, "{.path {path}} doesn't exist")
+        return()
+    }
+
+    code <- readLines(path, encoding = "UTF-8", warn = FALSE)
+    sect <- roxygen2::rd_section("doctest", code)
+    x$value <- code
+    sect$tag <- x
+
+    sect
 }
 
 
