@@ -1,3 +1,6 @@
+# doctest 0.3.0
+
+
 # doctest 0.2.0
 
 * First CRAN release.
