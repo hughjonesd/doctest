@@ -10,6 +10,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
 coverage](https://codecov.io/gh/hughjonesd/doctest/branch/master/graph/badge.svg)](https://app.codecov.io/gh/hughjonesd/doctest?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/doctest)](https://CRAN.R-project.org/package=doctest)
 <!-- badges: end -->
 
 Documentation examples and tests are similar in some ways:
