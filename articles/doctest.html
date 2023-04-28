@@ -163,12 +163,15 @@ fib(NA)
 <div class="section level3">
 <h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h3>
-<p>You can install the development version of doctest like this:</p>
+<p>Install doctest from CRAN:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"doctest"</span><span class="op">)</span></span></code></pre></div>
+<p>or get the development version:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
 <p>To use doctest in your package, alter its DESCRIPTION file to add the
 <code>dt_roclet</code> roclet to roxygen:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Roxygen</span><span class="op">:</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>roclets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"collate"</span>, <span class="st">"rd"</span>, <span class="st">"namespace"</span>, </span>
 <span>              <span class="st">"doctest::dt_roclet"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <p>Then use <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html" class="external-link">roxygen2::roxygenize()</a></code> or
@@ -205,7 +208,7 @@ like roxygen2 itself, you can use it to create help files and tests
 without it being installed for users. However, you may wish to add it in
 <code>Suggests:</code>, to help other developers working on the
 package:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_dev_package</span><span class="op">(</span><span class="st">"doctest"</span>, type <span class="op">=</span> <span class="st">"Suggests"</span>, </span>
 <span>                         remote <span class="op">=</span> <span class="st">"hughjonesd/doctest"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -218,7 +221,7 @@ package:</p>
 <code>@doctest</code><a class="anchor" aria-label="anchor" href="#doctest"></a>
 </h4>
 <p>Use <code>@doctest</code> instead of <code>@examples</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @doctest</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' # ... examples for your function</span></span></code></pre></div>
@@ -229,7 +232,7 @@ section creates one test like
 <code>test_that("Test name", {...})</code>. You can name the doctest, or
 leave it blank for a default name. All the sections will be merged into
 a single .Rd example.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @doctest Positive numbers</span></span>
 <span><span class="co">#' x &lt;- 1</span></span>
 <span><span class="co">#' @expect equal(x)</span></span>
@@ -245,7 +248,7 @@ a single .Rd example.</p>
 <code>@expect</code><a class="anchor" aria-label="anchor" href="#expect"></a>
 </h4>
 <p><code>@expect</code> writes a testthat expectation.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @expect equal(4)</span></span>
 <span><span class="co">#' 2 + 2</span></span></code></pre></div>
 <p>You can use any <code>expect_*</code> function from
@@ -253,14 +256,14 @@ a single .Rd example.</p>
 call.</p>
 <p>The expression on the next line will be substituted as the first
 argument into the <code>expect</code> call:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">expect_equal</span><span class="op">(</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p>Use a dot <code>.</code> to substitute in different places:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @expect equal(., rev(.))</span></span>
 <span><span class="co">#' c("T", "E", "N", "E", "T")</span></span></code></pre></div>
 <p>This becomes:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">expect_equal</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"E"</span>, <span class="st">"N"</span>, <span class="st">"E"</span>, <span class="st">"T"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"E"</span>, <span class="st">"N"</span>, <span class="st">"E"</span>, <span class="st">"T"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -269,7 +272,7 @@ argument into the <code>expect</code> call:</p>
 </h4>
 <p><code>@expectRaw</code> writes an expectation, without substituting
 the next expression:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' x &lt;- 2 + 2</span></span>
 <span><span class="co">#' @expectRaw equal(x, 4)</span></span></code></pre></div>
 </div>
@@ -288,7 +291,7 @@ changed.</p>
 </h4>
 <p><code>@testRaw</code> adds an arbitrary line of code to your
 test:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @testRaw skip_on_cran("Takes too long to run")</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @expect equal(6765)</span></span>
@@ -306,7 +309,7 @@ not the example, <code>@omit</code> does the opposite: it includes all
 following code in the example but not the test. You can use
 <code>@resume</code> to restart including lines without creating a new
 expectation.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' myfunc(1)</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @omit</span></span>
@@ -342,7 +345,7 @@ expression. Don’t rely on variables from a previous
 or <code>for</code> loops. Don’t forget that each roxygen tag must be
 indented with a single space:</p></li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' # Right:</span></span>
 <span><span class="co">#' if (TRUE) {</span></span>
 <span><span class="co">#' @expect equals(4)</span></span>
@@ -371,7 +374,7 @@ created tests, not a <em>substitute</em> for them. Use doctest to make
 sure your examples do what they expect, and for simple tests of basic
 functionality. If it’s hard to specify what to test for, consider using
 <code>@snap</code> to capture output:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @snap</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <p>For more complex test cases, write a test file manually.</p>
