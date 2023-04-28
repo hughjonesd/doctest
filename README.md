@@ -97,7 +97,13 @@ The .Rd file will be created as normal, with an example section like:
 
 ## Usage
 
-You can install the development version of doctest like this:
+Install doctest from CRAN:
+
+``` r
+install.packages("doctest")
+```
+
+or get the development version:
 
 ``` r
 devtools::install("hughjonesd/doctest")

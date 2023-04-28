@@ -4,7 +4,13 @@ output: github_document
 
 ## Usage
 
-You can install the development version of doctest like this:
+Install doctest from CRAN:
+
+```r
+install.packages("doctest")
+```
+
+or get the development version:
 
 ```r
 devtools::install("hughjonesd/doctest")
