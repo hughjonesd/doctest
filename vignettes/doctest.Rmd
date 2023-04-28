@@ -60,8 +60,7 @@ being installed for users. However, you may wish to add it in `Suggests:`,
 to help other developers working on the package:
 
 ```r
-usethis::use_dev_package("doctest", type = "Suggests", 
-                         remote = "hughjonesd/doctest")
+usethis::use_package("doctest", type = "Suggests")
 ```
 
 
