@@ -1,11 +1,18 @@
 create_expectations <- function (test) {
   example_lines <- test$lines
   if (any(grepl("donttest|dontrun|dontshow", example_lines))) {
-    example_lines <- clean_donts(example_lines)
+    example_lines <- clean_donts(example_lines, test = test)
   }
 
   example_text <- paste(example_lines, collapse = "\n")
-  example_exprs <- rlang::parse_exprs(example_text)
+  example_exprs <- rlang::try_fetch(
+    rlang::parse_exprs(example_text),
+    error = function (e) {
+      cli::cli_abort("Failed to parse code in doctest for {test$source_object}.",
+        parent = e
+      )
+    }
+  )
 
   example_exprs <- recursively_rewrite(example_exprs)
 
@@ -113,22 +120,25 @@ ast_has_dot <- function (x) {
 }
 
 
-clean_donts <- function (lines) {
+clean_donts <- function (lines, test) {
   # also deals with character(0):
   if (paste(lines, collapse = "") == "") return(lines)
   tf_in <- tempfile("Rex")
   tf_out <- tempfile("Rex")
-  on.exit({
+  on.exit(suppressWarnings({
     file.remove(tf_in)
     file.remove(tf_out)
-  })
+  }))
 
   # We need to do this to e.g. convert %plus% to \%plus\% ...
   # otherwise tools::Rd2ex() will do bad things
   # add in starting roxygen tags
   dummy_rox <- paste0(lines, collapse = "\n")
   # calls escape_examples() but uses an exported function
-  dummy_rox <- roxygen2::tag_examples(list(raw = dummy_rox))
+  dummy_rox <- roxygen2::tag_examples(roxy_tag("doctest",
+                                               raw = dummy_rox,
+                                               file = test$source_file,
+                                               line = test$source_line))
   dummy_rd <- as.character(dummy_rox$val)
 
   dummy_rd <- c("\\name{dummy}", "\\title{dummy}", "\\examples{", dummy_rd, "}")
@@ -137,5 +147,10 @@ clean_donts <- function (lines) {
   # this comments out the actual \donttest but leaves the rest uncommented
   tools::Rd2ex(tf_in, tf_out, commentDontrun = FALSE, commentDonttest = FALSE)
 
-  readLines(tf_out)
+  rlang::try_fetch(
+    suppressWarnings(readLines(tf_out)), # typically throws warning AND error
+    error = function (e) {
+      cli::cli_abort("tools::Rd2ex failed to clean test \"{test$name}\"", parent = e)
+    }
+  )
 }

@@ -75,7 +75,12 @@ fib(NA)
 
 \subsection{Usage}{
 
-You can install the development version of doctest like this:
+Install doctest from CRAN:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{install.packages("doctest")
+}\if{html}{\out{</div>}}
+
+or get the development version:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{devtools::install("hughjonesd/doctest")
 }\if{html}{\out{</div>}}

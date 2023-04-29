@@ -154,7 +154,41 @@ test_that("Multiple @doctest tags, invalid syntax", {
                         NULL
                        " |> dedent()
 
-  expect_error(
+  # We're fine with multiple warnings, so this just checks we got 1
+  suppressWarnings(expect_warning(
     roc_proc_text(dt_roclet(), bad_multi_doctest)
+  ))
+})
+
+
+test_that("Bad Rd syntax", {
+  bad_rd_doctest <- "
+                     #' @doctest
+                     #' @expect equal(1)
+                     #' 1
+                     #' if (TRUE) {
+                     NULL
+                    " |> dedent()
+
+  expect_warning(
+    roc_proc_text(dt_roclet(), bad_rd_doctest)
   )
+})
+
+
+test_that("Bad Rd syntax with dontrun", {
+  # expectation triggers create_expectations
+  bad_dontrun_doctest <- "
+                          #' @doctest
+                          #' @expect equal(1)
+                          #' 1
+                          #' \\dontrun{
+                          #' if (TRUE) {
+                          NULL
+                         " |> dedent()
+
+  # We're fine with multiple warnings, so this just checks we got 1
+  suppressWarnings(expect_warning(
+    roc_proc_text(dt_roclet(), bad_dontrun_doctest)
+  ))
 })

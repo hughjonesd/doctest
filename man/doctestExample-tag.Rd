@@ -34,4 +34,6 @@ will generate an example like:
 }\if{html}{\out{</div>}}
 
 At present, \verb{@doctestExample} doesn't add any code to the tests.
+
+\verb{@doctestExample} was added after doctest 0.2.0.
 }

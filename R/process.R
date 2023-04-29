@@ -174,11 +174,18 @@ add_lines_to_test <- function (tag, test) {
 
 process_test <- function (test, result) {
   if (test$has_expectation) {
-    test <- create_expectations(test)
-    test <- top_and_tail(test)
-
-    result$has_expectation <- TRUE
-    result$tests <- c(result$tests, list(test))
+    rlang::try_fetch({
+      test <- create_expectations(test)
+      test <- top_and_tail(test)
+      result$has_expectation <- TRUE
+      result$tests <- c(result$tests, list(test))
+    },
+      error = function(e) {
+        cli::cli_warn("Can't create test \"{test$name}\"",
+          parent = e
+        )
+      }
+    )
   }
 
   result
