@@ -98,13 +98,21 @@ The .Rd file will be created as normal, with an example section like:
 
 ## Usage
 
-Install doctest from CRAN:
+Install doctest from
+[r-universe](https://r-universe.dev):
+
+``` r
+install.packages("doctest", repos = c("https://hughjonesd.r-universe.dev", 
+                                      "https://cloud.r-project.org"))
+```
+
+Or from CRAN:
 
 ``` r
 install.packages("doctest")
 ```
 
-or get the development version:
+Or get the development version:
 
 ``` r
 devtools::install("hughjonesd/doctest")
