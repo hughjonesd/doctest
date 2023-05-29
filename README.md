@@ -10,7 +10,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
 coverage](https://codecov.io/gh/hughjonesd/doctest/branch/master/graph/badge.svg)](https://app.codecov.io/gh/hughjonesd/doctest?branch=master)
-[![CRAN
+![runiverse-package
+badge](https://hughjonesd.r-universe.dev/badges/doctest) [![CRAN
 status](https://www.r-pkg.org/badges/version/doctest)](https://CRAN.R-project.org/package=doctest)
 <!-- badges: end -->
 
