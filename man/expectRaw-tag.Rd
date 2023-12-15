@@ -23,6 +23,8 @@ argument.
 }\if{html}{\out{</div>}}
 
 Don't include the \code{expect_} prefix.
+
+The \verb{@expectRaw} tag and code must fit on a single line.
 }
 \seealso{
 Other expectations: 

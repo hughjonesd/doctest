@@ -31,6 +31,8 @@ place or places, use a dot \code{.}:
 \if{html}{\out{<div class="sourceCode">}}\preformatted{@expect equals(., rev(.))
 c("T", "E", "N", "E", "T")
 }\if{html}{\out{</div>}}
+
+The \verb{@expect} tag and code must fit on a single line.
 }
 \seealso{
 Other expectations: 

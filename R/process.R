@@ -163,7 +163,6 @@ add_tag_to_test.roxy_tag_resume <- function (tag, test, ...) {
 }
 
 
-
 add_lines_to_test <- function (tag, test) {
   example_lines <- tag$val
   test$lines <- c(test$lines, example_lines)

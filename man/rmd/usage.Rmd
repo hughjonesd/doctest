@@ -24,11 +24,11 @@ devtools::install("hughjonesd/doctest")
 ```
 
 To use doctest in your package, alter its DESCRIPTION file to add the 
-`dt_roclet` roclet to roxygen:
+`dt_roclet` roclet and `"doctest"` package to roxygen:
 
 ```r
 Roxygen: list(roclets = c("collate", "rd", "namespace", 
-              "doctest::dt_roclet")) 
+              "doctest::dt_roclet"), packages = "doctest") 
 ```
     
 Then use `roxygen2::roxygenize()` or `devtools::document()` to build 

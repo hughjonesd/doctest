@@ -75,21 +75,27 @@ fib(NA)
 
 \subsection{Usage}{
 
-Install doctest from CRAN:
+Install doctest from \href{https://r-universe.dev}{r-universe}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{install.packages("doctest", repos = c("https://hughjonesd.r-universe.dev", 
+                                      "https://cloud.r-project.org"))
+}\if{html}{\out{</div>}}
+
+Or from CRAN:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{install.packages("doctest")
 }\if{html}{\out{</div>}}
 
-or get the development version:
+Or get the development version:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{devtools::install("hughjonesd/doctest")
 }\if{html}{\out{</div>}}
 
 To use doctest in your package, alter its DESCRIPTION file to add the
-\code{dt_roclet} roclet to roxygen:
+\code{dt_roclet} roclet and \code{"doctest"} package to roxygen:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{Roxygen: list(roclets = c("collate", "rd", "namespace", 
-              "doctest::dt_roclet")) 
+              "doctest::dt_roclet"), packages = "doctest") 
 }\if{html}{\out{</div>}}
 
 Then use \code{roxygen2::roxygenize()} or \code{devtools::document()} to build
