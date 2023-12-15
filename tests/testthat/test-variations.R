@@ -1,4 +1,11 @@
 
+expect_roxygen2_output <- function(...) {
+  if (packageVersion("roxygen2") > "7.2.3") {
+    expect_message(...)
+  } else {
+    expect_warning(...)
+  }
+}
 
 test_that("@examples tag", {
   examples_expectation <- "
@@ -10,7 +17,7 @@ test_that("@examples tag", {
                            NULL
                           " |> dedent()
 
-  expect_warning({
+  expect_roxygen2_output({
     results <- roc_proc_text(dt_roclet(), examples_expectation)
   }, "@examples")
 })
@@ -24,7 +31,7 @@ test_that("Tags outside @doctest", {
                           NULL
                          " |> dedent()
 
-  expect_warning({
+  expect_roxygen2_output({
     results <- roc_proc_text(dt_roclet(), outside_expectation)
   }, "@doctest")
 })
@@ -38,7 +45,7 @@ test_that("Empty @expect tag", {
                         NULL
                        " |> dedent()
 
-  expect_warning({
+  expect_roxygen2_output({
     results <- roc_proc_text(dt_roclet(), empty_expectation)
   }, "@expect")
 })
@@ -52,7 +59,7 @@ test_that("Empty @expectRaw tag", {
                         NULL
                        " |> dedent()
 
-  expect_warning({
+  expect_roxygen2_output({
     results <- roc_proc_text(dt_roclet(), empty_expectation)
   }, "@expectRaw")
 })
@@ -66,7 +73,7 @@ test_that("Empty @testRaw tag", {
                         NULL
                        " |> dedent()
 
-  expect_warning({
+  expect_roxygen2_output({
     results <- roc_proc_text(dt_roclet(), empty_expectation)
   }, "@testRaw")
 })
