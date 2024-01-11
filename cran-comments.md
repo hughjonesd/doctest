@@ -12,5 +12,5 @@ Platforms
 * Mac, Windows, Linux (github actions): r-devel, r-release, r-oldrel
 
 
-
+One reverse dependency checked successfully.
 

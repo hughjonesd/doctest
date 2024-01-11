@@ -2,6 +2,7 @@
 
 * Added a `@doctestExample` tag as a drop-in replacement for `@example`.
 * Error handling has been improved.
+* Fix compatibility with roxygen 7.3.0. Thanks @hadley. 
 
 # doctest 0.2.0
 
