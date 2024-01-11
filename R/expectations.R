@@ -135,7 +135,7 @@ clean_donts <- function (lines, test) {
   # add in starting roxygen tags
   dummy_rox <- paste0(lines, collapse = "\n")
   # calls escape_examples() but uses an exported function
-  dummy_rox <- roxygen2::tag_examples(roxy_tag("doctest",
+  dummy_rox <- roxygen2::tag_examples(roxygen2::roxy_tag("doctest",
                                                raw = dummy_rox,
                                                file = test$source_file,
                                                line = test$source_line))

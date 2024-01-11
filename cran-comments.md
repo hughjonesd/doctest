@@ -11,6 +11,7 @@ Platforms
 * Windows (win-builder): r-devel and r-release
 * Mac, Windows, Linux (github actions): r-devel, r-release, r-oldrel
 
+One NOTE about an unimported function. Fixed.
 
 One reverse dependency checked successfully.
 
