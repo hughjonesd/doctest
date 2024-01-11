@@ -1,4 +1,4 @@
-# doctest (development version)
+# doctest 0.3.0
 
 * Added a `@doctestExample` tag as a drop-in replacement for `@example`.
 * Error handling has been improved.
