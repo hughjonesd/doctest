@@ -35,5 +35,5 @@ will generate an example like:
 
 At present, \verb{@doctestExample} doesn't add any code to the tests.
 
-\verb{@doctestExample} was added after doctest 0.2.0.
+\verb{@doctestExample} was added in doctest 0.3.0.
 }

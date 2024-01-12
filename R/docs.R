@@ -241,7 +241,7 @@ NULL
 #'
 #' At present, `@doctestExample` doesn't add any code to the tests.
 #'
-#' `@doctestExample` was added after doctest 0.2.0.
+#' `@doctestExample` was added in doctest 0.3.0.
 #'
 #' @name doctestExample-tag
 #' @aliases @doctestExample
