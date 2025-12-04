@@ -1,0 +1,378 @@
+# Converting a package to use doctest
+
+[Doctest](https://hughjonesd.github.io/doctest/) is an R package to let
+you write doctests. Doctests are chunks of code which act as both
+examples for your users, and tests of your package’s functionality. The
+doctest package does this by letting you add
+[testthat](https://testthat.r-lib.org) tests to your
+[roxygen](https://roxygen2.r-lib.org) documentation.
+
+This article gives a real world example of how to convert an R package
+to use doctest. I’ll use
+[onetime](https://hughjonesd.github.io/onetime/dev/), a small package
+which lets you run code only once. Onetime 0.1.0 is on CRAN, so we will
+be dogfooding real production code.
+
+To follow along, you’ll need to be familiar with both testthat and
+roxygen. Both packages have documentation and tutorials elsewhere.
+
+## Setting up doctest
+
+My first step, obviously, was to install the doctest package:
+
+``` r
+install.packages("doctest", repos = c("https://hughjonesd.r-universe.dev", 
+                                      "https://cloud.r-project.org"))
+```
+
+Next, I added the doctest roclet `dt_roclet` to onetime’S DESCRIPTION
+FILE:
+
+    Roxygen: list(roclets = c("collate", "rd", "namespace", 
+                  "doctest::dt_roclet"), packages = "doctest") 
+
+Now, whenever I run `devtools::document()`, it will create doctests in
+the `tests/testthat` directory, as well doing the usual roxygen tasks
+like writing .Rd files. I already had `tests/testthat` set up so I
+didn’t need to do anything more in this direction.
+
+One caveat: if you hit `Ctrl+Shift+D` in RStudio, it won’t run the
+doctest roclet. You need to type `devtools::document()` or
+[`roxygen2::roxygenize()`](https://roxygen2.r-lib.org/reference/roxygenize.html)
+on the command line. Otherwise your doctest tags won’t be recognized.
+
+You don’t need to add doctest to your package as a dependency. You can
+just use it on your own machine when you build your package.
+
+## Converting `@examples` to `@doctest` sections
+
+My next step was to “Find in files” all my `@examples` tags and change
+them to `@doctest` tags. `@doctest` sections create examples in Rd
+files, just like `@examples` sections. So I expected this to make no
+difference to the output from `document()`.
+
+#### Before
+
+``` r
+#' @examples
+#' oo <- options(onetime.dir = tempdir(check = TRUE))
+#' id <- sample(10000L, 1)
+#' ...
+```
+
+#### After
+
+``` r
+#' @doctest
+#' oo <- options(onetime.dir = tempdir(check = TRUE))
+#' id <- sample(10000L, 1)
+#' ...
+```
+
+Indeed, after I ran `devtools::document()`, my .Rd files were unchanged,
+apart from a few deleted empty lines in the examples. I judged that
+these were not important, so I made my first commit.
+
+At this stage, you might want to create a new branch for your commits,
+using `git branch` on the command line, or clicking the “new branch”
+button in RStudio. I was gung ho, so I just put [my
+commit](https://github.com/hughjonesd/onetime/commit/1c6400cac3528c27ffd2d397250da527fa2dbf7d?diff=split)
+on the master branch.
+
+I made one exception: I left the `@examples` tag unchanged in the
+`set_ok_to_store()` function. This is a function with side effects on
+the user’s installation; testing it needs to be done carefully. I
+thought that a doctest would need too much complex setup, so I left it
+as is. There is an existing test for `set_ok_to_store()` anyway.
+
+## Creating doctests by adding expectations
+
+So far, nothing has actually changed. To generate doctests from my
+examples, I needed to add some *expectations* to my code.
+
+If you know testthat, doctest expectations will look very familiar. In
+testthat, you write:
+
+``` r
+expect_equal(exp(1), 2.71828183)
+```
+
+In a `@doctest` roxygen section, this becomes:
+
+``` r
+#' @expect equal(2.71828183)
+#' exp(1)
+```
+
+where `exp(1)` is part of your example code. Similarly, in testthat you
+might write:
+
+``` r
+expect_warning(mean("foo"), "not numeric")
+```
+
+In a `@doctest` section you might write:
+
+``` r
+#' @expect warning("not numeric")
+#' mean("foo")
+```
+
+In other words:
+
+- Use the `@expect` tag to create an expectation.
+- After `@expect`, write a testthat expectation, without the `expect_`
+  prefix.
+- The next R expression after the `@expect` line becomes the first
+  argument to the expectation.
+
+## Doctests for messaging functions
+
+I started with onetime’s messaging functions, which print a message or
+warning only once. For example, `onetime_message_confirm()` had the
+following `@doctest` section:
+
+``` r
+#' @doctest
+#' oo <- options(onetime.dir = tempdir(check = TRUE))
+#' id <- sample(10000L, 1L)
+#'
+#' onetime_message_confirm("A message to show one or more times", id = id)
+#'
+#' onetime_reset(id = id)
+#' options(oo)
+```
+
+I want to check that when this example code runs, the user indeed sees a
+message. So I added an expectation:
+
+``` r
+#' @doctest
+#' oo <- options(onetime.dir = tempdir(check = TRUE))
+#' id <- sample(10000L, 1L)
+#'
+#' @expect message("A message")
+#' onetime_message_confirm("A message to show one or more times", id = id)
+#'
+#' onetime_reset(id = id)
+```
+
+That was simple. To check everything was working, I ran
+`devtools::document()` again. It produced a new file under
+`tests/testthat`, called `test-doctest-onetime_message_confirm.R`:
+
+``` r
+# Generated by doctest: do not edit by hand
+# Please edit file in R/messages.R
+
+test_that("Doctest: onetime_message_confirm", {
+  # Created from @doctest for `onetime_message_confirm`
+  # Source file: R/messages.R
+  oo <- options(onetime.dir = tempdir(check = TRUE))
+  id <- sample(10000L, 1L)
+  expect_message(onetime_message_confirm("A message to show one or more times", id = id),
+  "A message")
+  onetime_reset(id = id)
+  options(oo)
+})
+```
+
+This looked fine, so I ran my tests using `Ctrl+Shift+T`, and the new
+test passed.
+
+Notice the warning in the comment at the top of the test file. If you
+edit this file, it will be overwritten next time you run the doctest
+roclet. If you want to edit it manually, you should change its name to
+something without `doctest`, and remove the `Generated by doctest`
+stamp. Then you’ll just have a normal testthat test which you can edit
+as you please. If you don’t want to regenerate the automated test file
+again, then remember to replace `@doctest` with `@examples` in the
+roxygen chunk.
+
+My next doctest was more complex. The roxygen looked like this:
+
+``` r
+#' @doctest
+...
+#'
+#' for (n in 1:3) {
+#'   onetime_warning("will be shown once", id = id)
+#' }
+#'
+...
+```
+
+It’s fine to use expectations inside a for loop, but my problem was that
+I expected different things each time. `onetime_warning()` shows its
+warning only the first time it is called. So on the first time round the
+loop, I would expect a warning. Afterwards I would expect no output.
+
+I could have unrolled the loop, like this:
+
+``` r
+#' @expect warning()
+#' onetime_warning("will be shown once", id = id)
+#' @expect silent()
+#' onetime_warning("will be shown once", id = id)
+#' @expect silent()
+#' onetime_warning("will be shown once", id = id)
+```
+
+But I liked the loop because it made it very clear how
+`onetime_warning()` worked. I wanted to follow the philosophy “write
+great documentation, then add tests where appropriate” rather than “turn
+your documentation into a test suite”.
+
+So, I bit the bullet and wrote a more complex expectation:
+
+``` r
+#' for (n in 1:3) {
+#' @expect warning(regexp = if (n == 1L) "once" else NA)
+#'   onetime_warning("will be shown once", id = id)
+#' }
+```
+
+This is a bit ugly. It uses the fact that `expect_warning(regexp = NA)`
+is equivalent to *not* expecting a warning. So, on the first time round
+the loop, the expectation checks for a warning matching the string
+`"once"`; afterwards, it checks that there is no warning.
+
+Notice that the `@expect` tag isn’t indented. Roxygen tags have to come
+straight after the starting `#'` characters, with at most one space.
+
+Again, I ran `devtools::document()` and checked the new test:
+
+``` r
+  for (n in 1:3) {
+    expect_warning(onetime_warning("will be shown once", id = id), regexp = if (n ==
+    1L) "once" else NA)
+  }
+```
+
+Fine. I ran the test and again, it passed.
+
+I added some more similar tests and then made a
+[commit](https://github.com/hughjonesd/onetime/commit/a870ede984f6523b32c0da8a54ca114e9a1bba66?diff=split).
+I had set up Github actions to run `R CMD check`, so I knew that the
+tests would also be checked on different platforms. Happily, they all
+passed.
+
+## Adding doctests for utility functions
+
+Next I added some doctests for utility functions, which manipulate
+various aspects of onetime’s on-disk records. Mostly these don’t print
+output, so instead I tested their return value. For example,
+`onetime_been_done()`, which checks if a particular onetime call has
+already been made, got a doctest like this:
+
+``` r
+#' @expect false()
+#' onetime_been_done(id = id)
+#' onetime_message("Creating an ID",  id = id)
+#' @expect true()
+#' onetime_been_done(id = id)
+```
+
+The function `onetime_dir()` is very simple and just returns a file
+path. Its example was simple too:
+
+``` r
+#' @doctest
+#'
+#' onetime_dir("my-folder")
+#'
+#' oo <- options(onetime.dir = tempdir(check = TRUE))
+#' onetime_dir("my-folder")
+#' options(oo)
+```
+
+I decided to just test the first call to `onetime_dir()`, confirming
+that the result ended with the subfolder I passed in. The second call
+would return a temporary directory, which would be different between
+different R sessions, so I wasn’t sure how to test it usefully. In fact,
+to skip unnecessary code from the test, I used the `@omit` tag:
+
+``` r
+#' @expect match("my-folder$")
+#' onetime_dir("my-folder")
+#'
+#' @omit
+#' oo <- options(onetime.dir = tempdir(check = TRUE))
+...
+```
+
+`@omit` omits everything after it from the generated test. This code
+created a very simple test file in `test-doctest-onetime_dir.R`:
+
+``` r
+# Generated by doctest: do not edit by hand
+# Please edit file in R/utils.R
+
+test_that("Doctest: onetime_dir", {
+  # Created from @doctest for `onetime_dir`
+  # Source file: R/utils.R
+  expect_match(onetime_dir("my-folder"), "my-folder$")
+})
+```
+
+I ran these tests and
+[committed](https://github.com/hughjonesd/onetime/commit/cec1949a0129f00310dec23a12b411092dfbe3fe?diff=split)
+them.
+
+Lastly, I added tests for my final functions. There’s nothing new here.
+You can see the
+[commit](https://github.com/hughjonesd/onetime/commit/d3be66faabee09929deceafc9598488efd0ae8ee?diff=split)
+on GitHub.
+
+## Adding doctest to Suggests:
+
+Now that my doctests were working, I decided to make it easy for other
+developers to work on my package too. In the onetime DESCRIPTION file, I
+added doctest to `Suggests:`, and added a `Remotes:` field pointing to
+the [github repository](https://github.com/hughjonesd/doctest). This is
+a oneliner with the usethis package:
+
+``` r
+usethis::use_dev_package("doctest", type = "Suggests", 
+                         remote = "hughjonesd/doctest")
+```
+
+There is a tradeoff here: adding the doctest dependency will help other
+developers, but CRAN doesn’t allow `Remotes:` fields in packages. So
+when I submit the next version, I’ll have to remove the dependency
+again.
+
+## Conclusion
+
+This was encouragingly easy. All my tests passed the first time. Now I
+can develop more securely, knowing that if my changes stop my examples
+working, doctest will help to catch that.
+
+I followed some principles when making these changes to my package:
+
+- Start small, by changing `@examples` tags to `@doctest` tags. Doctest
+  is a new package, so you want to make sure it doesn’t do anything bad.
+  (If it does, please [file a bug
+  report](https://github.com/hughjonesd/doctest/issues)!) Obviously, you
+  should make sure your code is checked in to version control before
+  using doctest.
+
+- Keep doctests simple. Focus example code on its key role, which is to
+  teach the user about your package. If you need to make big changes, or
+  if your expectations are becoming complex, consider splitting them out
+  into a “proper” testthat test.
+
+There are many features of doctest that I didn’t need to use for this
+small package, including the `@expectRaw` and `@snap` tags to generate
+other expectations, and the `@testRaw` tag to add code to your tests.
+You can read about those in the package documentation or in the main
+vignette:
+[`vignette("doctest")`](https://hughjonesd.github.io/doctest/articles/doctest.md).
+
+If you are using doctest in your package, I’d love to hear about it.
+There is a [github
+issue](https://github.com/hughjonesd/doctest/issues/8) where end users
+can add their package. And of course, I welcome bug reports, enhancement
+requests and feedback.
+
+Happy testing!
