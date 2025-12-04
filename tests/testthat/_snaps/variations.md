@@ -6,7 +6,6 @@
     test_that("Doctest: unknown", {
       # Created from @doctest for `unknown`
       # Source file: <text>
-      # Source line: 2
       expect_equal(x <- 1, 1)
     })
     
@@ -19,7 +18,6 @@
     test_that("Doctest: unknown", {
       # Created from @doctest for `unknown`
       # Source file: <text>
-      # Source line: 2
       expect_equal(x <- c("t", "e", "n", "e", "t"), rev(x))
     })
     
@@ -32,7 +30,6 @@
     test_that("Doctest: unknown", {
       # Created from @doctest for `unknown`
       # Source file: <text>
-      # Source line: 2
       expect_equal(2 + 2, 4)
     })
     
@@ -45,14 +42,12 @@
     test_that("Doctest: unknown", {
       # Created from @doctest for `unknown`
       # Source file: <text>
-      # Source line: 2
       expect_equal(x <- 1, 1)
     })
     
     test_that("Doctest: unknown", {
       # Created from @doctest for `unknown`
       # Source file: <text>
-      # Source line: 6
       expect_equal(2 + 2, 4)
     })
     

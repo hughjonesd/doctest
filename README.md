@@ -77,7 +77,6 @@ This will create tests like:
     test_that("Doctest: fib", {
       # Created from @doctest for `fib`
       # Source file: <text>
-      # Source line: 7
       expect_type(fib(2), "integer")
       n <- 6
       expect_equal(fib(n), 8)

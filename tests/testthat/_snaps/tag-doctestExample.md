@@ -6,7 +6,6 @@
     test_that("example from a file", {
       # Created from @doctest for `foo`
       # Source file: <text>
-      # Source line: 4
       expect_equal(1 + 1, 2)
     })
     

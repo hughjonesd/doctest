@@ -6,7 +6,6 @@
     test_that("Doctest: unknown", {
       # Created from @doctest for `unknown`
       # Source file: <text>
-      # Source line: 2
       expect_snapshot(sum(1, 1))
     })
     
