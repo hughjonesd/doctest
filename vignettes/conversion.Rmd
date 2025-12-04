@@ -186,7 +186,6 @@ again. It produced a new file under `tests/testthat`, called
 test_that("Doctest: onetime_message_confirm", {
   # Created from @doctest for `onetime_message_confirm`
   # Source file: R/messages.R
-  # Source line: 110
   oo <- options(onetime.dir = tempdir(check = TRUE))
   id <- sample(10000L, 1L)
   expect_message(onetime_message_confirm("A message to show one or more times", id = id),
@@ -327,7 +326,6 @@ a very simple test file in `test-doctest-onetime_dir.R`:
 test_that("Doctest: onetime_dir", {
   # Created from @doctest for `onetime_dir`
   # Source file: R/utils.R
-  # Source line: 138
   expect_match(onetime_dir("my-folder"), "my-folder$")
 })
 ```

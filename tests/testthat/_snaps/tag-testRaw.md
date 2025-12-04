@@ -6,7 +6,6 @@
     test_that("Doctest: unknown", {
       # Created from @doctest for `unknown`
       # Source file: <text>
-      # Source line: 2
       skip_on_cran()
       expect_error(stop("Argh, CRAN won't like it"))
     })
