@@ -1,3 +1,7 @@
+# doctest 0.4.0
+
+* Do not produce `Source line` to avoid changes irrelevant to examples modifying the tests.
+
 # doctest 0.3.0
 
 * Added a `@doctestExample` tag as a drop-in replacement for `@example`.
