@@ -1,5 +1,10 @@
 # Changelog
 
+## doctest (development version)
+
+- Do not produce `Source line` to avoid changes irrelevant to examples
+  modifying the tests.
+
 ## doctest 0.3.0
 
 CRAN release: 2024-01-11
