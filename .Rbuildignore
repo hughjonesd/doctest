@@ -17,3 +17,9 @@
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^revdep$
+^CRAN-RELEASE\.md$
+^cran-release\.sh$
+^CRAN-SUBMISSION-MESSAGE\.md$
+^RELEASE-NOTES-.*\.md$
+^SUMMARY\.md$
+^RELEASE-README\.txt$

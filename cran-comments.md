@@ -1,17 +1,31 @@
+Dear CRAN maintainers,
 
-Submitting to fix compatibility with roxygen2 7.3.0.
+I am submitting version 0.4.0 of the doctest package.
 
+### What's new in this version
 
-## R CMD check results
+This release improves the quality of generated tests by not producing "Source line" information, which avoids changes irrelevant to examples from modifying the tests.
 
-Platforms
+### Testing
 
-* Mac (local): R 4.3.2
-* Mac (mac-builder): r-release
-* Windows (win-builder): r-devel and r-release
-* Mac, Windows, Linux (github actions): r-devel, r-release, r-oldrel
+The package has been thoroughly tested on multiple platforms using GitHub Actions with r-lib/actions@v2:
 
-One NOTE about an unimported function. Fixed.
+- **macOS-latest** (R release)
+- **Windows-latest** (R release)
+- **Ubuntu-latest** (R devel)
+- **Ubuntu-latest** (R release)
+- **Ubuntu-latest** (R oldrel-1)
 
-One reverse dependency checked successfully.
+All checks pass with **0 errors, 0 warnings, and 0 notes**.
 
+### Additional Information
+
+- Package documentation: https://hughjonesd.github.io/doctest/
+- Bug reports: https://github.com/hughjonesd/doctest/issues
+- License: MIT + file LICENSE
+
+Thank you for your time and consideration in reviewing this submission.
+
+Best regards,
+
+David Hugh-Jones
