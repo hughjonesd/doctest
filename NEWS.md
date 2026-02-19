@@ -1,3 +1,7 @@
+# doctest (development version)
+
+* Bugfix: @testRaw lines were producing empty lines in .Rd files. Thanks @MLopez-Ibanez.
+
 # doctest 0.4.0
 
 * Do not produce `Source line` to avoid changes irrelevant to examples modifying the tests.
