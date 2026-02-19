@@ -2,6 +2,8 @@
 
 ## doctest 0.4.0
 
+CRAN release: 2026-02-19
+
 - Do not produce `Source line` to avoid changes irrelevant to examples
   modifying the tests.
 

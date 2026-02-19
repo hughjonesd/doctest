@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/hughjonesd/doctest/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/hughjonesd/doctest/blob/v0.4.0/DESCRIPTION)
 
 Hugh-Jones D (2026). *doctest: Generate Tests from Examples Using
 'roxygen' and 'testthat'*. R package version 0.4.0,
