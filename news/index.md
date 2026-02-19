@@ -1,5 +1,11 @@
 # Changelog
 
+## doctest (development version)
+
+- Bugfix: [@testRaw](https://github.com/testRaw) lines were producing
+  empty lines in .Rd files. Thanks
+  [@MLopez-Ibanez](https://github.com/MLopez-Ibanez).
+
 ## doctest 0.4.0
 
 CRAN release: 2026-02-19
