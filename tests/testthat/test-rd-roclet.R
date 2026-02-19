@@ -41,6 +41,25 @@ test_that("Rd output", {
 
 
 
+test_that("@testRaw does not produce empty lines in Rd output", {
+  ex <- "
+         #' Title
+         #'
+         #' @doctest
+         #' x <- 1
+         #' @testRaw skip_on_cran()
+         #' @expect gt(0)
+         #' x
+         foo <- function() 1
+        " |> dedent()
+
+  results <- roc_proc_text(rd_roclet(), ex)
+  expect_snapshot_output(
+    print(results)
+  )
+})
+
+
 test_that("dontrun", {
 
   test_dontrun <- "

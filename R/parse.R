@@ -137,7 +137,9 @@ roxy_tag_rd.roxy_tag_expectRaw <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
-roxy_tag_rd.roxy_tag_testRaw <- roxy_tag_rd.roxy_tag_doctest
+roxy_tag_rd.roxy_tag_testRaw <- function (x, base_path, env) {
+  NULL
+}
 
 
 #' @export
