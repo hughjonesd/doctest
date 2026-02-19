@@ -137,7 +137,13 @@ roxy_tag_rd.roxy_tag_expectRaw <- roxy_tag_rd.roxy_tag_doctest
 
 
 #' @export
-roxy_tag_rd.roxy_tag_testRaw <- roxy_tag_rd.roxy_tag_doctest
+roxy_tag_rd.roxy_tag_testRaw <- function (x, base_path, env) {
+  sect <- roxygen2::rd_section("empty", x$val)
+  # we keep the tag around for error messages during Rd parsing
+  #
+  sect$tag <- x
+  sect
+}
 
 
 #' @export
@@ -175,4 +181,9 @@ format.rd_section_doctest <- function (x, ...) {
     rd <- paste0("\\examples", paste0("{", values, "}", collapse = ""))
     return(rd)
   }
+}
+
+#' @export
+format.rd_section_empty <- function (x, ...) {
+  character(0)
 }
