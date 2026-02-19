@@ -185,5 +185,5 @@ format.rd_section_doctest <- function (x, ...) {
 
 #' @export
 format.rd_section_empty <- function (x, ...) {
-  ""
+  character(0)
 }
