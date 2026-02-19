@@ -1,4 +1,4 @@
-# doctest (development version)
+# doctest 0.4.0
 
 * Do not produce `Source line` to avoid changes irrelevant to examples modifying the tests.
 
