@@ -1,6 +1,7 @@
 # doctest (development version)
 
 * Bugfix: @testRaw lines were producing empty lines in .Rd files. Thanks @MLopez-Ibanez.
+* This will be the last release on CRAN. Future versions will be available as GitHub releases or via https://r-universe.dev/.
 
 # doctest 0.4.0
 
