@@ -9,14 +9,14 @@ test_doctests(path = ".", ...)
 \arguments{
 \item{path}{Path to package}
 
-\item{...}{Passed to \code{\link[testthat:test_package]{testthat::test_local()}}.}
+\item{...}{Passed to \code{\link[testthat:test_local]{testthat::test_local()}}.}
 }
 \value{
-The result of \code{\link[testthat:test_package]{testthat::test_local()}}.
+The result of \code{\link[testthat:test_local]{testthat::test_local()}}.
 }
 \description{
 This is a utility function to run doctests in a local source package.
-It calls \code{\link[testthat:test_package]{testthat::test_local()}}.
+It calls \code{\link[testthat:test_local]{testthat::test_local()}}.
 }
 \examples{
 \dontrun{

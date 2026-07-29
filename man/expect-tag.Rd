@@ -35,7 +35,7 @@ c("T", "E", "N", "E", "T")
 The \verb{@expect} tag and code must fit on a single line.
 }
 \seealso{
-Other expectations: 
+Other expectations:
 \code{\link{expectRaw-tag}},
 \code{\link{snap-tag}}
 }

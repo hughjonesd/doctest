@@ -9,7 +9,6 @@ Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Creates 'testthat' tests from 'roxygen' examples using simple tags.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.2.3
 Imports: 
     cli,
     fs,
@@ -28,3 +27,4 @@ Roxygen: list(markdown = TRUE)
 URL: https://hughjonesd.github.io/doctest/
 BugReports: https://github.com/hughjonesd/doctest/issues
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0

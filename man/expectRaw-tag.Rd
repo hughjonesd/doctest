@@ -27,7 +27,7 @@ Don't include the \code{expect_} prefix.
 The \verb{@expectRaw} tag and code must fit on a single line.
 }
 \seealso{
-Other expectations: 
+Other expectations:
 \code{\link{expect-tag}},
 \code{\link{snap-tag}}
 }
