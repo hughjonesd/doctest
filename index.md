@@ -27,6 +27,7 @@ function:
 
 ``` r
 
+
 #' Fibonacci function 
 #' 
 #' @param n Integer
@@ -89,6 +90,7 @@ fib(NA)
 Install doctest from [r-universe](https://r-universe.dev):
 
 ``` r
+
 install.packages("doctest", repos = c("https://hughjonesd.r-universe.dev", 
                                       "https://cloud.r-project.org"))
 ```
@@ -96,12 +98,14 @@ install.packages("doctest", repos = c("https://hughjonesd.r-universe.dev",
 Or from CRAN:
 
 ``` r
+
 install.packages("doctest")
 ```
 
 Or get the development version:
 
 ``` r
+
 devtools::install("hughjonesd/doctest")
 ```
 
@@ -109,6 +113,7 @@ To use doctest in your package, alter its DESCRIPTION file to add the
 `dt_roclet` roclet to roxygen:
 
 ``` r
+
 Roxygen: list(roclets = c("collate", "rd", "namespace", 
               "doctest::dt_roclet")) 
 ```

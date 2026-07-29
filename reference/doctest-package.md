@@ -14,6 +14,7 @@ and
 Here's some [roxygen](https://roxygen2.r-lib.org) documentation for a
 function:
 
+
     #' Fibonacci function
     #'
     #' @param n Integer
@@ -104,3 +105,7 @@ Useful links:
 ## Author
 
 **Maintainer**: David Hugh-Jones <davidhughjones@gmail.com>
+
+Authors:
+
+- David Hugh-Jones <davidhughjones@gmail.com>

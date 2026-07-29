@@ -14,8 +14,8 @@ Documentation examples and tests are similar in some ways:
 
 This similarity makes it attractive to use “doctests”, which combine
 tests and documentation. Indeed, several languages, including Python and
-Rust, have doctests built in.[¹](#fn1) R also checks for errors in
-examples when running `R CMD check`.
+Rust, have doctests built in.[^1] R also checks for errors in examples
+when running `R CMD check`.
 
 The doctest package extends this idea. It lets you write
 [testthat](https://testthat.r-lib.org/) tests, by adding tags to your
@@ -28,6 +28,7 @@ Here’s some [roxygen](https://roxygen2.r-lib.org) documentation for a
 function:
 
 ``` r
+
 
 #' Fibonacci function 
 #' 
@@ -87,6 +88,7 @@ The .Rd file will be created as normal, with an example section like:
 Install doctest from [r-universe](https://r-universe.dev):
 
 ``` r
+
 install.packages("doctest", repos = c("https://hughjonesd.r-universe.dev", 
                                       "https://cloud.r-project.org"))
 ```
@@ -94,12 +96,14 @@ install.packages("doctest", repos = c("https://hughjonesd.r-universe.dev",
 Or from CRAN:
 
 ``` r
+
 install.packages("doctest")
 ```
 
 Or get the development version:
 
 ``` r
+
 devtools::install("hughjonesd/doctest")
 ```
 
@@ -107,6 +111,7 @@ To use doctest in your package, alter its DESCRIPTION file to add the
 `dt_roclet` roclet and `"doctest"` package to roxygen:
 
 ``` r
+
 Roxygen: list(roclets = c("collate", "rd", "namespace", 
               "doctest::dt_roclet"), packages = "doctest") 
 ```
@@ -149,6 +154,7 @@ it being installed for users. However, you may wish to add it in
 `Suggests:`, to help other developers working on the package:
 
 ``` r
+
 usethis::use_package("doctest", type = "Suggests")
 ```
 
@@ -161,6 +167,7 @@ The doctest package adds these tags to roxygen:
 Use `@doctest` instead of `@examples`:
 
 ``` r
+
 #' @doctest
 #' 
 #' # ... examples for your function
@@ -175,6 +182,7 @@ leave it blank for a default name. All the sections will be merged into
 a single .Rd example.
 
 ``` r
+
 #' @doctest Positive numbers
 #' x <- 1
 #' @expect equal(x)
@@ -191,6 +199,7 @@ a single .Rd example.
 `@expect` writes a testthat expectation.
 
 ``` r
+
 #' @expect equal(4)
 #' 2 + 2
 ```
@@ -202,12 +211,14 @@ The expression on the next line will be substituted as the first
 argument into the `expect` call:
 
 ``` r
+
 expect_equal(2 + 2, 4)
 ```
 
 Use a dot `.` to substitute in different places:
 
 ``` r
+
 #' @expect equal(., rev(.))
 #' c("T", "E", "N", "E", "T")
 ```
@@ -215,6 +226,7 @@ Use a dot `.` to substitute in different places:
 This becomes:
 
 ``` r
+
 expect_equal(c("T", "E", "N", "E", "T"), rev(c("T", "E", "N", "E", "T")))
 ```
 
@@ -224,6 +236,7 @@ expect_equal(c("T", "E", "N", "E", "T"), rev(c("T", "E", "N", "E", "T")))
 expression:
 
 ``` r
+
 #' x <- 2 + 2
 #' @expectRaw equal(x, 4)
 ```
@@ -239,6 +252,7 @@ useful for checking that complex examples haven’t changed.
 `@testRaw` adds an arbitrary line of code to your test:
 
 ``` r
+
 #' @testRaw skip_on_cran("Takes too long to run")
 #' 
 #' @expect equal(6765)
@@ -257,6 +271,7 @@ the example but not the test. You can use `@resume` to restart including
 lines without creating a new expectation.
 
 ``` r
+
 #' myfunc(1)
 #' 
 #' @omit
@@ -299,6 +314,7 @@ code isn’t checked for doctest tags and isn’t included in any tests.
   space:
 
 ``` r
+
 #' # Right:
 #' if (TRUE) {
 #' @expect equals(4)
@@ -330,6 +346,7 @@ hard to specify what to test for, consider using `@snap` to capture
 output:
 
 ``` r
+
 #' @snap
 summary(model)
 ```
@@ -350,7 +367,5 @@ combines tests with examples. The
 roxygen examples to generate a test skeleton which you can fill in
 yourself.
 
-------------------------------------------------------------------------
-
-1.  <https://docs.python.org/3/library/doctest.html>,
+[^1]: <https://docs.python.org/3/library/doctest.html>,
     <https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html>
