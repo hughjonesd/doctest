@@ -1,10 +1,10 @@
 Dear CRAN maintainers,
 
-I am submitting version 0.4.0 of the doctest package.
+I am submitting version 0.4.1 of the doctest package.
 
 ### What's new in this version
 
-This release improves the quality of generated tests by not producing "Source line" information, which avoids changes irrelevant to examples from modifying the tests.
+A single bugfix.
 
 ### Testing
 
