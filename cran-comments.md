@@ -18,6 +18,9 @@ The package has been thoroughly tested on multiple platforms using GitHub Action
 
 All checks pass with **0 errors, 0 warnings, and 0 notes**.
 
+One reverse dependency reported a failure. I manually checked this and
+found it was a false positive.
+
 ### Additional Information
 
 - Package documentation: https://hughjonesd.github.io/doctest/
