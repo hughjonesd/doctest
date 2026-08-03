@@ -49,7 +49,12 @@ doctest_test_files <- function (base_path) {
 
 
 package_test_path <- function (base_path) {
-  test_path <- file.path(pkgload::pkg_path(base_path), "tests", "testthat")
+  override <- getOption("doctest.test_dir")
+  if (! is.null(override)) {
+    return(override)
+  }
+
+  file.path(pkgload::pkg_path(base_path), "tests", "testthat")
 }
 
 

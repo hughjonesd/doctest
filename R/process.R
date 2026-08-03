@@ -2,14 +2,14 @@
 
 #' @export
 roclet_process.roclet_doctest <- function (x, blocks, env, base_path) {
-  results <- lapply(blocks, build_result_from_block)
+  results <- lapply(blocks, build_result_from_block, base_path = base_path)
   results <- purrr::compact(results)
 
   results
 }
 
 
-build_result_from_block <- function (block) {
+build_result_from_block <- function (block, base_path = pkgload::pkg_path()) {
   if (! roxygen2::block_has_tags(block,
           c("doctest", "expect", "expectRaw", "snap"))) {
     return(NULL)
@@ -42,7 +42,8 @@ build_result_from_block <- function (block) {
                        name = test_name(tag, result),
                        source_object = result$object,
                        source_file = tag$file,
-                       source_line = tag$line
+                       source_line = tag$line,
+                       base_path = base_path
                        )
     }
 
@@ -83,7 +84,8 @@ test_name <- function (tag, result) {
 }
 
 
-new_test <- function (name, source_object, source_file, source_line) {
+new_test <- function (name, source_object, source_file, source_line,
+                      base_path = pkgload::pkg_path()) {
   if (grepl("\"|\\\\", name)) {
     cli::cli_abort(c(
       "@doctest name must not include double quotes or backslashes",
@@ -92,7 +94,7 @@ new_test <- function (name, source_object, source_file, source_line) {
   }
 
   if (source_file != "<text>") {
-    source_file <- fs::path_rel(source_file, pkgload::pkg_path())
+    source_file <- fs::path_rel(source_file, base_path)
   }
   structure(list(
                  name            = name,
